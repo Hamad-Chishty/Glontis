@@ -311,6 +311,24 @@ export interface WorkVisaPageData {
   url_slug: string;
 }
 
+export interface HomepageSectionConfig {
+  id: string;
+  title: string;
+  description?: string;
+  is_enabled: boolean;
+  display_order: number;
+}
+
+export interface HeroSliderSettings {
+  animation_type: 'fade' | 'slide' | 'zoom' | 'crossfade';
+  autoplay: boolean;
+  autoplay_duration_ms: number;
+  transition_speed_ms: number;
+  pause_on_hover: boolean;
+  show_navigation_arrows: boolean;
+  show_pagination_dots: boolean;
+}
+
 export interface HomeServiceQuickLink {
   id: string;
   title: string;
@@ -345,6 +363,7 @@ export interface HomepageHeroData {
   mobile_hero_image_alt_text?: string;
   floating_badges: FloatingBadge[];
   service_quick_links: HomeServiceQuickLink[];
+  slider_settings?: HeroSliderSettings;
 }
 
 export interface VisitVisaDestination {

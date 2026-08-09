@@ -16,6 +16,7 @@ import {
   VisitVisaPageData,
   TouristVisaPageData,
   HomepageHeroData,
+  HomepageSectionConfig,
 } from './types';
 
 // Default initial database content
@@ -24,6 +25,7 @@ export interface AppDatabase {
   mediaLibrary: MediaItem[];
   heroSlides: HeroSlide[];
   homepageHero?: HomepageHeroData;
+  homepageSections?: HomepageSectionConfig[];
   offers: Offer[];
   trustStats: TrustStat[];
   countries: CountryDestination[];
@@ -1829,6 +1831,20 @@ export const defaultHomepageHero: HomepageHeroData = {
   ],
 };
 
+export const defaultHomepageSections: HomepageSectionConfig[] = [
+  { id: 'hero', title: 'Hero Section & Banner Slider', description: 'Main banner with headline, call-to-action buttons, country selector, and floating badges.', is_enabled: true, display_order: 1 },
+  { id: 'trust_stats', title: 'Trust & Statistics Bar', description: 'Key highlights such as assessment fee, university count, and office location.', is_enabled: true, display_order: 2 },
+  { id: 'offer_banner', title: 'Special Offers Banner', description: 'Featured promotional offers and discounts banner.', is_enabled: true, display_order: 3 },
+  { id: 'destinations', title: 'Study Visa Destinations', description: 'Interactive country cards for top study destinations.', is_enabled: true, display_order: 4 },
+  { id: 'services', title: 'Our Visa Services', description: 'Comprehensive list of Study, Work, Visit, Tourist & Immigration services.', is_enabled: true, display_order: 5 },
+  { id: 'universities', title: 'Partner Universities & Colleges', description: 'Showcase of 200+ partner international institutions.', is_enabled: true, display_order: 6 },
+  { id: 'success_stories', title: 'Visa Success Stories', description: 'Real student visa grant letters and success cases.', is_enabled: true, display_order: 7 },
+  { id: 'testimonials', title: 'Client Reviews & Testimonials', description: 'Verified student and client reviews.', is_enabled: true, display_order: 8 },
+  { id: 'consultation_form', title: 'Free Consultation Form', description: 'Lead generation assessment form.', is_enabled: true, display_order: 9 },
+  { id: 'faqs', title: 'Frequently Asked Questions (FAQs)', description: 'Accordion list of common visa and admission queries.', is_enabled: true, display_order: 10 },
+  { id: 'office_map', title: 'Office Location & Map', description: 'Multan Bosan Road office address, directions, and Google Maps embed.', is_enabled: true, display_order: 11 },
+];
+
 // Persistent File System DB Store Helper
 let inMemoryDb: AppDatabase | null = null;
 
@@ -1856,6 +1872,7 @@ export function getDb(): AppDatabase {
           if (!inMemoryDb.mediaLibrary) inMemoryDb.mediaLibrary = defaultMediaLibrary;
           if (!inMemoryDb.heroSlides) inMemoryDb.heroSlides = defaultHeroSlides;
           if (!inMemoryDb.homepageHero) inMemoryDb.homepageHero = defaultHomepageHero;
+          if (!inMemoryDb.homepageSections) inMemoryDb.homepageSections = defaultHomepageSections;
           if (!inMemoryDb.offers) inMemoryDb.offers = defaultOffers;
           if (!inMemoryDb.trustStats) inMemoryDb.trustStats = defaultTrustStats;
           if (!inMemoryDb.countries) inMemoryDb.countries = defaultCountries;
@@ -1882,6 +1899,7 @@ export function getDb(): AppDatabase {
     mediaLibrary: defaultMediaLibrary,
     heroSlides: defaultHeroSlides,
     homepageHero: defaultHomepageHero,
+    homepageSections: defaultHomepageSections,
     offers: defaultOffers,
     trustStats: defaultTrustStats,
     countries: defaultCountries,

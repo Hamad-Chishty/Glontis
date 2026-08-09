@@ -9,6 +9,7 @@ import WorkVisaCmsTab from '@/components/admin/WorkVisaCmsTab';
 import VisitVisaCmsTab from '@/components/admin/VisitVisaCmsTab';
 import TouristVisaCmsTab from '@/components/admin/TouristVisaCmsTab';
 import HomepageHeroCmsTab from '@/components/admin/HomepageHeroCmsTab';
+import HomepageSectionsCmsTab from '@/components/admin/HomepageSectionsCmsTab';
 import {
   Users,
   ImageIcon,
@@ -41,6 +42,7 @@ import {
   FolderOpen,
   Briefcase,
   Compass,
+  Layers,
 } from 'lucide-react';
 import {
   SiteSettings,
@@ -98,6 +100,7 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<
     | 'leads'
     | 'media'
+    | 'homepageSections'
     | 'homepageHero'
     | 'hero'
     | 'offers'
@@ -333,6 +336,7 @@ export default function AdminDashboardPage() {
           {[
             { id: 'leads', name: 'Student Leads CRM', icon: Users, badge: leads.length },
             { id: 'media', name: 'Media Library', icon: FolderOpen, badge: mediaLibrary.length },
+            { id: 'homepageSections', name: 'Homepage Section Manager', icon: Layers },
             { id: 'homepageHero', name: 'Homepage Hero CMS', icon: Sparkles },
             { id: 'hero', name: 'Hero Slider Banners', icon: ImageIcon, badge: heroSlides.length },
             { id: 'offers', name: 'Special Offers & Popups', icon: Tag, badge: offers.length },
@@ -1930,6 +1934,7 @@ export default function AdminDashboardPage() {
             </div>
           )}
 
+          {activeTab === 'homepageSections' && <HomepageSectionsCmsTab />}
           {activeTab === 'homepageHero' && <HomepageHeroCmsTab />}
           {activeTab === 'workVisa' && <WorkVisaCmsTab />}
           {activeTab === 'visitVisa' && <VisitVisaCmsTab />}

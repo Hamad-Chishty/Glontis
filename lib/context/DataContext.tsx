@@ -21,6 +21,7 @@ import {
   defaultMediaLibrary,
   defaultHeroSlides,
   defaultHomepageHero,
+  defaultHomepageSections,
   defaultOffers,
   defaultTrustStats,
   defaultCountries,
@@ -35,13 +36,14 @@ import {
   defaultVisitVisaPage,
   defaultTouristVisaPage,
 } from '@/lib/data-store';
-import { WorkVisaPageData, VisitVisaPageData, TouristVisaPageData, HomepageHeroData } from '@/lib/types';
+import { WorkVisaPageData, VisitVisaPageData, TouristVisaPageData, HomepageHeroData, HomepageSectionConfig } from '@/lib/types';
 
 interface DataContextType {
   settings: SiteSettings;
   mediaLibrary: MediaItem[];
   heroSlides: HeroSlide[];
   homepageHero: HomepageHeroData;
+  homepageSections: HomepageSectionConfig[];
   offers: Offer[];
   trustStats: TrustStat[];
   countries: CountryDestination[];
@@ -67,6 +69,7 @@ interface DataContextType {
   setMediaLibrary: React.Dispatch<React.SetStateAction<MediaItem[]>>;
   setHeroSlides: React.Dispatch<React.SetStateAction<HeroSlide[]>>;
   setHomepageHero: React.Dispatch<React.SetStateAction<HomepageHeroData>>;
+  setHomepageSections: React.Dispatch<React.SetStateAction<HomepageSectionConfig[]>>;
   setOffers: React.Dispatch<React.SetStateAction<Offer[]>>;
   setCountries: React.Dispatch<React.SetStateAction<CountryDestination[]>>;
   setServices: React.Dispatch<React.SetStateAction<ServiceItem[]>>;
@@ -89,6 +92,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [mediaLibrary, setMediaLibrary] = useState<MediaItem[]>(defaultMediaLibrary);
   const [heroSlides, setHeroSlides] = useState<HeroSlide[]>(defaultHeroSlides);
   const [homepageHero, setHomepageHero] = useState<HomepageHeroData>(defaultHomepageHero);
+  const [homepageSections, setHomepageSections] = useState<HomepageSectionConfig[]>(defaultHomepageSections);
   const [offers, setOffers] = useState<Offer[]>(defaultOffers);
   const [trustStats, setTrustStats] = useState<TrustStat[]>(defaultTrustStats);
   const [countries, setCountries] = useState<CountryDestination[]>(defaultCountries);
@@ -115,6 +119,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
           if (d.mediaLibrary) setMediaLibrary(d.mediaLibrary);
           if (d.heroSlides) setHeroSlides(d.heroSlides);
           if (d.homepageHero) setHomepageHero(d.homepageHero);
+          if (d.homepageSections) setHomepageSections(d.homepageSections);
           if (d.offers) setOffers(d.offers);
           if (d.trustStats) setTrustStats(d.trustStats);
           if (d.countries) setCountries(d.countries);
@@ -210,6 +215,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     setSettings(defaultSettings);
     setHeroSlides(defaultHeroSlides);
     setHomepageHero(defaultHomepageHero);
+    setHomepageSections(defaultHomepageSections);
     setOffers(defaultOffers);
     setTrustStats(defaultTrustStats);
     setCountries(defaultCountries);
@@ -227,6 +233,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       settings: defaultSettings,
       heroSlides: defaultHeroSlides,
       homepageHero: defaultHomepageHero,
+      homepageSections: defaultHomepageSections,
       offers: defaultOffers,
       trustStats: defaultTrustStats,
       countries: defaultCountries,
@@ -250,6 +257,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         mediaLibrary,
         heroSlides,
         homepageHero,
+        homepageSections,
         offers,
         trustStats,
         countries,
@@ -275,6 +283,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setMediaLibrary,
         setHeroSlides,
         setHomepageHero,
+        setHomepageSections,
         setOffers,
         setCountries,
         setServices,

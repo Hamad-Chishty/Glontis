@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useData } from '@/lib/context/DataContext';
 import {
@@ -18,15 +18,36 @@ import {
   Plane,
   ShieldCheck,
   ChevronRight,
+  ChevronLeft,
   AlertCircle,
 } from 'lucide-react';
 
 export default function HeroSlider() {
-  const { homepageHero, settings, countries } = useData();
+  const { homepageHero, heroSlides, settings, countries } = useData();
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [countryError, setCountryError] = useState(false);
 
-  const hero = homepageHero || {
+  // Slider settings with defaults
+  const sliderSettings = homepageHero?.slider_settings || {
+    animation_type: 'fade',
+    autoplay: true,
+    autoplay_duration_ms: 5000,
+    transition_speed_ms: 700,
+    pause_on_hover: true,
+    show_navigation_arrows: true,
+    show_pagination_dots: true,
+  };
+
+  // Active slides array
+  const activeSlides = (heroSlides || []).filter((s) => s.is_active).sort((a, b) => a.display_order - b.display_order);
+
+  // Fallback single slide from homepageHero if no heroSlides exist
+  const currentHero = activeSlides.length > 0 ? activeSlides[currentSlideIndex % activeSlides.length] : null;
+
+  // Single default slide
+  const fallbackHero = homepageHero || {
     eyebrow: 'GLONTIS VISA CONSULTANCY',
     heading: 'Your Journey Abroad Starts Here',
     description:
@@ -37,27 +58,53 @@ export default function HeroSlider() {
     secondary_cta_url: '/services',
     hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
     hero_image_alt_text: 'Glontis Visa Consultancy - Overseas Visa Counseling',
-    floating_badges: [
-      { id: 'fb-1', title: 'Study Visa', subtitle: 'Top Universities', icon_name: 'GraduationCap', is_active: true },
-      { id: 'fb-2', title: 'Work Visa', subtitle: 'Job Permits', icon_name: 'Briefcase', is_active: true },
-      { id: 'fb-3', title: 'Visit Visa', subtitle: 'Sponsor File', icon_name: 'Users', is_active: true },
-      { id: 'fb-4', title: 'Tourist Visa', subtitle: 'Global Travel', icon_name: 'Compass', is_active: true },
-    ],
-    service_quick_links: [
-      { id: 'sql-1', title: 'Study Visa', badge: 'Popular', url: '/study-visa', icon_name: 'GraduationCap', description: 'UK, Australia, USA, Canada & EU Top Universities', is_active: true, display_order: 1 },
-      { id: 'sql-2', title: 'Work Visa', badge: 'Permits', url: '/work-visa', icon_name: 'Briefcase', description: 'Europe, Middle East & Overseas Work Sponsorships', is_active: true, display_order: 2 },
-      { id: 'sql-3', title: 'Visit Visa', badge: 'Sponsor File', url: '/visit-visa', icon_name: 'Users', description: 'Family Visits, Business Meetings & Cover Letters', is_active: true, display_order: 3 },
-      { id: 'sql-4', title: 'Tourist Visa', badge: 'Fast Track', url: '/tourist-visa', icon_name: 'Compass', description: 'Schengen, USA, UK & Worldwide Holiday Visas', is_active: true, display_order: 4 },
-      { id: 'sql-5', title: 'Business Visa', badge: 'Investors', url: '/services/business-visa', icon_name: 'Building2', description: 'Corporate Travel, Trade & Investor Entry Permits', is_active: true, display_order: 5 },
-      { id: 'sql-6', title: 'Immigration / PR', badge: 'Residency', url: '/services/immigration', icon_name: 'Globe', description: 'Express Entry, Skilled Migration & PR Guidance', is_active: true, display_order: 6 },
-      { id: 'sql-7', title: 'Scholarships', badge: '100% Grants', url: '/scholarships', icon_name: 'Award', description: 'Fully Funded & Partial Merit-Based Academic Grants', is_active: true, display_order: 7 },
-    ],
   };
 
-  const activeBadges = (hero.floating_badges || []).filter((b) => b.is_active);
-  const activeServices = (hero.service_quick_links || [])
+  const eyebrow = currentHero?.badge || fallbackHero.eyebrow || 'GLONTIS VISA CONSULTANCY';
+  const heading = currentHero?.title || fallbackHero.heading || 'Your Journey Abroad Starts Here';
+  const description = currentHero?.subheading || fallbackHero.description || 'Expert guidance for Study, Work, Visit & Tourist Visas, Immigration, Scholarships and overseas opportunities.';
+  const primaryCtaText = currentHero?.primary_cta_text || fallbackHero.primary_cta_text || 'Book Free Consultation';
+  const primaryCtaUrl = currentHero?.primary_cta_link || fallbackHero.primary_cta_url || '/free-consultation';
+  const secondaryCtaText = currentHero?.secondary_cta_text || fallbackHero.secondary_cta_text || 'Explore Our Services';
+  const secondaryCtaUrl = currentHero?.secondary_cta_link || fallbackHero.secondary_cta_url || '/services';
+  const heroImage = currentHero?.image_url || fallbackHero.hero_image || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80';
+  const heroImageAlt = currentHero?.image_alt_text || fallbackHero.hero_image_alt_text || 'Glontis Overseas Counseling';
+
+  const floatingBadges = homepageHero?.floating_badges || [
+    { id: 'fb-1', title: 'Study Visa', subtitle: 'Top Universities', icon_name: 'GraduationCap', is_active: true },
+    { id: 'fb-2', title: 'Work Visa', subtitle: 'Job Permits', icon_name: 'Briefcase', is_active: true },
+    { id: 'fb-3', title: 'Visit Visa', subtitle: 'Sponsor File', icon_name: 'Users', is_active: true },
+    { id: 'fb-4', title: 'Tourist Visa', subtitle: 'Global Travel', icon_name: 'Compass', is_active: true },
+  ];
+
+  const activeBadges = floatingBadges.filter((b) => b.is_active);
+
+  const activeServices = (homepageHero?.service_quick_links || [])
     .filter((s) => s.is_active)
     .sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+
+  // Handle Autoplay Timer
+  const totalSlides = activeSlides.length;
+  useEffect(() => {
+    if (!sliderSettings.autoplay || totalSlides <= 1) return;
+    if (sliderSettings.pause_on_hover && isHovered) return;
+
+    const timer = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev + 1) % totalSlides);
+    }, sliderSettings.autoplay_duration_ms || 5000);
+
+    return () => clearInterval(timer);
+  }, [sliderSettings.autoplay, sliderSettings.autoplay_duration_ms, sliderSettings.pause_on_hover, isHovered, totalSlides]);
+
+  const handlePrev = () => {
+    if (totalSlides === 0) return;
+    setCurrentSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const handleNext = () => {
+    if (totalSlides === 0) return;
+    setCurrentSlideIndex((prev) => (prev + 1) % totalSlides);
+  };
 
   const getBadgeHref = (badge: { title: string }) => {
     const t = badge.title.toLowerCase();
@@ -68,7 +115,7 @@ export default function HeroSlider() {
     return '/services';
   };
 
-  const renderIcon = (iconName: string, className = 'w-5 h-5') => {
+  const renderIcon = (iconName?: string, className = 'w-5 h-5') => {
     switch (iconName) {
       case 'GraduationCap':
         return <GraduationCap className={className} />;
@@ -102,34 +149,71 @@ export default function HeroSlider() {
     }
   };
 
+  // Determine transition animation class
+  const getAnimationClasses = () => {
+    switch (sliderSettings.animation_type) {
+      case 'slide':
+        return 'transition-all duration-700 ease-in-out transform';
+      case 'zoom':
+        return 'transition-all duration-700 ease-out transform hover:scale-[1.02]';
+      case 'crossfade':
+        return 'transition-opacity duration-1000 ease-in-out';
+      case 'fade':
+      default:
+        return 'transition-opacity duration-500 ease-in-out';
+    }
+  };
+
   return (
-    <div className="relative bg-[#0A1838] text-white overflow-hidden">
+    <div
+      className="relative bg-[#0A1838] text-white overflow-hidden group/hero"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Background Decorative Lighting */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#F07100]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#F07100]/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
+
+      {/* Slide Index Badge & Navigation Arrows */}
+      {totalSlides > 1 && sliderSettings.show_navigation_arrows && (
+        <>
+          <button
+            onClick={handlePrev}
+            aria-label="Previous Slide"
+            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#F07100] border border-slate-700 hover:border-[#F07100] text-white flex items-center justify-center transition-all shadow-xl hover:scale-110 active:scale-95"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={handleNext}
+            aria-label="Next Slide"
+            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#F07100] border border-slate-700 hover:border-[#F07100] text-white flex items-center justify-center transition-all shadow-xl hover:scale-110 active:scale-95"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </>
+      )}
 
       {/* Main Hero Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center ${getAnimationClasses()}`}>
           
-          {/* LEFT SIDE: Main Headline & Branding */}
+          {/* LEFT SIDE: Headline & Branding */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             {/* Eyebrow / Main Branding */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F07100]/15 border border-[#F07100]/30 text-xs font-black text-[#F07100] uppercase tracking-wider shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F07100]/15 border border-[#F07100]/30 text-xs font-black text-[#F07100] uppercase tracking-wider shadow-sm transition-all duration-300">
               <Sparkles className="w-3.5 h-3.5 text-[#F07100]" />
-              <span>{hero.eyebrow || 'GLONTIS VISA CONSULTANCY'}</span>
+              <span>{eyebrow}</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-              Your Journey Abroad <br className="hidden sm:inline" />
-              <span className="text-[#F07100]">Starts Here</span>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] transition-all duration-500">
+              {heading}
             </h1>
 
             {/* Concise Supporting Text */}
             <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-2xl mx-auto lg:mx-0">
-              {hero.description ||
-                'Expert guidance for Study, Work, Visit & Tourist Visas, Immigration, Scholarships and overseas opportunities.'}
+              {description}
             </p>
 
             {/* Country Destination Selector */}
@@ -176,25 +260,25 @@ export default function HeroSlider() {
             {/* Hero CTA Buttons */}
             <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
               <Link
-                href={hero.primary_cta_url || '/free-consultation'}
+                href={primaryCtaUrl}
                 className="px-7 py-3.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm sm:text-base flex items-center gap-2 shadow-xl hover:shadow-orange-500/25 transition-all hover:scale-[1.02]"
               >
-                <span>{hero.primary_cta_text || 'Book Free Consultation'}</span>
+                <span>{primaryCtaText}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
               <Link
-                href={hero.secondary_cta_url || '/services'}
+                href={secondaryCtaUrl}
                 className="px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border border-slate-700/80 font-bold text-sm sm:text-base flex items-center gap-2 transition-all hover:border-[#F07100]"
               >
-                <span>{hero.secondary_cta_text || 'Explore Our Services'}</span>
+                <span>{secondaryCtaText}</span>
               </Link>
 
               <a
                 href={`https://wa.me/92${cleanWhatsapp}?text=Hello%20Glontis%20Visa%20Consultancy,%20I%20want%20information%20about%20Overseas%20Visa%20Guidance.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center gap-2 transition-all shadow-md"
+                className="px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center gap-2 transition-all shadow-md hover:scale-[1.02]"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span className="hidden sm:inline">WhatsApp Us</span>
@@ -218,19 +302,19 @@ export default function HeroSlider() {
             </div>
           </div>
 
-          {/* RIGHT SIDE: High-Quality Professional Travel Image & Clickable Floating Badges */}
+          {/* RIGHT SIDE: High-Quality Professional Travel Image & Floating Badges */}
           <div className="lg:col-span-5 relative flex justify-center items-center">
             <div className="relative w-full max-w-md lg:max-w-none aspect-[4/3] rounded-3xl overflow-hidden border-2 border-slate-700/60 shadow-2xl bg-slate-900 group">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={hero.hero_image || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80'}
-                alt={hero.hero_image_alt_text || hero.heading || 'Glontis Visa Consultancy'}
+                src={heroImage}
+                alt={heroImageAlt}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent" />
 
               {/* Bottom Image Caption */}
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/85 backdrop-blur-md p-3 rounded-2xl border border-white/10 text-xs font-bold text-white flex items-center justify-between">
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-md p-3 rounded-2xl border border-white/10 text-xs font-bold text-white flex items-center justify-between">
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#F07100]" />
                   <span>Glontis Overseas File Guidance</span>
@@ -241,10 +325,9 @@ export default function HeroSlider() {
               </div>
             </div>
 
-            {/* 4 CLICKABLE FLOATING VISA BADGES AROUND THE IMAGE */}
+            {/* CLICKABLE FLOATING VISA BADGES */}
             {activeBadges.length > 0 && (
               <>
-                {/* Badge 1: Top Left */}
                 {activeBadges[0] && (
                   <Link
                     href={getBadgeHref(activeBadges[0])}
@@ -262,7 +345,6 @@ export default function HeroSlider() {
                   </Link>
                 )}
 
-                {/* Badge 2: Top Right */}
                 {activeBadges[1] && (
                   <Link
                     href={getBadgeHref(activeBadges[1])}
@@ -280,7 +362,6 @@ export default function HeroSlider() {
                   </Link>
                 )}
 
-                {/* Badge 3: Bottom Left */}
                 {activeBadges[2] && (
                   <Link
                     href={getBadgeHref(activeBadges[2])}
@@ -298,7 +379,6 @@ export default function HeroSlider() {
                   </Link>
                 )}
 
-                {/* Badge 4: Bottom Right */}
                 {activeBadges[3] && (
                   <Link
                     href={getBadgeHref(activeBadges[3])}
@@ -320,11 +400,27 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* ================================================== */}
+        {/* Pagination Dots */}
+        {totalSlides > 1 && sliderSettings.show_pagination_dots && (
+          <div className="mt-8 flex items-center justify-center gap-2.5">
+            {activeSlides.map((slide, idx) => (
+              <button
+                key={slide.id || idx}
+                onClick={() => setCurrentSlideIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  idx === currentSlideIndex % totalSlides
+                    ? 'w-8 bg-[#F07100]'
+                    : 'w-2.5 bg-slate-700 hover:bg-slate-500'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
         {/* SERVICE QUICK LINKS BAR BELOW HERO CONTENT */}
-        {/* ================================================== */}
         {activeServices.length > 0 && (
-          <div className="mt-16 pt-8 border-t border-slate-800/80">
+          <div className="mt-14 pt-8 border-t border-slate-800/80">
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#F07100]">Explore Services</span>
@@ -382,4 +478,3 @@ export default function HeroSlider() {
     </div>
   );
 }
-

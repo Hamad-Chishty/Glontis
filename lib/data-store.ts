@@ -13,6 +13,7 @@ import {
   FAQItem,
   TrustStat,
   WorkVisaPageData,
+  VisitVisaPageData,
   TouristVisaPageData,
 } from './types';
 
@@ -32,6 +33,7 @@ export interface AppDatabase {
   leads: LeadEntry[];
   faqs: FAQItem[];
   workVisaPage: WorkVisaPageData;
+  visitVisaPage: VisitVisaPageData;
   touristVisaPage: TouristVisaPageData;
 }
 
@@ -1579,6 +1581,221 @@ export const defaultTouristVisaPage: TouristVisaPageData = {
   url_slug: 'tourist-visa',
 };
 
+export const defaultVisitVisaPage: VisitVisaPageData = {
+  page_title: 'Visit Visa Consultancy in Multan | Family & Business Visit Visas',
+  url_slug: 'visit-visa',
+  hero_heading: 'Family & Business Visit Visas',
+  hero_subheading: 'Visit Visa Assistance',
+  hero_description: 'Professional guidance for visitors planning international travel. Visit family members abroad, attend business conferences, or explore investment opportunities with complete visa file preparation from Glontis Visa Consultancy in Multan.',
+  hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+  hero_image_alt_text: 'Family and Business Visit Visa Counseling',
+  hero_image_title: 'Glontis Visit Visa Banner',
+  mobile_hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
+  mobile_hero_image_alt_text: 'Visit Visa Assistance Multan',
+  mobile_hero_image_title: 'Visit Visa Mobile Banner',
+  introduction: 'Glontis Visa Consultancy provides expert visit visa advisory and file preparation services for applicants in Multan and across Pakistan. Whether you are traveling to visit close family, attending trade expos, or taking short business trips, our experienced consultants ensure every legal and financial proof is accurately compiled.',
+  visa_overview: 'Our visit visa services cover complete documentation audit, sponsor letter verification, official itinerary vouchers, bank statement formatting, and embassy appointment scheduling. We help you present a genuine, transparent, and compelling application to international embassies.',
+  who_can_apply: [
+    'Individuals visiting immediate family members or close relatives legally residing abroad.',
+    'Business delegates, corporate executives, and entrepreneurs attending international conferences or trade fairs.',
+    'Parents visiting children studying or working overseas.',
+    'Short-term visitors for medical consultations, cultural exchange, or family celebrations.',
+  ],
+  eligibility_requirements: [
+    'Valid original passport with at least 6 months validity from the intended return date.',
+    'Demonstrated strong socio-economic and financial ties to Pakistan (employment, business NTN, property).',
+    'Official invitation letter from overseas sponsor, host relative, or inviting organization.',
+    'Sufficient bank balance and active account statement for the past 6 months.',
+    'Clean immigration history with no previous visa violations or unexplained rejections.',
+  ],
+  required_documents: [
+    'Original Passport & Scans of Previous Passports / Visas',
+    '2 Recent Passport Photos (35x45mm, White Background, 80% Face)',
+    '6 Months Bank Statement & Account Maintenance Certificate',
+    'CNIC Copy & Family Registration Certificate (FRC / MRC)',
+    'Employment Letter / Salary Slips OR Business Chamber / NTN Documents',
+    'Official Invitation Letter & Sponsor ID Proof (if visiting family/business)',
+    'Confirmed Flight Reservation & Verifiable Hotel Vouchers',
+    'Overseas Travel Health Insurance Policy ($30,000+ coverage)',
+  ],
+  application_process: [
+    {
+      step: 1,
+      title: 'Case Assessment & Document Review',
+      description: 'Consult with our Multan counselors to assess your profile, family ties, sponsor credibility, and bank statement stability.',
+    },
+    {
+      step: 2,
+      title: 'Sponsor & File Compilation',
+      description: 'We verify sponsor invitation documents, generate flight/hotel itineraries, and draft custom cover letters.',
+    },
+    {
+      step: 3,
+      title: 'Embassy Filing & Biometrics',
+      description: 'Appointment booking for VFS, Gerrys, BLS, or embassy biometrics, plus DS-160/online e-visa filing.',
+    },
+    {
+      step: 4,
+      title: 'Visa Grant & Travel Briefing',
+      description: 'Collect your stamped passport or e-visa approval with pre-departure travel recommendations.',
+    },
+  ],
+  processing_information: {
+    processing_time: '5 to 1 Working Days (depending on embassy)',
+    visa_duration: '6 Months to 2 Years (Single / Multiple Entry)',
+    entry_type: 'Single Entry / Multiple Entry',
+    stay_duration: '30 Days to 90 Days per visit',
+    fee_estimate: 'Affordable, transparent service charges with zero hidden fees',
+    important_info: 'All applications undergo thorough verification before submission to ensure complete alignment with official embassy guidelines.',
+  },
+  benefits: [
+    'End-to-end guidance from senior visa experts in Multan.',
+    'Meticulous bank statement evaluation to maximize legal presentation.',
+    'Official verifiable flight reservations, hotel vouchers, and travel insurance.',
+    'Professional cover letter writing highlighting genuine ties to home country.',
+    'Mock embassy interview preparation for US B1/B2 and Schengen applicants.',
+  ],
+  destinations: [
+    {
+      id: 'vv-dest-1',
+      title: 'UK Standard Visitor Visa',
+      country: 'United Kingdom',
+      badge: '6 Months / 2 Years',
+      description: 'Visit family, friends, or attend business meetings in London and across the UK with solid financial documentation.',
+      key_highlights: [
+        '6 Months / 2 Year Multiple Entry',
+        'Full Sponsor File Support',
+        'VFS Appointment Booking',
+      ],
+      image_url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80',
+      image_alt_text: 'UK Standard Visitor Visa Big Ben',
+      image_title: 'UK Visit Visa',
+      is_active: true,
+    },
+    {
+      id: 'vv-dest-2',
+      title: 'Schengen Business & Family Visit Visa',
+      country: 'Germany, France, Italy, Spain',
+      badge: '29 Countries',
+      description: 'Travel across 29 Schengen countries. Complete itinerary, invitation verification, and insurance file compilation.',
+      key_highlights: [
+        'Schengen Travel Insurance Included',
+        'Cover Letter & Hotel Vouchers',
+        'BLS / VFS Appointment Prep',
+      ],
+      image_url: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
+      image_alt_text: 'Schengen Visit Visa Paris',
+      image_title: 'Schengen Visit Visa',
+      is_active: true,
+    },
+    {
+      id: 'vv-dest-3',
+      title: 'USA B1/B2 Visitor Visa',
+      country: 'United States',
+      badge: '10-Year Multiple Entry',
+      description: 'DS-160 form filing, fee payment, appointment booking, and mock interview preparation at the US Embassy in Islamabad.',
+      key_highlights: [
+        'DS-160 Form Filing',
+        'Islamabad Embassy Prep',
+        '10-Year Multiple Entry Potential',
+      ],
+      image_url: 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=1200&q=80',
+      image_alt_text: 'USA Visitor Visa Statue of Liberty',
+      image_title: 'USA B1 B2 Visa',
+      is_active: true,
+    },
+    {
+      id: 'vv-dest-4',
+      title: 'Canada Visitor Visa (TRV)',
+      country: 'Canada',
+      badge: 'Multiple Entry',
+      description: 'Multiple-entry Canada visitor visa filing for visiting children, relatives, or attending trade exhibitions.',
+      key_highlights: [
+        '10-Year Validity (Passport Expiry)',
+        'Immigration Portal Submission',
+        'Family Ties & Financial Proof',
+      ],
+      image_url: 'https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=80',
+      image_alt_text: 'Canada Visitor Visa Toronto',
+      image_title: 'Canada Visit Visa',
+      is_active: true,
+    },
+    {
+      id: 'vv-dest-5',
+      title: 'Australia Visitor Visa (Subclass 600)',
+      country: 'Australia',
+      badge: 'Family & Business',
+      description: 'Tourist & Family stream visas with online ImmiAccount submission and genuine temporary entrant proofing.',
+      key_highlights: [
+        'Online ImmiAccount Processing',
+        'No Passport Stamping Required',
+        'Fast Turnaround',
+      ],
+      image_url: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80',
+      image_alt_text: 'Australia Subclass 600 Opera House',
+      image_title: 'Australia Visit Visa',
+      is_active: true,
+    },
+    {
+      id: 'vv-dest-6',
+      title: 'UAE & Saudi Arabia Family Visit',
+      country: 'Middle East',
+      badge: 'Fast 24-48 Hours',
+      description: 'Fast 24-48 hour e-visa processing for family visits, business exhibitions, and Umrah visits.',
+      key_highlights: [
+        '24 to 48 Hours E-Visa',
+        'Simple Document Checklist',
+        'Instant Delivery',
+      ],
+      image_url: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
+      image_alt_text: 'UAE Saudi Visit Visa Dubai',
+      image_title: 'UAE Saudi Visit Visa',
+      is_active: true,
+    },
+  ],
+  faqs: [
+    {
+      id: 'vv-faq-1',
+      question: 'What is the difference between a Tourist Visa and a Visit Visa?',
+      answer: 'A tourist visa is primarily intended for leisure travel and sightseeing, whereas a visit visa usually requires an invitation from an overseas sponsor, relative, or business partner who verifies the purpose and host arrangements for your stay.',
+    },
+    {
+      id: 'vv-faq-2',
+      question: 'Can I work on a Visit Visa?',
+      answer: 'No. Visit visas strictly prohibit taking up employment or performing paid work abroad. If your goal is employment, you must apply for a dedicated Work Visa or Employment Permit.',
+    },
+    {
+      id: 'vv-faq-3',
+      question: 'How much bank statement balance is required for a UK Visit Visa?',
+      answer: 'Embassies evaluate whether your available bank balance is proportionate to your income and sufficient to cover travel costs without straining your finances. We evaluate your account to ensure genuine, compliant presentation.',
+    },
+  ],
+  cta_heading: 'Ready to Visit Family or Attend Business Abroad?',
+  cta_description: 'Get personalized visit visa file assessment and guidance from Glontis Visa Consultancy in Multan.',
+  primary_cta_text: 'Book Free Visit Visa Assessment',
+  primary_cta_url: '/free-consultation',
+  secondary_cta_text: 'Explore Destinations',
+  secondary_cta_url: '/visit-visa',
+  whatsapp_button_text: 'Chat on WhatsApp',
+  section_visibility: {
+    hero: true,
+    introduction: true,
+    overview: true,
+    who_can_apply: true,
+    destinations: true,
+    eligibility: true,
+    documents: true,
+    process: true,
+    processing_info: true,
+    benefits: true,
+    faqs: true,
+    cta: true,
+  },
+  section_order: ['hero', 'introduction', 'overview', 'who_can_apply', 'destinations', 'eligibility', 'documents', 'process', 'processing_info', 'benefits', 'faqs', 'cta'],
+  seo_title: 'Visit Visa Consultancy in Multan | UK, Schengen, USA, Canada Visit Visas',
+  meta_description: 'Top Visit Visa consultants in Multan. Professional file preparation for family visit, business visitor, and sponsor-backed visas for UK, USA, Canada, Australia, and Europe.',
+};
+
 // Persistent File System DB Store Helper
 let inMemoryDb: AppDatabase | null = null;
 
@@ -1616,6 +1833,7 @@ export function getDb(): AppDatabase {
           if (!inMemoryDb.faqs) inMemoryDb.faqs = defaultFaqs;
           if (!inMemoryDb.leads) inMemoryDb.leads = defaultLeads;
           if (!inMemoryDb.workVisaPage) inMemoryDb.workVisaPage = defaultWorkVisaPage;
+          if (!inMemoryDb.visitVisaPage) inMemoryDb.visitVisaPage = defaultVisitVisaPage;
           if (!inMemoryDb.touristVisaPage) inMemoryDb.touristVisaPage = defaultTouristVisaPage;
           return inMemoryDb;
         }
@@ -1640,6 +1858,7 @@ export function getDb(): AppDatabase {
     leads: defaultLeads,
     faqs: defaultFaqs,
     workVisaPage: defaultWorkVisaPage,
+    visitVisaPage: defaultVisitVisaPage,
     touristVisaPage: defaultTouristVisaPage,
   };
 

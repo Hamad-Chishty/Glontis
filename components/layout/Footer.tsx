@@ -195,6 +195,26 @@ export default function Footer() {
               Our Services
             </h4>
             <ul className="space-y-2.5 text-xs">
+              <li>
+                <Link href="/study-visa" className="hover:text-white transition-colors font-bold text-[#F07100]">
+                  Study Visa
+                </Link>
+              </li>
+              <li>
+                <Link href="/work-visa" className="hover:text-white transition-colors font-bold text-[#F07100]">
+                  Work Visa
+                </Link>
+              </li>
+              <li>
+                <Link href="/visit-visa" className="hover:text-white transition-colors font-bold text-[#F07100]">
+                  Visit Visa
+                </Link>
+              </li>
+              <li>
+                <Link href="/tourist-visa" className="hover:text-white transition-colors font-bold text-[#F07100]">
+                  Tourist Visa
+                </Link>
+              </li>
               {publishedServices.map((service) => (
                 <li key={service.id}>
                   <Link

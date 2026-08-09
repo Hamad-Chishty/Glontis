@@ -6,6 +6,7 @@ import { useData } from '@/lib/context/DataContext';
 import ImageUploader from '@/components/admin/ImageUploader';
 import MediaLibraryTab from '@/components/admin/MediaLibraryTab';
 import WorkVisaCmsTab from '@/components/admin/WorkVisaCmsTab';
+import VisitVisaCmsTab from '@/components/admin/VisitVisaCmsTab';
 import TouristVisaCmsTab from '@/components/admin/TouristVisaCmsTab';
 import {
   Users,
@@ -106,6 +107,7 @@ export default function AdminDashboardPage() {
     | 'blogs'
     | 'faqs'
     | 'workVisa'
+    | 'visitVisa'
     | 'touristVisa'
     | 'settings'
   >('leads');
@@ -330,15 +332,16 @@ export default function AdminDashboardPage() {
             { id: 'media', name: 'Media Library', icon: FolderOpen, badge: mediaLibrary.length },
             { id: 'hero', name: 'Hero Slider Banners', icon: ImageIcon, badge: heroSlides.length },
             { id: 'offers', name: 'Special Offers & Popups', icon: Tag, badge: offers.length },
-            { id: 'countries', name: 'Study Destinations', icon: Globe, badge: countries.length },
+            { id: 'countries', name: 'Study Visa / Destinations', icon: Globe, badge: countries.length },
+            { id: 'workVisa', name: 'Work Visa CMS', icon: Briefcase },
+            { id: 'visitVisa', name: 'Visit Visa CMS', icon: Users },
+            { id: 'touristVisa', name: 'Tourist Visa CMS', icon: Compass },
+            { id: 'universities', name: 'Scholarships & Universities', icon: Building2, badge: universities.length },
             { id: 'services', name: 'Visa & Admission Services', icon: GraduationCap, badge: services.length },
-            { id: 'universities', name: 'Partner Universities', icon: Building2, badge: universities.length },
             { id: 'stories', name: 'Visa Success Grants', icon: Award, badge: successStories.length },
             { id: 'testimonials', name: 'Client Testimonials', icon: Star, badge: testimonials.length },
             { id: 'blogs', name: 'Blog Articles', icon: BookOpen, badge: blogs.length },
             { id: 'faqs', name: 'FAQs Manager', icon: HelpCircle, badge: faqs.length },
-            { id: 'workVisa', name: 'Work Visa CMS', icon: Briefcase },
-            { id: 'touristVisa', name: 'Tourist Visa CMS', icon: Compass },
             { id: 'settings', name: 'Website Settings', icon: Settings },
           ].map((item) => {
             const Icon = item.icon;
@@ -1923,6 +1926,7 @@ export default function AdminDashboardPage() {
           )}
 
           {activeTab === 'workVisa' && <WorkVisaCmsTab />}
+          {activeTab === 'visitVisa' && <VisitVisaCmsTab />}
           {activeTab === 'touristVisa' && <TouristVisaCmsTab />}
         </main>
       </div>

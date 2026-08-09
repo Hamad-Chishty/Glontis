@@ -311,6 +311,82 @@ export interface WorkVisaPageData {
   url_slug: string;
 }
 
+export interface VisitVisaDestination {
+  id: string;
+  title: string;
+  country: string;
+  badge?: string;
+  description: string;
+  key_highlights: string[];
+  image_url?: string;
+  image_alt_text?: string;
+  image_title?: string;
+  is_active: boolean;
+}
+
+export interface VisitVisaPageData {
+  page_title: string;
+  url_slug: string;
+  hero_heading: string;
+  hero_subheading?: string;
+  hero_description: string;
+  hero_image: string;
+  hero_image_alt_text?: string;
+  hero_image_title?: string;
+  mobile_hero_image?: string;
+  mobile_hero_image_alt_text?: string;
+  mobile_hero_image_title?: string;
+  introduction: string;
+  visa_overview: string;
+  who_can_apply: string[];
+  eligibility_requirements: string[];
+  required_documents: string[];
+  application_process: Array<{
+    step: number;
+    title: string;
+    description: string;
+  }>;
+  processing_information: {
+    processing_time: string;
+    visa_duration: string;
+    entry_type: string;
+    stay_duration: string;
+    fee_estimate: string;
+    important_info: string;
+  };
+  benefits: string[];
+  destinations: VisitVisaDestination[];
+  faqs: Array<{
+    id: string;
+    question: string;
+    answer: string;
+  }>;
+  cta_heading: string;
+  cta_description: string;
+  primary_cta_text: string;
+  primary_cta_url: string;
+  secondary_cta_text: string;
+  secondary_cta_url: string;
+  whatsapp_button_text: string;
+  section_visibility: {
+    hero: boolean;
+    introduction: boolean;
+    overview: boolean;
+    who_can_apply: boolean;
+    destinations: boolean;
+    eligibility: boolean;
+    documents: boolean;
+    process: boolean;
+    processing_info: boolean;
+    benefits: boolean;
+    faqs: boolean;
+    cta: boolean;
+  };
+  section_order?: string[];
+  seo_title: string;
+  meta_description: string;
+}
+
 export interface TouristVisaPageData {
   page_title: string;
   hero_heading: string;

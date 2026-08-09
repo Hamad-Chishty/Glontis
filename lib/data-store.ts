@@ -1,5 +1,6 @@
 import {
   SiteSettings,
+  MediaItem,
   HeroSlide,
   Offer,
   CountryDestination,
@@ -16,6 +17,7 @@ import {
 // Default initial database content
 export interface AppDatabase {
   settings: SiteSettings;
+  mediaLibrary: MediaItem[];
   heroSlides: HeroSlide[];
   offers: Offer[];
   trustStats: TrustStat[];
@@ -52,6 +54,107 @@ export const defaultSettings: SiteSettings = {
   seo_default_description: 'Glontis Visa Consultancy is Multan’s premier education and visa advisory firm. Expert guidance for student visas in UK, Australia, Canada, USA, Germany, Italy, Ireland, and more.',
   copyright_text: '© 2026 Glontis Visa Consultancy. All Rights Reserved.',
 };
+
+export const defaultMediaLibrary: MediaItem[] = [
+  {
+    id: 'media-logo',
+    url: '/glontis-logo.svg',
+    file_name: 'glontis-logo.svg',
+    width: 320,
+    height: 80,
+    file_size_bytes: 14200,
+    file_size_formatted: '14.2 KB',
+    file_type: 'SVG',
+    aspect_ratio: '4:1',
+    upload_date: '2026-01-10',
+    alt_text: 'Glontis Visa Consultancy Official Logo',
+    title: 'Glontis Logo',
+  },
+  {
+    id: 'media-hero-1',
+    url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+    file_name: 'hero_students_campus.jpg',
+    width: 1920,
+    height: 800,
+    file_size_bytes: 245000,
+    file_size_formatted: '245 KB',
+    file_type: 'JPG',
+    aspect_ratio: '12:5 (2.40:1)',
+    upload_date: '2026-01-12',
+    alt_text: 'International students on university campus',
+    title: 'Hero Banner 1',
+  },
+  {
+    id: 'media-hero-2',
+    url: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1600&q=80',
+    file_name: 'uk_study_destination.jpg',
+    width: 1920,
+    height: 800,
+    file_size_bytes: 310000,
+    file_size_formatted: '310 KB',
+    file_type: 'JPG',
+    aspect_ratio: '12:5 (2.40:1)',
+    upload_date: '2026-01-15',
+    alt_text: 'UK university hall and students',
+    title: 'Hero Banner 2',
+  },
+  {
+    id: 'media-c-uk',
+    url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80',
+    file_name: 'london_big_ben_uk.jpg',
+    width: 1200,
+    height: 800,
+    file_size_bytes: 280000,
+    file_size_formatted: '280 KB',
+    file_type: 'JPG',
+    aspect_ratio: '3:2 (1.50:1)',
+    upload_date: '2026-01-18',
+    alt_text: 'Study in UK Big Ben London Landmark',
+    title: 'UK Study Destination',
+  },
+  {
+    id: 'media-c-aus',
+    url: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80',
+    file_name: 'sydney_opera_house_australia.jpg',
+    width: 1200,
+    height: 800,
+    file_size_bytes: 295000,
+    file_size_formatted: '295 KB',
+    file_type: 'JPG',
+    aspect_ratio: '3:2 (1.50:1)',
+    upload_date: '2026-01-20',
+    alt_text: 'Study in Australia Sydney Harbor',
+    title: 'Australia Study Destination',
+  },
+  {
+    id: 'media-c-can',
+    url: 'https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1200&q=80',
+    file_name: 'toronto_skyline_canada.jpg',
+    width: 1200,
+    height: 800,
+    file_size_bytes: 260000,
+    file_size_formatted: '260 KB',
+    file_type: 'JPG',
+    aspect_ratio: '3:2 (1.50:1)',
+    upload_date: '2026-01-22',
+    alt_text: 'Study in Canada Toronto Skyline',
+    title: 'Canada Study Destination',
+  },
+  {
+    id: 'media-blog-1',
+    url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
+    file_name: 'uk_visa_guide_2026.jpg',
+    width: 1200,
+    height: 675,
+    file_size_bytes: 210000,
+    file_size_formatted: '210 KB',
+    file_type: 'JPG',
+    aspect_ratio: '16:9 (1.78:1)',
+    upload_date: '2026-01-25',
+    alt_text: 'UK Student Visa Step-by-Step Guide',
+    title: 'UK Visa Article Cover',
+  },
+];
 
 export const defaultHeroSlides: HeroSlide[] = [
   {
@@ -1136,6 +1239,7 @@ export function getDb(): AppDatabase {
         inMemoryDb = JSON.parse(data);
         if (inMemoryDb) {
           if (!inMemoryDb.settings) inMemoryDb.settings = defaultSettings;
+          if (!inMemoryDb.mediaLibrary) inMemoryDb.mediaLibrary = defaultMediaLibrary;
           if (!inMemoryDb.heroSlides) inMemoryDb.heroSlides = defaultHeroSlides;
           if (!inMemoryDb.offers) inMemoryDb.offers = defaultOffers;
           if (!inMemoryDb.trustStats) inMemoryDb.trustStats = defaultTrustStats;
@@ -1157,6 +1261,7 @@ export function getDb(): AppDatabase {
 
   inMemoryDb = {
     settings: defaultSettings,
+    mediaLibrary: defaultMediaLibrary,
     heroSlides: defaultHeroSlides,
     offers: defaultOffers,
     trustStats: defaultTrustStats,

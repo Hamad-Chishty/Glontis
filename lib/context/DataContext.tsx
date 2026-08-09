@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   SiteSettings,
+  MediaItem,
   HeroSlide,
   Offer,
   TrustStat,
@@ -17,6 +18,7 @@ import {
 } from '@/lib/types';
 import {
   defaultSettings,
+  defaultMediaLibrary,
   defaultHeroSlides,
   defaultOffers,
   defaultTrustStats,
@@ -32,6 +34,7 @@ import {
 
 interface DataContextType {
   settings: SiteSettings;
+  mediaLibrary: MediaItem[];
   heroSlides: HeroSlide[];
   offers: Offer[];
   trustStats: TrustStat[];
@@ -49,7 +52,10 @@ interface DataContextType {
   addLead: (lead: Omit<LeadEntry, 'id' | 'created_at' | 'status'>) => Promise<{ success: boolean; message: string }>;
   updateLeadStatus: (id: string, status: LeadEntry['status']) => Promise<boolean>;
   deleteLead: (id: string) => Promise<boolean>;
+  addMediaItem: (item: MediaItem) => Promise<boolean>;
+  deleteMediaItem: (id: string) => Promise<boolean>;
   setSettings: React.Dispatch<React.SetStateAction<SiteSettings>>;
+  setMediaLibrary: React.Dispatch<React.SetStateAction<MediaItem[]>>;
   setHeroSlides: React.Dispatch<React.SetStateAction<HeroSlide[]>>;
   setOffers: React.Dispatch<React.SetStateAction<Offer[]>>;
   setCountries: React.Dispatch<React.SetStateAction<CountryDestination[]>>;
@@ -66,6 +72,7 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
+  const [mediaLibrary, setMediaLibrary] = useState<MediaItem[]>(defaultMediaLibrary);
   const [heroSlides, setHeroSlides] = useState<HeroSlide[]>(defaultHeroSlides);
   const [offers, setOffers] = useState<Offer[]>(defaultOffers);
   const [trustStats, setTrustStats] = useState<TrustStat[]>(defaultTrustStats);
@@ -87,6 +94,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         if (json.success && json.data) {
           const d = json.data;
           if (d.settings) setSettings(d.settings);
+          if (d.mediaLibrary) setMediaLibrary(d.mediaLibrary);
           if (d.heroSlides) setHeroSlides(d.heroSlides);
           if (d.offers) setOffers(d.offers);
           if (d.trustStats) setTrustStats(d.trustStats);
@@ -130,6 +138,18 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       console.error('Error updating data:', err);
       return false;
     }
+  };
+
+  const addMediaItem = async (item: MediaItem) => {
+    const updated = [item, ...mediaLibrary.filter((m) => m.id !== item.id)];
+    setMediaLibrary(updated);
+    return await updateData('UPDATE_ENTITY', 'mediaLibrary', updated);
+  };
+
+  const deleteMediaItem = async (id: string) => {
+    const updated = mediaLibrary.filter((m) => m.id !== id);
+    setMediaLibrary(updated);
+    return await updateData('UPDATE_ENTITY', 'mediaLibrary', updated);
   };
 
   const addLead = async (leadData: Omit<LeadEntry, 'id' | 'created_at' | 'status'>) => {
@@ -196,6 +216,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     <DataContext.Provider
       value={{
         settings,
+        mediaLibrary,
         heroSlides,
         offers,
         trustStats,
@@ -213,7 +234,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         addLead,
         updateLeadStatus,
         deleteLead,
+        addMediaItem,
+        deleteMediaItem,
         setSettings,
+        setMediaLibrary,
         setHeroSlides,
         setOffers,
         setCountries,

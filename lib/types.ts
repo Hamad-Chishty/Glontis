@@ -2,6 +2,10 @@ export interface SiteSettings {
   company_name: string;
   tagline: string;
   domain: string;
+  logo_url?: string;
+  favicon_url?: string;
+  about_image_url?: string;
+  hero_bg_image_url?: string;
   phones: string[];
   whatsapp: string;
   email: string;
@@ -25,12 +29,29 @@ export interface SiteSettings {
   copyright_text: string;
 }
 
+export interface MediaItem {
+  id: string;
+  url: string;
+  file_name: string;
+  width: number;
+  height: number;
+  file_size_bytes: number;
+  file_size_formatted: string;
+  file_type: string;
+  aspect_ratio: string;
+  upload_date: string;
+  alt_text?: string;
+  title?: string;
+}
+
 export interface HeroSlide {
   id: string;
   title: string;
   subheading: string;
   badge?: string;
   image_url: string;
+  image_alt_text?: string;
+  image_title?: string;
   primary_cta_text: string;
   primary_cta_link: string;
   secondary_cta_text: string;
@@ -45,6 +66,8 @@ export interface Offer {
   description: string;
   discount_badge: string;
   image_url?: string;
+  image_alt_text?: string;
+  image_title?: string;
   start_date: string;
   end_date: string;
   cta_text: string;
@@ -62,6 +85,8 @@ export interface CountryDestination {
   slug: string; // e.g. "study-in-uk"
   flag_emoji: string;
   hero_image: string;
+  image_alt_text?: string;
+  image_title?: string;
   short_description: string;
   full_description: string;
   study_benefits: string[];
@@ -89,6 +114,8 @@ export interface ServiceItem {
   slug: string;
   icon_name: string; // Lucide icon name
   image_url: string;
+  image_alt_text?: string;
+  image_title?: string;
   short_description: string;
   full_description: string;
   key_benefits: string[];
@@ -106,6 +133,8 @@ export interface UniversityItem {
   city: string;
   logo_url: string;
   image_url: string;
+  image_alt_text?: string;
+  image_title?: string;
   description: string;
   popular_programs: string[];
   entry_requirements: string[];
@@ -127,6 +156,8 @@ export interface SuccessStory {
   grant_date: string;
   student_image: string;
   visa_grant_image: string;
+  image_alt_text?: string;
+  image_title?: string;
   story_text: string;
   is_featured: boolean;
   is_published: boolean;
@@ -136,6 +167,8 @@ export interface Testimonial {
   id: string;
   customer_name: string;
   customer_photo: string;
+  image_alt_text?: string;
+  image_title?: string;
   country: string;
   service: string;
   star_rating: number; // 1 - 5
@@ -153,6 +186,8 @@ export interface BlogPost {
   excerpt: string;
   content: string; // Markdown or HTML
   featured_image: string;
+  image_alt_text?: string;
+  image_title?: string;
   category: string;
   tags: string[];
   author_name: string;

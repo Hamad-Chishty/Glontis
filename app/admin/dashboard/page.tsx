@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useData } from '@/lib/context/DataContext';
+import ImageUploader from '@/components/admin/ImageUploader';
+import MediaLibraryTab from '@/components/admin/MediaLibraryTab';
 import {
   Users,
   ImageIcon,
@@ -32,9 +34,11 @@ import {
   ExternalLink,
   ShieldCheck,
   Check,
+  FolderOpen,
 } from 'lucide-react';
 import {
   SiteSettings,
+  MediaItem,
   HeroSlide,
   Offer,
   CountryDestination,
@@ -53,6 +57,7 @@ export default function AdminDashboardPage() {
     leads,
     updateLeadStatus,
     deleteLead,
+    mediaLibrary,
     heroSlides,
     setHeroSlides,
     offers,
@@ -86,6 +91,7 @@ export default function AdminDashboardPage() {
 
   const [activeTab, setActiveTab] = useState<
     | 'leads'
+    | 'media'
     | 'hero'
     | 'offers'
     | 'countries'
@@ -315,6 +321,7 @@ export default function AdminDashboardPage() {
 
           {[
             { id: 'leads', name: 'Student Leads CRM', icon: Users, badge: leads.length },
+            { id: 'media', name: 'Media Library', icon: FolderOpen, badge: mediaLibrary.length },
             { id: 'hero', name: 'Hero Slider Banners', icon: ImageIcon, badge: heroSlides.length },
             { id: 'offers', name: 'Special Offers & Popups', icon: Tag, badge: offers.length },
             { id: 'countries', name: 'Study Destinations', icon: Globe, badge: countries.length },
@@ -490,6 +497,9 @@ export default function AdminDashboardPage() {
             </div>
           )}
 
+          {/* MEDIA LIBRARY TAB */}
+          {activeTab === 'media' && <MediaLibraryTab />}
+
           {/* HERO SLIDER CMS */}
           {activeTab === 'hero' && (
             <div className="space-y-6">
@@ -601,16 +611,21 @@ export default function AdminDashboardPage() {
                       </div>
 
                       <div>
-                        <label className="block font-bold text-[#0A1838] mb-1">Banner Image URL</label>
-                        <input
-                          type="text"
+                        <ImageUploader
+                          label="Hero Banner Image"
                           value={slide.image_url}
-                          onChange={(e) => {
+                          altText={slide.image_alt_text}
+                          titleText={slide.image_title}
+                          recommendedDimensions="1920 × 800 px"
+                          recommendedWidth={1920}
+                          recommendedHeight={800}
+                          onChange={(url, alt, title) => {
                             const updated = [...heroSlides];
-                            updated[idx].image_url = e.target.value;
+                            updated[idx].image_url = url;
+                            updated[idx].image_alt_text = alt;
+                            updated[idx].image_title = title;
                             setHeroSlides(updated);
                           }}
-                          className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50"
                         />
                       </div>
 
@@ -710,6 +725,25 @@ export default function AdminDashboardPage() {
                           setOffers(updated);
                         }}
                         className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <ImageUploader
+                        label="Offer Banner / Popup Graphic Image"
+                        value={offer.image_url || ''}
+                        altText={offer.image_alt_text}
+                        titleText={offer.image_title}
+                        recommendedDimensions="1200 × 400 px"
+                        recommendedWidth={1200}
+                        recommendedHeight={400}
+                        onChange={(url, alt, title) => {
+                          const updated = [...offers];
+                          updated[idx].image_url = url;
+                          updated[idx].image_alt_text = alt;
+                          updated[idx].image_title = title;
+                          setOffers(updated);
+                        }}
                       />
                     </div>
 
@@ -854,16 +888,21 @@ export default function AdminDashboardPage() {
                       </div>
 
                       <div>
-                        <label className="block font-bold text-[#0A1838] mb-1">Hero Image URL</label>
-                        <input
-                          type="text"
+                        <ImageUploader
+                          label="Country Hero Cover Image"
                           value={c.hero_image}
-                          onChange={(e) => {
+                          altText={c.image_alt_text}
+                          titleText={c.image_title}
+                          recommendedDimensions="800 × 600 px"
+                          recommendedWidth={800}
+                          recommendedHeight={600}
+                          onChange={(url, alt, title) => {
                             const updated = [...countries];
-                            updated[idx].hero_image = e.target.value;
+                            updated[idx].hero_image = url;
+                            updated[idx].image_alt_text = alt;
+                            updated[idx].image_title = title;
                             setCountries(updated);
                           }}
-                          className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50"
                         />
                       </div>
 
@@ -1024,16 +1063,21 @@ export default function AdminDashboardPage() {
                       </div>
 
                       <div className="sm:col-span-2">
-                        <label className="block font-bold text-[#0A1838] mb-1">Image URL</label>
-                        <input
-                          type="text"
+                        <ImageUploader
+                          label="Service Featured Graphic / Image"
                           value={service.image_url}
-                          onChange={(e) => {
+                          altText={service.image_alt_text}
+                          titleText={service.image_title}
+                          recommendedDimensions="800 × 600 px"
+                          recommendedWidth={800}
+                          recommendedHeight={600}
+                          onChange={(url, alt, title) => {
                             const updated = [...services];
-                            updated[idx].image_url = e.target.value;
+                            updated[idx].image_url = url;
+                            updated[idx].image_alt_text = alt;
+                            updated[idx].image_title = title;
                             setServices(updated);
                           }}
-                          className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50"
                         />
                       </div>
                     </div>
@@ -1152,17 +1196,33 @@ export default function AdminDashboardPage() {
                         </div>
                       </div>
 
-                      <div>
-                        <label className="block font-bold text-[#0A1838] mb-1">Cover Image URL</label>
-                        <input
-                          type="text"
-                          value={uni.image_url}
-                          onChange={(e) => {
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <ImageUploader
+                          label="University Crest / Logo"
+                          value={uni.logo_url}
+                          recommendedDimensions="Transparent PNG/SVG"
+                          onChange={(url) => {
                             const updated = [...universities];
-                            updated[idx].image_url = e.target.value;
+                            updated[idx].logo_url = url;
                             setUniversities(updated);
                           }}
-                          className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50"
+                        />
+
+                        <ImageUploader
+                          label="Campus Cover Image"
+                          value={uni.image_url}
+                          altText={uni.image_alt_text}
+                          titleText={uni.image_title}
+                          recommendedDimensions="800 × 600 px"
+                          recommendedWidth={800}
+                          recommendedHeight={600}
+                          onChange={(url, alt, title) => {
+                            const updated = [...universities];
+                            updated[idx].image_url = url;
+                            updated[idx].image_alt_text = alt;
+                            updated[idx].image_title = title;
+                            setUniversities(updated);
+                          }}
                         />
                       </div>
 
@@ -1306,6 +1366,38 @@ export default function AdminDashboardPage() {
                           className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50"
                         />
                       </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <ImageUploader
+                          label="Student Photo"
+                          value={story.student_image}
+                          altText={story.image_alt_text}
+                          titleText={story.image_title}
+                          recommendedDimensions="400 × 400 px"
+                          recommendedWidth={400}
+                          recommendedHeight={400}
+                          onChange={(url, alt, title) => {
+                            const updated = [...successStories];
+                            updated[idx].student_image = url;
+                            updated[idx].image_alt_text = alt;
+                            updated[idx].image_title = title;
+                            setSuccessStories(updated);
+                          }}
+                        />
+
+                        <ImageUploader
+                          label="Visa Grant Letter / Stamp Image"
+                          value={story.visa_grant_image}
+                          recommendedDimensions="600 × 800 px"
+                          recommendedWidth={600}
+                          recommendedHeight={800}
+                          onChange={(url) => {
+                            const updated = [...successStories];
+                            updated[idx].visa_grant_image = url;
+                            setSuccessStories(updated);
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -1419,6 +1511,23 @@ export default function AdminDashboardPage() {
                           className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50"
                         />
                       </div>
+
+                      <ImageUploader
+                        label="Client Avatar Photo"
+                        value={t.customer_photo}
+                        altText={t.image_alt_text}
+                        titleText={t.image_title}
+                        recommendedDimensions="400 × 400 px"
+                        recommendedWidth={400}
+                        recommendedHeight={400}
+                        onChange={(url, alt, title) => {
+                          const updated = [...testimonials];
+                          updated[idx].customer_photo = url;
+                          updated[idx].image_alt_text = alt;
+                          updated[idx].image_title = title;
+                          setTestimonials(updated);
+                        }}
+                      />
                     </div>
                   </div>
                 ))}
@@ -1542,6 +1651,25 @@ export default function AdminDashboardPage() {
                             setBlogs(updated);
                           }}
                           className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mono text-xs"
+                        />
+                      </div>
+
+                      <div className="sm:col-span-2">
+                        <ImageUploader
+                          label="Featured Article Cover Image"
+                          value={blog.featured_image}
+                          altText={blog.image_alt_text}
+                          titleText={blog.image_title}
+                          recommendedDimensions="1200 × 630 px"
+                          recommendedWidth={1200}
+                          recommendedHeight={630}
+                          onChange={(url, alt, title) => {
+                            const updated = [...blogs];
+                            updated[idx].featured_image = url;
+                            updated[idx].image_alt_text = alt;
+                            updated[idx].image_title = title;
+                            setBlogs(updated);
+                          }}
                         />
                       </div>
                     </div>
@@ -1738,6 +1866,47 @@ export default function AdminDashboardPage() {
                       value={settings.opening_hours}
                       onChange={(e) => setSettings({ ...settings, opening_hours: e.target.value })}
                       className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 font-medium"
+                    />
+                  </div>
+                </div>
+
+                {/* Brand Media & Logo Management */}
+                <div className="pt-4 border-t border-slate-200 space-y-4">
+                  <h3 className="font-extrabold text-[#0A1838] text-xs uppercase tracking-wider">
+                    Brand Logos & Key Visual Assets
+                  </h3>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <ImageUploader
+                      label="Header Official Logo (SVG or PNG)"
+                      value={settings.logo_url || ''}
+                      recommendedDimensions="Transparent SVG / PNG (320 × 80 px)"
+                      onChange={(url) => setSettings({ ...settings, logo_url: url })}
+                    />
+
+                    <ImageUploader
+                      label="Favicon / Browser Tab Icon"
+                      value={settings.favicon_url || ''}
+                      recommendedDimensions="32 × 32 px or 64 × 64 px PNG / ICO"
+                      onChange={(url) => setSettings({ ...settings, favicon_url: url })}
+                    />
+
+                    <ImageUploader
+                      label="About Us Page Story Image"
+                      value={settings.about_image_url || ''}
+                      recommendedDimensions="1200 × 800 px"
+                      recommendedWidth={1200}
+                      recommendedHeight={800}
+                      onChange={(url) => setSettings({ ...settings, about_image_url: url })}
+                    />
+
+                    <ImageUploader
+                      label="Global Hero Background Pattern / Cover"
+                      value={settings.hero_bg_image_url || ''}
+                      recommendedDimensions="1920 × 1080 px"
+                      recommendedWidth={1920}
+                      recommendedHeight={1080}
+                      onChange={(url) => setSettings({ ...settings, hero_bg_image_url: url })}
                     />
                   </div>
                 </div>

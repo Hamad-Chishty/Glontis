@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useData } from '@/lib/context/DataContext';
 import {
   GraduationCap,
@@ -19,24 +18,25 @@ import {
   Plane,
   ShieldCheck,
   ChevronRight,
-  FileText,
+  AlertCircle,
 } from 'lucide-react';
 
 export default function HeroSlider() {
   const { homepageHero, settings, countries } = useData();
   const [selectedCountry, setSelectedCountry] = useState('');
+  const [countryError, setCountryError] = useState(false);
 
   const hero = homepageHero || {
     eyebrow: 'GLONTIS VISA CONSULTANCY',
     heading: 'Your Journey Abroad Starts Here',
     description:
-      'Expert guidance for Study Visa, Work Visa, Visit Visa, Tourist Visa, Business Visa, Immigration & PR, and Overseas Scholarships from Multan\'s premier visa consultancy.',
+      'Expert guidance for Study, Work, Visit & Tourist Visas, Immigration, Scholarships and overseas opportunities.',
     primary_cta_text: 'Book Free Consultation',
     primary_cta_url: '/free-consultation',
     secondary_cta_text: 'Explore Our Services',
     secondary_cta_url: '/services',
     hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
-    hero_image_alt_text: 'Glontis Visa Consultancy',
+    hero_image_alt_text: 'Glontis Visa Consultancy - Overseas Visa Counseling',
     floating_badges: [
       { id: 'fb-1', title: 'Study Visa', subtitle: 'Top Universities', icon_name: 'GraduationCap', is_active: true },
       { id: 'fb-2', title: 'Work Visa', subtitle: 'Job Permits', icon_name: 'Briefcase', is_active: true },
@@ -44,13 +44,13 @@ export default function HeroSlider() {
       { id: 'fb-4', title: 'Tourist Visa', subtitle: 'Global Travel', icon_name: 'Compass', is_active: true },
     ],
     service_quick_links: [
-      { id: 'sql-1', title: 'Study Visa', badge: 'Popular', url: '/study-visa', icon_name: 'GraduationCap', description: 'UK, Australia, USA, Canada & EU Universities', is_active: true, display_order: 1 },
+      { id: 'sql-1', title: 'Study Visa', badge: 'Popular', url: '/study-visa', icon_name: 'GraduationCap', description: 'UK, Australia, USA, Canada & EU Top Universities', is_active: true, display_order: 1 },
       { id: 'sql-2', title: 'Work Visa', badge: 'Permits', url: '/work-visa', icon_name: 'Briefcase', description: 'Europe, Middle East & Overseas Work Sponsorships', is_active: true, display_order: 2 },
-      { id: 'sql-3', title: 'Visit Visa', badge: 'Sponsor File', url: '/visit-visa', icon_name: 'Users', description: 'Family Visits, Business Meetings & File Guidance', is_active: true, display_order: 3 },
+      { id: 'sql-3', title: 'Visit Visa', badge: 'Sponsor File', url: '/visit-visa', icon_name: 'Users', description: 'Family Visits, Business Meetings & Cover Letters', is_active: true, display_order: 3 },
       { id: 'sql-4', title: 'Tourist Visa', badge: 'Fast Track', url: '/tourist-visa', icon_name: 'Compass', description: 'Schengen, USA, UK & Worldwide Holiday Visas', is_active: true, display_order: 4 },
-      { id: 'sql-5', title: 'Business Visa', badge: 'Investors', url: '/services', icon_name: 'Building2', description: 'Corporate Travel, Trade & Investor Entry Permits', is_active: true, display_order: 5 },
-      { id: 'sql-6', title: 'Immigration / PR', badge: 'Residency', url: '/services', icon_name: 'Globe', description: 'Express Entry, Skilled Migration & PR Guidance', is_active: true, display_order: 6 },
-      { id: 'sql-7', title: 'Scholarships', badge: '100% Funded', url: '/study-destinations', icon_name: 'Award', description: 'Fully Funded & Partial Merit-Based Academic Grants', is_active: true, display_order: 7 },
+      { id: 'sql-5', title: 'Business Visa', badge: 'Investors', url: '/services/business-visa', icon_name: 'Building2', description: 'Corporate Travel, Trade & Investor Entry Permits', is_active: true, display_order: 5 },
+      { id: 'sql-6', title: 'Immigration / PR', badge: 'Residency', url: '/services/immigration', icon_name: 'Globe', description: 'Express Entry, Skilled Migration & PR Guidance', is_active: true, display_order: 6 },
+      { id: 'sql-7', title: 'Scholarships', badge: '100% Grants', url: '/scholarships', icon_name: 'Award', description: 'Fully Funded & Partial Merit-Based Academic Grants', is_active: true, display_order: 7 },
     ],
   };
 
@@ -58,6 +58,15 @@ export default function HeroSlider() {
   const activeServices = (hero.service_quick_links || [])
     .filter((s) => s.is_active)
     .sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+
+  const getBadgeHref = (badge: { title: string }) => {
+    const t = badge.title.toLowerCase();
+    if (t.includes('study')) return '/study-visa';
+    if (t.includes('work')) return '/work-visa';
+    if (t.includes('visit')) return '/visit-visa';
+    if (t.includes('tourist')) return '/tourist-visa';
+    return '/services';
+  };
 
   const renderIcon = (iconName: string, className = 'w-5 h-5') => {
     switch (iconName) {
@@ -85,42 +94,54 @@ export default function HeroSlider() {
   const whatsappNumber = settings.whatsapp || '03334530456';
   const cleanWhatsapp = whatsappNumber.replace(/^0/, '').replace(/\s+/g, '');
 
+  const handleExploreCountryClick = (e: React.MouseEvent) => {
+    if (!selectedCountry) {
+      e.preventDefault();
+      setCountryError(true);
+      setTimeout(() => setCountryError(false), 4000);
+    }
+  };
+
   return (
     <div className="relative bg-[#0A1838] text-white overflow-hidden">
-      {/* Background Decorative Gradients */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#F07100]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Background Decorative Lighting */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#F07100]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Hero Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* LEFT SIDE: Heading & Hero Content */}
+          {/* LEFT SIDE: Main Headline & Branding */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Eyebrow */}
+            {/* Eyebrow / Main Branding */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F07100]/15 border border-[#F07100]/30 text-xs font-black text-[#F07100] uppercase tracking-wider shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-[#F07100]" />
               <span>{hero.eyebrow || 'GLONTIS VISA CONSULTANCY'}</span>
             </div>
 
-            {/* Main Heading */}
+            {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-              {hero.heading || 'Your Journey Abroad Starts Here'}
+              Your Journey Abroad <br className="hidden sm:inline" />
+              <span className="text-[#F07100]">Starts Here</span>
             </h1>
 
-            {/* Supporting Text */}
+            {/* Concise Supporting Text */}
             <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-2xl mx-auto lg:mx-0">
               {hero.description ||
-                'Expert guidance for Study Visa, Work Visa, Visit Visa, Tourist Visa, Immigration and more.'}
+                'Expert guidance for Study, Work, Visit & Tourist Visas, Immigration, Scholarships and overseas opportunities.'}
             </p>
 
-            {/* Target Destination Dropdown Bar */}
+            {/* Country Destination Selector */}
             {countries?.length > 0 && (
-              <div className="pt-1 max-w-xl mx-auto lg:mx-0">
-                <div className="p-2 rounded-2xl bg-slate-900/90 border border-slate-700/80 shadow-xl flex flex-col sm:flex-row items-center gap-2">
+              <div className="pt-1 max-w-xl mx-auto lg:mx-0 space-y-2">
+                <div className="p-2 rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-2xl flex flex-col sm:flex-row items-center gap-2">
                   <select
                     value={selectedCountry}
-                    onChange={(e) => setSelectedCountry(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedCountry(e.target.value);
+                      if (e.target.value) setCountryError(false);
+                    }}
                     className="w-full sm:flex-1 bg-slate-950 text-white text-xs sm:text-sm py-2.5 px-3.5 rounded-xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-[#F07100] font-bold"
                   >
                     <option value="">Select Target Country Destination...</option>
@@ -134,21 +155,29 @@ export default function HeroSlider() {
                   </select>
 
                   <Link
-                    href={selectedCountry ? `/${selectedCountry}` : '/study-destinations'}
-                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shrink-0 shadow-md"
+                    href={selectedCountry ? `/${selectedCountry}` : '#'}
+                    onClick={handleExploreCountryClick}
+                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shrink-0 shadow-md active:scale-95"
                   >
                     <span>Explore Info</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
+
+                {countryError && (
+                  <p className="text-xs font-bold text-amber-400 flex items-center gap-1.5 animate-in fade-in">
+                    <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>Please select a target country destination from the dropdown list.</span>
+                  </p>
+                )}
               </div>
             )}
 
-            {/* CTA Buttons */}
-            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            {/* Hero CTA Buttons */}
+            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
               <Link
                 href={hero.primary_cta_url || '/free-consultation'}
-                className="px-7 py-4 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm sm:text-base flex items-center gap-2 shadow-xl hover:shadow-orange-500/25 transition-all hover:scale-[1.02]"
+                className="px-7 py-3.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm sm:text-base flex items-center gap-2 shadow-xl hover:shadow-orange-500/25 transition-all hover:scale-[1.02]"
               >
                 <span>{hero.primary_cta_text || 'Book Free Consultation'}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -156,16 +185,16 @@ export default function HeroSlider() {
 
               <Link
                 href={hero.secondary_cta_url || '/services'}
-                className="px-6 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border border-slate-700/80 font-bold text-sm sm:text-base flex items-center gap-2 transition-all"
+                className="px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border border-slate-700/80 font-bold text-sm sm:text-base flex items-center gap-2 transition-all hover:border-[#F07100]"
               >
                 <span>{hero.secondary_cta_text || 'Explore Our Services'}</span>
               </Link>
 
               <a
-                href={`https://wa.me/92${cleanWhatsapp}?text=Hello%20Glontis,%20I%20want%20information%20about%20Visa%20Consultancy.`}
+                href={`https://wa.me/92${cleanWhatsapp}?text=Hello%20Glontis%20Visa%20Consultancy,%20I%20want%20information%20about%20Overseas%20Visa%20Guidance.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center gap-2 transition-all shadow-md"
+                className="px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center gap-2 transition-all shadow-md"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span className="hidden sm:inline">WhatsApp Us</span>
@@ -189,7 +218,7 @@ export default function HeroSlider() {
             </div>
           </div>
 
-          {/* RIGHT SIDE: High-Quality Professional Travel Image & Floating Service Badges */}
+          {/* RIGHT SIDE: High-Quality Professional Travel Image & Clickable Floating Badges */}
           <div className="lg:col-span-5 relative flex justify-center items-center">
             <div className="relative w-full max-w-md lg:max-w-none aspect-[4/3] rounded-3xl overflow-hidden border-2 border-slate-700/60 shadow-2xl bg-slate-900 group">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -201,78 +230,90 @@ export default function HeroSlider() {
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
 
               {/* Bottom Image Caption */}
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/80 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-xs font-bold text-white flex items-center justify-between">
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/85 backdrop-blur-md p-3 rounded-2xl border border-white/10 text-xs font-bold text-white flex items-center justify-between">
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#F07100]" />
                   <span>Glontis Overseas File Guidance</span>
                 </span>
-                <span className="text-[10px] bg-[#F07100] px-2 py-0.5 rounded-full uppercase font-black">
+                <span className="text-[10px] bg-[#F07100] px-2.5 py-0.5 rounded-full uppercase font-black">
                   VIP Support
                 </span>
               </div>
             </div>
 
-            {/* FLOATING BADGES AROUND THE IMAGE */}
+            {/* 4 CLICKABLE FLOATING VISA BADGES AROUND THE IMAGE */}
             {activeBadges.length > 0 && (
               <>
                 {/* Badge 1: Top Left */}
                 {activeBadges[0] && (
-                  <div className="absolute -top-4 -left-2 sm:-left-6 bg-slate-900/90 backdrop-blur-xl border border-slate-700 p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20 animate-bounce-slow">
-                    <div className="w-8 h-8 rounded-xl bg-[#F07100]/20 text-[#F07100] flex items-center justify-center font-black">
+                  <Link
+                    href={getBadgeHref(activeBadges[0])}
+                    className="absolute -top-4 -left-2 sm:-left-6 bg-slate-900/95 hover:bg-[#0A1838] backdrop-blur-xl border border-slate-700 hover:border-[#F07100] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20 transition-all hover:scale-105 group"
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-[#F07100]/20 text-[#F07100] group-hover:bg-[#F07100] group-hover:text-white flex items-center justify-center font-black transition-colors">
                       {renderIcon(activeBadges[0].icon_name || 'GraduationCap', 'w-4 h-4')}
                     </div>
                     <div>
-                      <div className="text-xs font-extrabold text-white">{activeBadges[0].title}</div>
+                      <div className="text-xs font-extrabold text-white group-hover:text-[#F07100] transition-colors">{activeBadges[0].title}</div>
                       {activeBadges[0].subtitle && (
                         <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[0].subtitle}</div>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 )}
 
                 {/* Badge 2: Top Right */}
                 {activeBadges[1] && (
-                  <div className="absolute top-6 -right-2 sm:-right-6 bg-slate-900/90 backdrop-blur-xl border border-slate-700 p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20">
-                    <div className="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-black">
+                  <Link
+                    href={getBadgeHref(activeBadges[1])}
+                    className="absolute top-6 -right-2 sm:-right-6 bg-slate-900/95 hover:bg-[#0A1838] backdrop-blur-xl border border-slate-700 hover:border-[#F07100] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20 transition-all hover:scale-105 group"
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white flex items-center justify-center font-black transition-colors">
                       {renderIcon(activeBadges[1].icon_name || 'Briefcase', 'w-4 h-4')}
                     </div>
                     <div>
-                      <div className="text-xs font-extrabold text-white">{activeBadges[1].title}</div>
+                      <div className="text-xs font-extrabold text-white group-hover:text-blue-300 transition-colors">{activeBadges[1].title}</div>
                       {activeBadges[1].subtitle && (
                         <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[1].subtitle}</div>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 )}
 
                 {/* Badge 3: Bottom Left */}
                 {activeBadges[2] && (
-                  <div className="absolute bottom-12 -left-3 sm:-left-8 bg-slate-900/90 backdrop-blur-xl border border-slate-700 p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black">
+                  <Link
+                    href={getBadgeHref(activeBadges[2])}
+                    className="absolute bottom-12 -left-3 sm:-left-8 bg-slate-900/95 hover:bg-[#0A1838] backdrop-blur-xl border border-slate-700 hover:border-[#F07100] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20 transition-all hover:scale-105 group"
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center font-black transition-colors">
                       {renderIcon(activeBadges[2].icon_name || 'Users', 'w-4 h-4')}
                     </div>
                     <div>
-                      <div className="text-xs font-extrabold text-white">{activeBadges[2].title}</div>
+                      <div className="text-xs font-extrabold text-white group-hover:text-emerald-300 transition-colors">{activeBadges[2].title}</div>
                       {activeBadges[2].subtitle && (
                         <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[2].subtitle}</div>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 )}
 
                 {/* Badge 4: Bottom Right */}
                 {activeBadges[3] && (
-                  <div className="absolute -bottom-4 -right-2 sm:-right-6 bg-slate-900/90 backdrop-blur-xl border border-slate-700 p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20">
-                    <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black">
+                  <Link
+                    href={getBadgeHref(activeBadges[3])}
+                    className="absolute -bottom-4 -right-2 sm:-right-6 bg-slate-900/95 hover:bg-[#0A1838] backdrop-blur-xl border border-slate-700 hover:border-[#F07100] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-20 transition-all hover:scale-105 group"
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 group-hover:bg-purple-500 group-hover:text-white flex items-center justify-center font-black transition-colors">
                       {renderIcon(activeBadges[3].icon_name || 'Compass', 'w-4 h-4')}
                     </div>
                     <div>
-                      <div className="text-xs font-extrabold text-white">{activeBadges[3].title}</div>
+                      <div className="text-xs font-extrabold text-white group-hover:text-purple-300 transition-colors">{activeBadges[3].title}</div>
                       {activeBadges[3].subtitle && (
                         <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[3].subtitle}</div>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 )}
               </>
             )}
@@ -341,3 +382,4 @@ export default function HeroSlider() {
     </div>
   );
 }
+

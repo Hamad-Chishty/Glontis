@@ -40,13 +40,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
           {/* Col 1: Brand & Multan Contact Info */}
           <div className="lg:col-span-2 space-y-6">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 group">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/glontis-logo.svg"
                 alt="Glontis Visa Consultancy"
-                className="h-12 w-auto object-contain"
+                className="h-12 w-auto object-contain transition-transform group-hover:scale-105"
               />
+              <span className="text-xl font-black text-white group-hover:text-[#F07100] transition-colors">
+                Glontis <span className="text-[#F07100]">Visa Consultancy</span>
+              </span>
             </Link>
 
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">

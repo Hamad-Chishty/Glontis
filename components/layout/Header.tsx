@@ -120,19 +120,22 @@ export default function Header() {
             : 'bg-white border-b border-slate-100 py-2.5'
         }`}
       >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-2">
-          {/* Official Glontis Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0 group">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
+          {/* Official Glontis Logo + Company Name */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/glontis-logo.svg"
               alt="Glontis Visa Consultancy"
-              className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105"
+              className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-transform group-hover:scale-105"
             />
+            <span className="text-base sm:text-lg lg:text-xl font-black tracking-tight text-[#0A1838] whitespace-nowrap leading-none group-hover:text-[#F07100] transition-colors">
+              Glontis <span className="text-[#F07100]">Visa Consultancy</span>
+            </span>
           </Link>
 
-          {/* Desktop Navigation Links - Single Row with Flex & No-Wrap */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 flex-nowrap whitespace-nowrap overflow-x-auto no-scrollbar">
+          {/* Desktop Navigation Links - Guaranteed Single Row */}
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 flex-nowrap whitespace-nowrap">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
               const hasDropdown = link.dropdown && link.dropdown.length > 0;
@@ -146,14 +149,14 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className={`px-2 xl:px-2.5 py-1.5 rounded-lg text-xs xl:text-[13px] font-bold transition-all flex items-center gap-0.5 ${
+                    className={`px-1.5 xl:px-2 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold transition-all flex items-center gap-0.5 whitespace-nowrap ${
                       isActive
                         ? 'text-[#F07100] bg-orange-50 font-black'
                         : 'text-[#0A1838] hover:text-[#F07100] hover:bg-slate-50'
                     }`}
                   >
                     <span>{link.name}</span>
-                    {hasDropdown && <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform" />}
+                    {hasDropdown && <ChevronDown className="w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform shrink-0" />}
                   </Link>
 
                   {/* Dropdown Menu */}
@@ -182,9 +185,9 @@ export default function Header() {
           <div className="hidden lg:flex items-center shrink-0">
             <Link
               href="/free-consultation"
-              className="px-4 xl:px-5 py-2.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white text-xs xl:text-sm font-extrabold shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 whitespace-nowrap"
+              className="px-3.5 xl:px-4 py-2 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white text-xs font-extrabold shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 whitespace-nowrap"
             >
-              <Sparkles className="w-4 h-4 text-white" />
+              <Sparkles className="w-3.5 h-3.5 text-white" />
               <span>Free Consultation</span>
             </Link>
           </div>

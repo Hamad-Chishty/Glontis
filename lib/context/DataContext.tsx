@@ -20,6 +20,7 @@ import {
   defaultSettings,
   defaultMediaLibrary,
   defaultHeroSlides,
+  defaultHomepageHero,
   defaultOffers,
   defaultTrustStats,
   defaultCountries,
@@ -34,12 +35,13 @@ import {
   defaultVisitVisaPage,
   defaultTouristVisaPage,
 } from '@/lib/data-store';
-import { WorkVisaPageData, VisitVisaPageData, TouristVisaPageData } from '@/lib/types';
+import { WorkVisaPageData, VisitVisaPageData, TouristVisaPageData, HomepageHeroData } from '@/lib/types';
 
 interface DataContextType {
   settings: SiteSettings;
   mediaLibrary: MediaItem[];
   heroSlides: HeroSlide[];
+  homepageHero: HomepageHeroData;
   offers: Offer[];
   trustStats: TrustStat[];
   countries: CountryDestination[];
@@ -64,6 +66,7 @@ interface DataContextType {
   setSettings: React.Dispatch<React.SetStateAction<SiteSettings>>;
   setMediaLibrary: React.Dispatch<React.SetStateAction<MediaItem[]>>;
   setHeroSlides: React.Dispatch<React.SetStateAction<HeroSlide[]>>;
+  setHomepageHero: React.Dispatch<React.SetStateAction<HomepageHeroData>>;
   setOffers: React.Dispatch<React.SetStateAction<Offer[]>>;
   setCountries: React.Dispatch<React.SetStateAction<CountryDestination[]>>;
   setServices: React.Dispatch<React.SetStateAction<ServiceItem[]>>;
@@ -78,12 +81,14 @@ interface DataContextType {
   resetToDefaultData: () => void;
 }
 
+
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [mediaLibrary, setMediaLibrary] = useState<MediaItem[]>(defaultMediaLibrary);
   const [heroSlides, setHeroSlides] = useState<HeroSlide[]>(defaultHeroSlides);
+  const [homepageHero, setHomepageHero] = useState<HomepageHeroData>(defaultHomepageHero);
   const [offers, setOffers] = useState<Offer[]>(defaultOffers);
   const [trustStats, setTrustStats] = useState<TrustStat[]>(defaultTrustStats);
   const [countries, setCountries] = useState<CountryDestination[]>(defaultCountries);
@@ -109,6 +114,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
           if (d.settings) setSettings(d.settings);
           if (d.mediaLibrary) setMediaLibrary(d.mediaLibrary);
           if (d.heroSlides) setHeroSlides(d.heroSlides);
+          if (d.homepageHero) setHomepageHero(d.homepageHero);
           if (d.offers) setOffers(d.offers);
           if (d.trustStats) setTrustStats(d.trustStats);
           if (d.countries) setCountries(d.countries);
@@ -130,6 +136,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
     }
   };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -202,6 +209,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const resetToDefaultData = () => {
     setSettings(defaultSettings);
     setHeroSlides(defaultHeroSlides);
+    setHomepageHero(defaultHomepageHero);
     setOffers(defaultOffers);
     setTrustStats(defaultTrustStats);
     setCountries(defaultCountries);
@@ -218,6 +226,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     updateData('UPDATE_ALL', undefined, {
       settings: defaultSettings,
       heroSlides: defaultHeroSlides,
+      homepageHero: defaultHomepageHero,
       offers: defaultOffers,
       trustStats: defaultTrustStats,
       countries: defaultCountries,
@@ -240,6 +249,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         settings,
         mediaLibrary,
         heroSlides,
+        homepageHero,
         offers,
         trustStats,
         countries,
@@ -264,6 +274,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setSettings,
         setMediaLibrary,
         setHeroSlides,
+        setHomepageHero,
         setOffers,
         setCountries,
         setServices,
@@ -278,6 +289,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         resetToDefaultData,
       }}
     >
+
       {children}
     </DataContext.Provider>
   );

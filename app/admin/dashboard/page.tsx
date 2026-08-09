@@ -8,6 +8,7 @@ import MediaLibraryTab from '@/components/admin/MediaLibraryTab';
 import WorkVisaCmsTab from '@/components/admin/WorkVisaCmsTab';
 import VisitVisaCmsTab from '@/components/admin/VisitVisaCmsTab';
 import TouristVisaCmsTab from '@/components/admin/TouristVisaCmsTab';
+import HomepageHeroCmsTab from '@/components/admin/HomepageHeroCmsTab';
 import {
   Users,
   ImageIcon,
@@ -97,6 +98,7 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<
     | 'leads'
     | 'media'
+    | 'homepageHero'
     | 'hero'
     | 'offers'
     | 'countries'
@@ -111,6 +113,7 @@ export default function AdminDashboardPage() {
     | 'touristVisa'
     | 'settings'
   >('leads');
+
 
   const [notification, setNotification] = useState('');
   const [savingEntity, setSavingEntity] = useState<string | null>(null);
@@ -330,6 +333,7 @@ export default function AdminDashboardPage() {
           {[
             { id: 'leads', name: 'Student Leads CRM', icon: Users, badge: leads.length },
             { id: 'media', name: 'Media Library', icon: FolderOpen, badge: mediaLibrary.length },
+            { id: 'homepageHero', name: 'Homepage Hero CMS', icon: Sparkles },
             { id: 'hero', name: 'Hero Slider Banners', icon: ImageIcon, badge: heroSlides.length },
             { id: 'offers', name: 'Special Offers & Popups', icon: Tag, badge: offers.length },
             { id: 'countries', name: 'Study Visa / Destinations', icon: Globe, badge: countries.length },
@@ -344,6 +348,7 @@ export default function AdminDashboardPage() {
             { id: 'faqs', name: 'FAQs Manager', icon: HelpCircle, badge: faqs.length },
             { id: 'settings', name: 'Website Settings', icon: Settings },
           ].map((item) => {
+
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (
@@ -1925,9 +1930,11 @@ export default function AdminDashboardPage() {
             </div>
           )}
 
+          {activeTab === 'homepageHero' && <HomepageHeroCmsTab />}
           {activeTab === 'workVisa' && <WorkVisaCmsTab />}
           {activeTab === 'visitVisa' && <VisitVisaCmsTab />}
           {activeTab === 'touristVisa' && <TouristVisaCmsTab />}
+
         </main>
       </div>
 

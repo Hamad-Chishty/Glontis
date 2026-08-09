@@ -311,6 +311,42 @@ export interface WorkVisaPageData {
   url_slug: string;
 }
 
+export interface HomeServiceQuickLink {
+  id: string;
+  title: string;
+  badge?: string;
+  url: string;
+  icon_name: string; // e.g. "GraduationCap", "Briefcase", "Users", "Compass", "Globe", "Award", "Building2"
+  description?: string;
+  is_active: boolean;
+  display_order: number;
+}
+
+export interface FloatingBadge {
+  id: string;
+  title: string;
+  subtitle?: string;
+  icon_name?: string;
+  is_active: boolean;
+}
+
+export interface HomepageHeroData {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  primary_cta_text: string;
+  primary_cta_url: string;
+  secondary_cta_text: string;
+  secondary_cta_url: string;
+  hero_image: string;
+  hero_image_alt_text?: string;
+  hero_image_title?: string;
+  mobile_hero_image?: string;
+  mobile_hero_image_alt_text?: string;
+  floating_badges: FloatingBadge[];
+  service_quick_links: HomeServiceQuickLink[];
+}
+
 export interface VisitVisaDestination {
   id: string;
   title: string;
@@ -453,4 +489,41 @@ export interface TouristVisaPageData {
   meta_description: string;
   url_slug: string;
 }
+
+export interface HomeServiceQuickLink {
+  id: string;
+  title: string;
+  badge?: string;
+  url: string;
+  icon_name: string;
+  description?: string;
+  is_active: boolean;
+  display_order: number;
+}
+
+export interface FloatingBadge {
+  id: string;
+  title: string;
+  subtitle?: string;
+  icon_name?: string;
+  is_active: boolean;
+}
+
+export interface HomepageHeroData {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  primary_cta_text: string;
+  primary_cta_url: string;
+  secondary_cta_text: string;
+  secondary_cta_url: string;
+  hero_image: string;
+  hero_image_alt_text?: string;
+  hero_image_title?: string;
+  mobile_hero_image?: string;
+  mobile_hero_image_alt_text?: string;
+  floating_badges: FloatingBadge[];
+  service_quick_links: HomeServiceQuickLink[];
+}
+
 

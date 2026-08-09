@@ -15,6 +15,7 @@ import {
   WorkVisaPageData,
   VisitVisaPageData,
   TouristVisaPageData,
+  HomepageHeroData,
 } from './types';
 
 // Default initial database content
@@ -22,6 +23,7 @@ export interface AppDatabase {
   settings: SiteSettings;
   mediaLibrary: MediaItem[];
   heroSlides: HeroSlide[];
+  homepageHero?: HomepageHeroData;
   offers: Offer[];
   trustStats: TrustStat[];
   countries: CountryDestination[];
@@ -36,6 +38,7 @@ export interface AppDatabase {
   visitVisaPage: VisitVisaPageData;
   touristVisaPage: TouristVisaPageData;
 }
+
 
 export const defaultSettings: SiteSettings = {
   company_name: 'Glontis Visa Consultancy',
@@ -1796,6 +1799,36 @@ export const defaultVisitVisaPage: VisitVisaPageData = {
   meta_description: 'Top Visit Visa consultants in Multan. Professional file preparation for family visit, business visitor, and sponsor-backed visas for UK, USA, Canada, Australia, and Europe.',
 };
 
+export const defaultHomepageHero: HomepageHeroData = {
+  eyebrow: 'GLONTIS VISA CONSULTANCY',
+  heading: 'Your Journey Abroad Starts Here',
+  description: 'Expert guidance for Study Visa, Work Visa, Visit Visa, Tourist Visa, Business Visa, Immigration & PR, and Overseas Scholarships from Multan\'s premier visa consultancy.',
+  primary_cta_text: 'Book Free Consultation',
+  primary_cta_url: '/free-consultation',
+  secondary_cta_text: 'Explore Our Services',
+  secondary_cta_url: '/services',
+  hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+  hero_image_alt_text: 'Glontis Visa Consultancy - Professional Overseas Guidance',
+  hero_image_title: 'Glontis Overseas Consultation',
+  mobile_hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
+  mobile_hero_image_alt_text: 'Glontis Overseas Mobile Banner',
+  floating_badges: [
+    { id: 'fb-1', title: 'Study Visa', subtitle: 'Top Universities & Grants', icon_name: 'GraduationCap', is_active: true },
+    { id: 'fb-2', title: 'Work Visa', subtitle: 'Global Employment Permits', icon_name: 'Briefcase', is_active: true },
+    { id: 'fb-3', title: 'Visit Visa', subtitle: 'Family & Sponsor Invites', icon_name: 'Users', is_active: true },
+    { id: 'fb-4', title: 'Tourist Visa', subtitle: 'Worldwide Holiday Travel', icon_name: 'Compass', is_active: true },
+  ],
+  service_quick_links: [
+    { id: 'sql-1', title: 'Study Visa', badge: 'Popular', url: '/study-visa', icon_name: 'GraduationCap', description: 'UK, Australia, USA, Canada & EU Top Universities', is_active: true, display_order: 1 },
+    { id: 'sql-2', title: 'Work Visa', badge: 'Permits', url: '/work-visa', icon_name: 'Briefcase', description: 'Europe, Middle East & Overseas Job Sponsorships', is_active: true, display_order: 2 },
+    { id: 'sql-3', title: 'Visit Visa', badge: 'Sponsor File', url: '/visit-visa', icon_name: 'Users', description: 'Family Visits, Business Meetings & Cover Letters', is_active: true, display_order: 3 },
+    { id: 'sql-4', title: 'Tourist Visa', badge: 'Fast Track', url: '/tourist-visa', icon_name: 'Compass', description: 'Schengen, USA, UK & Worldwide Holiday Visas', is_active: true, display_order: 4 },
+    { id: 'sql-5', title: 'Business Visa', badge: 'Investors', url: '/services', icon_name: 'Building2', description: 'Corporate Travel, Trade & Investor Entry Permits', is_active: true, display_order: 5 },
+    { id: 'sql-6', title: 'Immigration / PR', badge: 'Residency', url: '/services', icon_name: 'Globe', description: 'Express Entry, Skilled Migration & PR Guidance', is_active: true, display_order: 6 },
+    { id: 'sql-7', title: 'Scholarships', badge: '100% Funded', url: '/study-destinations', icon_name: 'Award', description: 'Fully Funded & Partial Merit-Based Grants', is_active: true, display_order: 7 },
+  ],
+};
+
 // Persistent File System DB Store Helper
 let inMemoryDb: AppDatabase | null = null;
 
@@ -1822,6 +1855,7 @@ export function getDb(): AppDatabase {
           if (!inMemoryDb.settings) inMemoryDb.settings = defaultSettings;
           if (!inMemoryDb.mediaLibrary) inMemoryDb.mediaLibrary = defaultMediaLibrary;
           if (!inMemoryDb.heroSlides) inMemoryDb.heroSlides = defaultHeroSlides;
+          if (!inMemoryDb.homepageHero) inMemoryDb.homepageHero = defaultHomepageHero;
           if (!inMemoryDb.offers) inMemoryDb.offers = defaultOffers;
           if (!inMemoryDb.trustStats) inMemoryDb.trustStats = defaultTrustStats;
           if (!inMemoryDb.countries) inMemoryDb.countries = defaultCountries;
@@ -1847,6 +1881,7 @@ export function getDb(): AppDatabase {
     settings: defaultSettings,
     mediaLibrary: defaultMediaLibrary,
     heroSlides: defaultHeroSlides,
+    homepageHero: defaultHomepageHero,
     offers: defaultOffers,
     trustStats: defaultTrustStats,
     countries: defaultCountries,
@@ -1861,6 +1896,7 @@ export function getDb(): AppDatabase {
     visitVisaPage: defaultVisitVisaPage,
     touristVisaPage: defaultTouristVisaPage,
   };
+
 
   saveDb(inMemoryDb);
   return inMemoryDb;

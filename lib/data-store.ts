@@ -12,6 +12,8 @@ import {
   LeadEntry,
   FAQItem,
   TrustStat,
+  WorkVisaPageData,
+  TouristVisaPageData,
 } from './types';
 
 // Default initial database content
@@ -29,6 +31,8 @@ export interface AppDatabase {
   blogs: BlogPost[];
   leads: LeadEntry[];
   faqs: FAQItem[];
+  workVisaPage: WorkVisaPageData;
+  touristVisaPage: TouristVisaPageData;
 }
 
 export const defaultSettings: SiteSettings = {
@@ -1215,6 +1219,366 @@ export const defaultLeads: LeadEntry[] = [
   },
 ];
 
+export const defaultWorkVisaPage: WorkVisaPageData = {
+  page_title: 'Work Visa & Skilled Migration Advisory',
+  hero_heading: 'Work Abroad with Glontis Visa Consultancy',
+  hero_description: 'Expand your career globally. We offer complete guidance for UK Health & Care Visas, EU Blue Cards, Germany Opportunity Cards (Chancenkarte), Gulf Work Permits, and skilled migration files.',
+  hero_image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1920&q=80',
+  hero_image_alt_text: 'Skilled professionals and engineers working internationally',
+  hero_image_title: 'Glontis Work Visa Banner',
+  mobile_hero_image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80',
+  mobile_hero_image_alt_text: 'Mobile Work Visa Banner',
+  mobile_hero_image_title: 'Glontis Work Visa Mobile',
+  introduction: 'At Glontis Visa Consultancy in Multan, we assist professionals and skilled workers in navigating complex international work permit procedures, credential evaluations, employer sponsorship checks, and embassy submissions.',
+  visa_overview: 'Our work visa consulting service provides step-by-step assistance from job search guidance and CV formatting according to European and Gulf standards to sponsorship verification, document attestation, and visa appointment booking.',
+  countries_available: [
+    {
+      id: 'wv-uk',
+      name: 'United Kingdom',
+      badge: 'Fast-Track Visa',
+      description: 'UK Health & Care Worker Visa and Skilled Worker Visa for healthcare workers, IT experts, and engineers with sponsor licence employers.',
+      points: ['Reduced visa application fees', 'Exemption from Immigration Health Surcharge (IHS)', 'Family dependent rights for qualifying tiers'],
+      image_url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'United Kingdom Work Visa',
+      image_title: 'Study & Work in UK',
+      is_active: true,
+    },
+    {
+      id: 'wv-de',
+      name: 'Germany',
+      badge: 'Points-Based Visa',
+      description: 'Germany Opportunity Card (Chancenkarte) and EU Blue Card allowing qualified Pakistani skilled workers to live and work in Germany.',
+      points: ['No initial employer sponsorship required for Opportunity Card', 'Part-time work permitted during job search', 'Fast-track pathway to German PR'],
+      image_url: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Germany Work Permit',
+      image_title: 'Work in Germany',
+      is_active: true,
+    },
+    {
+      id: 'wv-eu',
+      name: 'European Union (Romania, Poland, Czechia)',
+      badge: 'Direct Work Permit',
+      description: 'Official European work permit processing for engineers, IT specialists, construction workers, technicians, and hotel staff.',
+      points: ['Official employer contract assistance', 'Family reunification options', 'PR eligible after qualifying period'],
+      image_url: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'EU Work Permits',
+      image_title: 'Work in Europe',
+      is_active: true,
+    },
+    {
+      id: 'wv-gcc',
+      name: 'GCC Countries (Saudi Arabia, UAE, Qatar)',
+      badge: 'Employment Visa',
+      description: 'Immediate employment visa processing and document attestation for Middle Eastern corporate, engineering, and medical roles.',
+      points: ['Quick processing turnaround', 'MOFA & Chamber attestation guidance', 'Tax-free salary packages'],
+      image_url: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'GCC Employment Visa',
+      image_title: 'Work in Dubai & Saudi Arabia',
+      is_active: true,
+    },
+    {
+      id: 'wv-ca',
+      name: 'Canada',
+      badge: 'Skilled Migration',
+      description: 'Express Entry Federal Skilled Worker Program (FSWP) and Provincial Nominee Program (PNP) assessment and file processing.',
+      points: ['Comprehensive WES credential evaluation', 'CRS score calculation & optimization', 'Direct Permanent Residency route'],
+      image_url: 'https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Canada Skilled Worker',
+      image_title: 'Migrate to Canada',
+      is_active: true,
+    },
+  ],
+  job_categories: [
+    {
+      id: 'jc-1',
+      title: 'Healthcare & Nursing',
+      badge: 'High Demand',
+      description: 'Doctors, registered nurses, care assistants, and radiographers for NHS UK, German hospitals, and Gulf health centers.',
+      key_requirements: ['Recognized MBBS / BSC Nursing Degree', 'IELTS Academic / OET clearance', 'Professional council registration'],
+      image_url: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Healthcare and Nursing Jobs',
+      image_title: 'Healthcare Careers Abroad',
+      is_active: true,
+    },
+    {
+      id: 'jc-2',
+      title: 'IT & Software Engineering',
+      badge: 'Global Shortage',
+      description: 'Full stack developers, cloud engineers, cybersecurity analysts, and data specialists for European tech hubs.',
+      key_requirements: ['BS Computer Science or Software Engineering', 'Technical portfolio / GitHub', 'English B2 / German A2 (optional for some roles)'],
+      image_url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'IT Software Jobs Abroad',
+      image_title: 'IT Careers in Europe & UK',
+      is_active: true,
+    },
+    {
+      id: 'jc-3',
+      title: 'Engineering & Construction',
+      badge: 'In-Demand',
+      description: 'Civil engineers, electrical engineers, site supervisors, and CAD designers for infrastructure projects across Europe & GCC.',
+      key_requirements: ['B.Sc Engineering (PEC Registered)', 'Min 2 years field experience', 'Safety certifications'],
+      image_url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Engineering Jobs Abroad',
+      image_title: 'Engineering Careers',
+      is_active: true,
+    },
+  ],
+  eligibility_requirements: [
+    'Recognized Bachelor degree, Diploma, or Vocational Trade qualification from PEC/HEC recognized institutions.',
+    'Minimum 1 to 3 years of relevant work experience in your professional domain.',
+    'Valid passport with at least 12 months validity remaining.',
+    'Language proficiency proof (IELTS General / Academic, PTE, OET, or German A2/B1 depending on destination).',
+    'Clean police record (Police Clearance Certificate) and medical fitness certificate.',
+    'Proof of sufficient funds / bank statement for job seeker routes (e.g. Germany Chancenkarte).',
+  ],
+  required_documents: [
+    'Valid Passport (All pages scan)',
+    'Educational Degrees, Transcripts & HEC/PEC Attestations',
+    'Experience Certificates & Detailed CV (Europass / Canadian format)',
+    'Language Test Score Card (IELTS / OET / PTE / German Cert)',
+    'Job Offer Letter / Sponsorship Certificate (if applicable)',
+    '6-Month Bank Statement with Account Maintenance Certificate',
+    'Police Clearance Certificate (PCC) & Medical Fitness Report',
+  ],
+  application_process: [
+    {
+      step: 1,
+      title: 'Profile & Eligibility Assessment',
+      description: 'Visit Glontis Multan office or book an online assessment to evaluate your qualifications, points score, and destination options.',
+    },
+    {
+      step: 2,
+      title: 'Document Attestation & Credential Evaluation',
+      description: 'We assist with HEC, MOFA, WES (Canada), or Anabin (Germany) educational evaluation and document attestation.',
+    },
+    {
+      step: 3,
+      title: 'File Preparation & Sponsorship Verification',
+      description: 'Complete CV formatting, employer contract verification, cover letter drafting, and sponsorship license checks.',
+    },
+    {
+      step: 4,
+      title: 'Embassy Submission & Visa Grant',
+      description: 'Appointment booking at VFS / Gerrys / Embassy, biometric submission, and final visa grant receiving.',
+    },
+  ],
+  processing_information: {
+    processing_time: '4 to 12 Weeks (depending on country and visa tier)',
+    visa_duration: '1 to 5 Years (Renewable with employment)',
+    work_rights: 'Full-time employment permitted with sponsoring employer or general permit',
+    family_dependents: 'Spouse and children allowed under qualifying tiers',
+    fee_estimate: 'Transparent official embassy fees & competitive consultancy package',
+  },
+  benefits: [
+    'Earn competitive international salaries in GBP, EUR, USD, or SAR.',
+    'Access world-class healthcare, social security, and safe living standards.',
+    'Direct or fast-track pathways to Permanent Residency (PR) and citizenship.',
+    'Bring spouse and dependent children with full work and study rights.',
+  ],
+  faqs: [
+    {
+      id: 'wv-faq-1',
+      question: 'Can I apply for a Germany Opportunity Card (Chancenkarte) from Pakistan?',
+      answer: 'Yes! The Opportunity Card is a points-based job seeker visa for skilled Pakistani professionals with a recognized degree, relevant experience, and basic English or German language skills.',
+    },
+    {
+      id: 'wv-faq-2',
+      question: 'Does Glontis Visa Consultancy guarantee 100% visa approval?',
+      answer: 'No consultancy can promise guaranteed visa approval as final decisions rest entirely with the respective country embassy or immigration authority. However, Glontis ensures 100% compliant document verification and expert file presentation to maximize your chances.',
+    },
+    {
+      id: 'wv-faq-3',
+      question: 'Can my family accompany me on a UK Health & Care Visa?',
+      answer: 'Yes, qualifying healthcare professionals on a UK Skilled Worker or Health & Care visa can apply for dependent visas for their spouse and children.',
+    },
+  ],
+  cta_heading: 'Ready to Launch Your International Career?',
+  cta_description: 'Book a 1-on-1 consultation with our Work Visa specialists at our Multan office or online.',
+  cta_button_text: 'Book Work Visa Assessment',
+  whatsapp_button_text: 'Chat on WhatsApp',
+  section_visibility: {
+    hero: true,
+    introduction: true,
+    overview: true,
+    countries: true,
+    job_categories: true,
+    eligibility: true,
+    documents: true,
+    process: true,
+    processing_info: true,
+    benefits: true,
+    faqs: true,
+    cta: true,
+  },
+  seo_title: 'Work Visa Consultancy in Multan | Glontis Work Permit Consultants',
+  meta_description: 'Expert Work Visa consultants in Multan for UK Health & Care Visa, Germany Opportunity Card, EU Blue Card, GCC Work Permits, and Canada Express Entry.',
+  url_slug: 'work-visa',
+};
+
+export const defaultTouristVisaPage: TouristVisaPageData = {
+  page_title: 'International Tourist & Visit Visa Consultancy',
+  hero_heading: 'Explore the World with Tourist Visas',
+  hero_description: 'Seamless holiday visa processing, hotel reservation itineraries, flight bookings, and travel insurance for UAE, Turkey, Malaysia, Thailand, Schengen, and GCC countries.',
+  hero_image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1920&q=80',
+  hero_image_alt_text: 'International travel and vacation landmarks',
+  hero_image_title: 'Glontis Tourist Visa Banner',
+  mobile_hero_image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80',
+  mobile_hero_image_alt_text: 'Mobile Tourist Visa Banner',
+  mobile_hero_image_title: 'Glontis Tourist Visa Mobile',
+  introduction: 'Discover new destinations without the stress of visa complications. Glontis Visa Consultancy in Multan manages your tourist visa documentation from A to Z.',
+  visa_overview: 'Whether you are planning a family vacation, a honeymoon, or a solo trip, our tourist visa services handle cover letters, verifiable hotel vouchers, flight reservations, travel health insurance, and embassy appointments.',
+  destinations: [
+    {
+      id: 'tv-uae',
+      title: 'UAE (Dubai / Abu Dhabi) 30 & 60 Days E-Visa',
+      country: 'United Arab Emirates',
+      badge: 'Express 24-48h',
+      description: 'Express 24 to 48-hour tourist visa for Dubai, Abu Dhabi, and Sharjah with flight itinerary and hotel vouchers included.',
+      key_highlights: ['Fast-track 24-hour e-visa approval', 'Family & solo travel packages', 'Verifiable flight & hotel itineraries'],
+      image_url: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Dubai Tourist Visa',
+      image_title: 'Dubai Vacation',
+      is_active: true,
+    },
+    {
+      id: 'tv-tr',
+      title: 'Turkey Sticker & E-Visa',
+      country: 'Turkey',
+      badge: 'Popular Holiday',
+      description: 'E-visa for valid UK/USA/Schengen visa holders or complete sticker visa file preparation for Istanbul & Cappadocia trips.',
+      key_highlights: ['Official embassy appointment booking', 'Customized cover letter & travel itinerary', 'Bank statement evaluation'],
+      image_url: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Turkey Tourist Visa',
+      image_title: 'Travel to Turkey',
+      is_active: true,
+    },
+    {
+      id: 'tv-sea',
+      title: 'Malaysia, Thailand & Vietnam E-Visas',
+      country: 'Southeast Asia',
+      badge: 'Easy Approval',
+      description: 'Hassle-free holiday visas for Kuala Lumpur, Bangkok, Phuket, Bali, and Hanoi with minimal documentation requirements.',
+      key_highlights: ['Simplified online application', 'Quick 3-5 working days processing', 'Affordable package pricing'],
+      image_url: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Malaysia & Thailand Tourist Visa',
+      image_title: 'Southeast Asia Holidays',
+      is_active: true,
+    },
+    {
+      id: 'tv-sch',
+      title: 'Schengen Tourist Visa (29 Countries)',
+      country: 'Europe',
+      badge: 'Comprehensive File',
+      description: 'Comprehensive tourist file compilation, travel insurance, hotel bookings, and cover letters for European holidays in France, Italy, Switzerland, Spain, etc.',
+      key_highlights: ['Covering 29 European Schengen nations', 'Schengen-approved travel insurance ($30,000 cover)', 'Full appointment and biometric preparation'],
+      image_url: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Schengen European Tourist Visa',
+      image_title: 'European Vacation',
+      is_active: true,
+    },
+    {
+      id: 'tv-ksa',
+      title: 'Saudi Arabia Tourist & Umrah E-Visa',
+      country: 'Saudi Arabia',
+      badge: '1-Year Multiple Entry',
+      description: 'One-year multiple entry tourist visa for Umrah, visiting historical sites in Al Ula, Riyadh, and Jeddah.',
+      key_highlights: ['Valid for 1 full year with 90 days stay per visit', 'Includes medical insurance', 'Fast-track issuance'],
+      image_url: 'https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=800&q=80',
+      image_alt_text: 'Saudi Arabia Tourist Visa',
+      image_title: 'Saudi Arabia Umrah & Visit',
+      is_active: true,
+    },
+  ],
+  eligibility_requirements: [
+    'Valid Passport with at least 6 months validity from the intended travel date.',
+    'Demonstrated stable financial capacity (6-month bank statement with sufficient closing balance).',
+    'Strong ties to Pakistan (proof of employment, business registration, or family roots).',
+    'Clear and genuine travel purpose (vacation, family visit, or sightseeing itinerary).',
+    'Clean travel history and no past visa violations or deportation record.',
+  ],
+  required_documents: [
+    'Original Passport & Scans of Previous Passports / Visas',
+    '2 Recent Passport Size Photographs (35x45mm, White Background, 80% Face)',
+    '6 Months Original Bank Statement with Bank Account Maintenance Certificate',
+    'CNIC Copy & Family Registration Certificate (FRC / MRC if traveling with family)',
+    'Employment Letter / Salary Slip / Business Chamber Certificate (NTN)',
+    'Confirmed Return Flight Reservation & Verifiable Hotel Booking Vouchers',
+    'Travel Health Insurance Policy ($30,000 - $50,000 coverage)',
+  ],
+  application_process: [
+    {
+      step: 1,
+      title: 'Destination Selection & Requirements Check',
+      description: 'Consult with our Multan team to choose your destination, check entry conditions, and review your bank statement.',
+    },
+    {
+      step: 2,
+      title: 'Itinerary & Document Preparation',
+      description: 'We generate official hotel vouchers, flight reservations, travel insurance, and a compelling personal cover letter.',
+    },
+    {
+      step: 3,
+      title: 'E-Visa or Embassy Appointment Submission',
+      description: 'Online submission for e-visas (UAE, Saudi, Malaysia, Turkey) or booking VFS/BLS/Gerrys appointments for Schengen sticker visas.',
+    },
+    {
+      step: 4,
+      title: 'Visa Issuance & Pre-Flight Guidance',
+      description: 'Receive your approved visa, travel itinerary copies, and pre-departure briefing.',
+    },
+  ],
+  processing_information: {
+    processing_time: '24 Hours (E-Visas) to 15 Days (Schengen / Sticker Visas)',
+    validity_period: '30 Days to 1 Year (Single or Multiple Entry)',
+    entry_type: 'Single Entry / Multiple Entry depending on destination',
+    stay_duration: '14 Days to 90 Days per visit',
+    fee_estimate: 'Affordable, transparent official visa & service fees',
+  },
+  benefits: [
+    'Hassle-free document preparation with official hotel and flight bookings.',
+    'Expert bank statement evaluation to ensure compliance with embassy norms.',
+    'Fast e-visa processing for UAE, Turkey, Saudi Arabia, and Southeast Asia.',
+    'Comprehensive travel insurance and customized travel itineraries.',
+  ],
+  faqs: [
+    {
+      id: 'tv-faq-1',
+      question: 'How much bank statement balance is required for a Schengen Tourist Visa?',
+      answer: 'Embassies generally look for a stable bank balance showing sufficient daily expenses (approx. €70-€100 per day of stay) along with flight and hotel costs, backed by legitimate business or employment income.',
+    },
+    {
+      id: 'tv-faq-2',
+      question: 'How fast can I get a Dubai 30-day tourist visa?',
+      answer: 'Standard Dubai e-visas are processed within 24 to 48 hours working days. Express emergency visas can be issued even faster.',
+    },
+    {
+      id: 'tv-faq-3',
+      question: 'Do you provide dummy flight tickets and hotel bookings for visa applications?',
+      answer: 'Yes, we provide official verifiable flight itineraries and hotel reservation vouchers suitable for embassy visa file submissions.',
+    },
+  ],
+  cta_heading: 'Planning Your Next International Holiday?',
+  cta_description: 'Get fast tourist visa assistance today from Glontis Visa Consultancy in Multan.',
+  cta_button_text: 'Plan Your Tourist Visa',
+  whatsapp_button_text: 'Chat on WhatsApp',
+  section_visibility: {
+    hero: true,
+    introduction: true,
+    overview: true,
+    destinations: true,
+    eligibility: true,
+    documents: true,
+    process: true,
+    processing_info: true,
+    benefits: true,
+    faqs: true,
+    cta: true,
+  },
+  seo_title: 'Tourist Visa Consultancy in Multan | UAE, Turkey, Schengen Visit Visas',
+  meta_description: 'Top Tourist & Visit Visa consultants in Multan. Fast processing for Dubai, Turkey, Malaysia, Thailand, Schengen, and Saudi Arabia tourist visas.',
+  url_slug: 'tourist-visa',
+};
+
 // Persistent File System DB Store Helper
 let inMemoryDb: AppDatabase | null = null;
 
@@ -1251,6 +1615,8 @@ export function getDb(): AppDatabase {
           if (!inMemoryDb.blogs) inMemoryDb.blogs = defaultBlogs;
           if (!inMemoryDb.faqs) inMemoryDb.faqs = defaultFaqs;
           if (!inMemoryDb.leads) inMemoryDb.leads = defaultLeads;
+          if (!inMemoryDb.workVisaPage) inMemoryDb.workVisaPage = defaultWorkVisaPage;
+          if (!inMemoryDb.touristVisaPage) inMemoryDb.touristVisaPage = defaultTouristVisaPage;
           return inMemoryDb;
         }
       }
@@ -1273,6 +1639,8 @@ export function getDb(): AppDatabase {
     blogs: defaultBlogs,
     leads: defaultLeads,
     faqs: defaultFaqs,
+    workVisaPage: defaultWorkVisaPage,
+    touristVisaPage: defaultTouristVisaPage,
   };
 
   saveDb(inMemoryDb);

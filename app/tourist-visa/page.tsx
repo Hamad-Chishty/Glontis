@@ -4,178 +4,312 @@ import React from 'react';
 import Link from 'next/link';
 import { useData } from '@/lib/context/DataContext';
 import {
-  Globe,
+  Compass,
   CheckCircle2,
   ArrowRight,
   MessageCircle,
   FileText,
   Clock,
   ShieldCheck,
-  ChevronRight,
+  Globe,
   HelpCircle,
   Plane,
-  Compass,
 } from 'lucide-react';
 import ConsultationForm from '@/components/home/ConsultationForm';
 
 export default function TouristVisaPage() {
-  const { settings, faqs } = useData();
-
-  const touristFaqs = faqs.filter((f) => f.category === 'Tourist Visa' || f.category === 'General');
+  const { settings, touristVisaPage } = useData();
   const whatsappNumber = settings.whatsapp || '03334530456';
+  const data = touristVisaPage;
+  const vis = data.section_visibility || {
+    hero: true,
+    introduction: true,
+    overview: true,
+    destinations: true,
+    eligibility: true,
+    documents: true,
+    process: true,
+    benefits: true,
+    faqs: true,
+    cta: true,
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
-      {/* Hero Banner */}
-      <div className="relative bg-[#0A1838] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1838] via-[#0A1838]/95 to-slate-900/90 z-10" />
-        <div className="absolute -right-20 -top-20 w-96 h-96 bg-[#F07100]/15 rounded-full blur-3xl z-0" />
-
-        <div className="relative z-20 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F07100]/20 text-[#F07100] border border-[#F07100]/30 text-xs font-black uppercase tracking-wider">
-              <Compass className="w-4 h-4 text-[#F07100]" />
-              <span>International Holiday & Leisure Travel Visas</span>
+    <div className="min-h-screen bg-slate-50 pb-20 space-y-16">
+      {/* Hero Banner Section */}
+      {vis.hero && (
+        <div className="relative bg-[#0A1838] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+          {data.hero_image && (
+            <div className="absolute inset-0 z-0 opacity-20">
+              <picture>
+                {data.mobile_hero_image && (
+                  <source media="(max-width: 640px)" srcSet={data.mobile_hero_image} />
+                )}
+                <img
+                  src={data.hero_image}
+                  alt={data.hero_image_alt_text || 'Tourist Visa Banner'}
+                  title={data.hero_image_title}
+                  className="w-full h-full object-cover"
+                />
+              </picture>
             </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A1838] via-[#0A1838]/95 to-slate-900/90 z-10" />
+          <div className="absolute -right-20 -top-20 w-96 h-96 bg-[#F07100]/15 rounded-full blur-3xl z-0" />
 
-            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-              Explore the World with <span className="text-[#F07100]">Tourist Visas</span>
-            </h1>
-
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-              Seamless holiday visa processing, hotel reservation itineraries, flight bookings, and travel insurance for UAE, Turkey, Malaysia, Thailand, Schengen, and GCC countries.
-            </p>
-
-            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-              <Link
-                href="/free-consultation"
-                className="px-6 py-3.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm flex items-center gap-2 shadow-lg hover:shadow-orange-500/20 transition-all"
-              >
-                <span>Plan Your Holiday Visa</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <a
-                href={`https://wa.me/92${whatsappNumber.replace(/^0/, '').replace(/\s+/g, '')}?text=Hello%20Glontis,%20I%20want%20information%20about%20Tourist%20Visa%20packages.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm flex items-center gap-2 shadow-lg transition-all"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>Chat on WhatsApp</span>
-              </a>
-            </div>
-
-            <div className="pt-6 grid grid-cols-3 gap-4 border-t border-slate-800/80 text-left">
-              <div>
-                <span className="block text-2xl font-black text-[#F07100]">24 - 48h</span>
-                <span className="text-[11px] text-slate-400 font-semibold uppercase">E-Visa Speed</span>
-              </div>
-              <div>
-                <span className="block text-2xl font-black text-white">20+</span>
-                <span className="text-[11px] text-slate-400 font-semibold uppercase">Destinations</span>
-              </div>
-              <div>
-                <span className="block text-2xl font-black text-white">Full</span>
-                <span className="text-[11px] text-slate-400 font-semibold uppercase">Travel Itinerary</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl shadow-2xl text-slate-900 border border-slate-100">
-            <h3 className="text-xl font-black text-[#0A1838] mb-1">Apply for Tourist Visa</h3>
-            <p className="text-xs text-slate-500 mb-6 font-medium">Quick processing for individuals & families.</p>
-            <ConsultationForm />
-          </div>
-        </div>
-      </div>
-
-      {/* Popular Tourist Visa Destinations */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-black uppercase tracking-widest text-[#F07100] bg-orange-50 px-3 py-1 rounded-full border border-orange-200">
-            Popular Holiday Spots
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-[#0A1838]">
-            Fast-Track Tourist Visa Services
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-            We handle hotel vouchers, dummy flight tickets, bank statement evaluation, and embassy appointments.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              title: 'UAE (Dubai / Abu Dhabi) 30 & 60 Days E-Visa',
-              country: 'United Arab Emirates',
-              desc: 'Express 24-48 hour tourist visa for Dubai, Abu Dhabi, and Sharjah with flight itinerary and hotel vouchers.',
-            },
-            {
-              title: 'Turkey Sticker & E-Visa',
-              country: 'Turkey',
-              desc: 'E-visa for valid UK/USA/Schengen visa holders or complete sticker visa file preparation for Istanbul & Cappadocia trips.',
-            },
-            {
-              title: 'Malaysia & Thailand E-Visas',
-              country: 'Southeast Asia',
-              desc: 'Hassle-free holiday visas for Kuala Lumpur, Bangkok, Phuket, and Bali with minimal documentation requirements.',
-            },
-            {
-              title: 'Schengen Tourist Visa (29 Countries)',
-              country: 'Europe',
-              desc: 'Comprehensive tourist file compilation, travel insurance, hotel bookings, and cover letters for European holidays.',
-            },
-            {
-              title: 'Saudi Arabia Tourist / Umrah E-Visa',
-              country: 'Saudi Arabia',
-              desc: 'One-year multiple entry tourist visa for Umrah, visiting historical sites in Al Ula, Riyadh, and Jeddah.',
-            },
-            {
-              title: 'Azerbaijan, Georgia & Egypt Visas',
-              country: 'E-Visa Hubs',
-              desc: 'Instant online visa applications for Baku, Tbilisi, Cairo, and Sharm El-Sheikh leisure tours.',
-            },
-          ].map((dest, idx) => (
-            <div key={idx} className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <span className="text-[11px] font-black uppercase text-[#F07100] bg-orange-50 px-2.5 py-1 rounded-md inline-block">
-                  {dest.country}
-                </span>
-                <h3 className="text-lg font-extrabold text-[#0A1838]">{dest.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed font-medium">{dest.desc}</p>
+          <div className="relative z-20 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F07100]/20 text-[#F07100] border border-[#F07100]/30 text-xs font-black uppercase tracking-wider">
+                <Compass className="w-4 h-4 text-[#F07100]" />
+                <span>{data.page_title || 'Tourist & Visit Visa Consultancy'}</span>
               </div>
 
-              <div className="pt-4 border-t border-slate-100">
+              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+                {data.hero_heading}
+              </h1>
+
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                {data.hero_description}
+              </p>
+
+              <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
                 <Link
                   href="/free-consultation"
-                  className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-[#F07100] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                  className="px-6 py-3.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm flex items-center gap-2 shadow-lg hover:shadow-orange-500/20 transition-all"
                 >
-                  <span>Inquire {dest.country} Tourist Visa</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>{data.cta_button_text || 'Plan Your Holiday Visa'}</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
+
+                <a
+                  href={`https://wa.me/92${whatsappNumber.replace(/^0/, '').replace(/\s+/g, '')}?text=Hello%20Glontis,%20I%20want%20information%20about%20Tourist%20Visa%20packages.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm flex items-center gap-2 shadow-lg transition-all"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>{data.whatsapp_button_text || 'Chat on WhatsApp'}</span>
+                </a>
               </div>
             </div>
-          ))}
+
+            <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl shadow-2xl text-slate-900 border border-slate-100">
+              <h3 className="text-xl font-black text-[#0A1838] mb-1">Apply for Tourist Visa</h3>
+              <p className="text-xs text-slate-500 mb-6 font-medium">Fast processing for individuals and families.</p>
+              <ConsultationForm />
+            </div>
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Introduction & Overview */}
+      {(vis.introduction || vis.overview) && (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+            <div className="inline-flex items-center gap-2 text-xs font-black uppercase text-[#F07100] bg-orange-50 px-3 py-1 rounded-full">
+              <FileText className="w-3.5 h-3.5" />
+              <span>Holiday Visa Services</span>
+            </div>
+            {vis.introduction && (
+              <h2 className="text-2xl sm:text-3xl font-black text-[#0A1838]">
+                {data.introduction}
+              </h2>
+            )}
+            {vis.overview && (
+              <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line font-medium">
+                {data.visa_overview}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Popular Tourist Destinations */}
+      {vis.destinations && data.destinations && data.destinations.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-2">
+            <span className="text-xs font-black uppercase tracking-widest text-[#F07100] bg-orange-50 px-3 py-1 rounded-full border border-orange-200">
+              Popular Holiday Destinations
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black text-[#0A1838]">Fast-Track Tourist Visa Packages</h2>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium">Hassle-free e-visas and sticker visa support for your next vacation.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {data.destinations.map((dest, idx) => (
+              <div key={dest.id || idx} className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  {dest.image_url && (
+                    <div className="h-44 w-full overflow-hidden relative">
+                      <img
+                        src={dest.image_url}
+                        alt={dest.image_alt_text || dest.title}
+                        title={dest.image_title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      />
+                      {dest.badge && (
+                        <span className="absolute top-3 right-3 bg-[#F07100] text-white text-[10px] font-black px-3 py-1 rounded-full shadow">
+                          {dest.badge}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="p-6 space-y-3">
+                    <span className="text-[11px] font-black uppercase text-[#F07100] bg-orange-50 px-2.5 py-1 rounded-md inline-block">
+                      {dest.country}
+                    </span>
+                    <h3 className="text-lg font-black text-[#0A1838]">{dest.title}</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed font-medium">{dest.description}</p>
+
+                    {dest.key_highlights && dest.key_highlights.length > 0 && (
+                      <ul className="space-y-1.5 pt-2 text-xs text-slate-700 font-medium">
+                        {dest.key_highlights.map((h, hIdx) => (
+                          <li key={hIdx} className="flex items-center gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+
+                <div className="p-6 pt-0">
+                  <Link
+                    href="/free-consultation"
+                    className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-[#F07100] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                  >
+                    <span>Inquire {dest.country} Visa</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Eligibility & Documents Grid */}
+      {(vis.eligibility || vis.documents) && (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {vis.eligibility && (
+            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <h3 className="text-xl font-black text-[#0A1838] flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-[#F07100]" />
+                <span>Eligibility & Requirements</span>
+              </h3>
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-700 font-medium">
+                {data.eligibility_requirements.map((req, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                    <span>{req}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {vis.documents && (
+            <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <h3 className="text-xl font-black text-[#0A1838] flex items-center gap-2">
+                <FileText className="w-5 h-5 text-[#F07100]" />
+                <span>Required Documents Checklist</span>
+              </h3>
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-700 font-medium">
+                {data.required_documents.map((doc, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                    <span>{doc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Processing Info & Specifications */}
+      {vis.process && data.processing_information && (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#0A1838] text-white p-8 sm:p-10 rounded-3xl shadow-xl space-y-6">
+            <div className="flex items-center gap-2 text-xs font-black uppercase text-[#F07100] tracking-wider">
+              <Clock className="w-4 h-4" />
+              <span>Processing Times & Visa Specifications</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center sm:text-left">
+              <div className="space-y-1">
+                <span className="text-[11px] text-slate-400 font-bold uppercase block">Processing Time</span>
+                <span className="text-lg font-black text-white">{data.processing_information.processing_time}</span>
+              </div>
+              <div className="space-y-1">
+                <span className="text-[11px] text-slate-400 font-bold uppercase block">Validity Period</span>
+                <span className="text-lg font-black text-white">{data.processing_information.validity_period}</span>
+              </div>
+              <div className="space-y-1">
+                <span className="text-[11px] text-slate-400 font-bold uppercase block">Entry Type</span>
+                <span className="text-lg font-black text-white">{data.processing_information.entry_type}</span>
+              </div>
+              <div className="space-y-1">
+                <span className="text-[11px] text-slate-400 font-bold uppercase block">Max Stay Duration</span>
+                <span className="text-lg font-black text-white">{data.processing_information.stay_duration}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FAQs */}
-      {touristFaqs.length > 0 && (
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8">
+      {vis.faqs && data.faqs && data.faqs.length > 0 && (
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-2">
             <HelpCircle className="w-8 h-8 text-[#F07100] mx-auto" />
-            <h2 className="text-2xl font-black text-[#0A1838]">Tourist Visa FAQs</h2>
-            <p className="text-xs text-slate-500">Quick answers regarding travel documentation and processing times.</p>
+            <h2 className="text-2xl font-black text-[#0A1838]">Frequently Asked Questions</h2>
+            <p className="text-xs text-slate-500">Essential answers for leisure travelers & holiday seekers.</p>
           </div>
 
           <div className="space-y-4">
-            {touristFaqs.map((faq) => (
-              <div key={faq.id} className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+            {data.faqs.map((faq, idx) => (
+              <div key={faq.id || idx} className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
                 <h4 className="text-sm font-extrabold text-[#0A1838]">{faq.question}</h4>
                 <p className="text-xs text-slate-600 leading-relaxed font-medium">{faq.answer}</p>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Call To Action Banner */}
+      {vis.cta && (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-[#0A1838] to-[#132c66] text-white p-8 sm:p-12 rounded-3xl text-center space-y-6 shadow-2xl relative overflow-hidden">
+            <div className="absolute -right-12 -bottom-12 w-64 h-64 bg-[#F07100]/20 rounded-full blur-2xl" />
+            <div className="relative z-10 max-w-2xl mx-auto space-y-4">
+              <h2 className="text-2xl sm:text-4xl font-black">{data.cta_heading || 'Ready for Your Vacation?'}</h2>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium">
+                {data.cta_description || 'Get in touch with Glontis Visa Consultancy to secure your travel visa.'}
+              </p>
+
+              <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  href="/free-consultation"
+                  className="px-6 py-3.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg"
+                >
+                  <span>{data.cta_button_text || 'Book Consultation Now'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <a
+                  href={`https://wa.me/92${whatsappNumber.replace(/^0/, '').replace(/\s+/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>{data.whatsapp_button_text || 'WhatsApp Us Directly'}</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -232,3 +232,149 @@ export interface TrustStat {
   description: string;
   icon: string;
 }
+
+export interface WorkVisaPageData {
+  page_title: string;
+  hero_heading: string;
+  hero_description: string;
+  hero_image: string;
+  hero_image_alt_text?: string;
+  hero_image_title?: string;
+  mobile_hero_image?: string;
+  mobile_hero_image_alt_text?: string;
+  mobile_hero_image_title?: string;
+  introduction: string;
+  visa_overview: string;
+  countries_available: Array<{
+    id: string;
+    name: string;
+    badge?: string;
+    description: string;
+    points: string[];
+    image_url?: string;
+    image_alt_text?: string;
+    image_title?: string;
+    is_active: boolean;
+  }>;
+  job_categories: Array<{
+    id: string;
+    title: string;
+    badge?: string;
+    description: string;
+    key_requirements: string[];
+    image_url?: string;
+    image_alt_text?: string;
+    image_title?: string;
+    is_active: boolean;
+  }>;
+  eligibility_requirements: string[];
+  required_documents: string[];
+  application_process: Array<{
+    step: number;
+    title: string;
+    description: string;
+  }>;
+  processing_information: {
+    processing_time: string;
+    visa_duration: string;
+    work_rights: string;
+    family_dependents: string;
+    fee_estimate: string;
+  };
+  benefits: string[];
+  faqs: Array<{
+    id: string;
+    question: string;
+    answer: string;
+  }>;
+  cta_heading: string;
+  cta_description: string;
+  cta_button_text: string;
+  whatsapp_button_text: string;
+  section_visibility: {
+    hero: boolean;
+    introduction: boolean;
+    overview: boolean;
+    countries: boolean;
+    job_categories: boolean;
+    eligibility: boolean;
+    documents: boolean;
+    process: boolean;
+    processing_info: boolean;
+    benefits: boolean;
+    faqs: boolean;
+    cta: boolean;
+  };
+  section_order?: string[];
+  seo_title: string;
+  meta_description: string;
+  url_slug: string;
+}
+
+export interface TouristVisaPageData {
+  page_title: string;
+  hero_heading: string;
+  hero_description: string;
+  hero_image: string;
+  hero_image_alt_text?: string;
+  hero_image_title?: string;
+  mobile_hero_image?: string;
+  mobile_hero_image_alt_text?: string;
+  mobile_hero_image_title?: string;
+  introduction: string;
+  visa_overview: string;
+  destinations: Array<{
+    id: string;
+    title: string;
+    country: string;
+    badge?: string;
+    description: string;
+    key_highlights: string[];
+    image_url?: string;
+    image_alt_text?: string;
+    image_title?: string;
+    is_active: boolean;
+  }>;
+  eligibility_requirements: string[];
+  required_documents: string[];
+  application_process: Array<{
+    step: number;
+    title: string;
+    description: string;
+  }>;
+  processing_information: {
+    processing_time: string;
+    validity_period: string;
+    entry_type: string;
+    stay_duration: string;
+    fee_estimate: string;
+  };
+  benefits: string[];
+  faqs: Array<{
+    id: string;
+    question: string;
+    answer: string;
+  }>;
+  cta_heading: string;
+  cta_description: string;
+  cta_button_text: string;
+  whatsapp_button_text: string;
+  section_visibility: {
+    hero: boolean;
+    introduction: boolean;
+    overview: boolean;
+    destinations: boolean;
+    eligibility: boolean;
+    documents: boolean;
+    process: boolean;
+    processing_info: boolean;
+    benefits: boolean;
+    faqs: boolean;
+    cta: boolean;
+  };
+  section_order?: string[];
+  seo_title: string;
+  meta_description: string;
+  url_slug: string;
+}
+

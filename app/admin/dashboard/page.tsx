@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useData } from '@/lib/context/DataContext';
 import ImageUploader from '@/components/admin/ImageUploader';
 import MediaLibraryTab from '@/components/admin/MediaLibraryTab';
+import WorkVisaCmsTab from '@/components/admin/WorkVisaCmsTab';
+import TouristVisaCmsTab from '@/components/admin/TouristVisaCmsTab';
 import {
   Users,
   ImageIcon,
@@ -35,6 +37,8 @@ import {
   ShieldCheck,
   Check,
   FolderOpen,
+  Briefcase,
+  Compass,
 } from 'lucide-react';
 import {
   SiteSettings,
@@ -101,6 +105,8 @@ export default function AdminDashboardPage() {
     | 'testimonials'
     | 'blogs'
     | 'faqs'
+    | 'workVisa'
+    | 'touristVisa'
     | 'settings'
   >('leads');
 
@@ -331,6 +337,8 @@ export default function AdminDashboardPage() {
             { id: 'testimonials', name: 'Client Testimonials', icon: Star, badge: testimonials.length },
             { id: 'blogs', name: 'Blog Articles', icon: BookOpen, badge: blogs.length },
             { id: 'faqs', name: 'FAQs Manager', icon: HelpCircle, badge: faqs.length },
+            { id: 'workVisa', name: 'Work Visa CMS', icon: Briefcase },
+            { id: 'touristVisa', name: 'Tourist Visa CMS', icon: Compass },
             { id: 'settings', name: 'Website Settings', icon: Settings },
           ].map((item) => {
             const Icon = item.icon;
@@ -1913,6 +1921,9 @@ export default function AdminDashboardPage() {
               </div>
             </div>
           )}
+
+          {activeTab === 'workVisa' && <WorkVisaCmsTab />}
+          {activeTab === 'touristVisa' && <TouristVisaCmsTab />}
         </main>
       </div>
 

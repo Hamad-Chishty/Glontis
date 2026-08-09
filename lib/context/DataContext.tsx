@@ -30,7 +30,10 @@ import {
   defaultBlogs,
   defaultLeads,
   defaultFaqs,
+  defaultWorkVisaPage,
+  defaultTouristVisaPage,
 } from '@/lib/data-store';
+import { WorkVisaPageData, TouristVisaPageData } from '@/lib/types';
 
 interface DataContextType {
   settings: SiteSettings;
@@ -46,6 +49,8 @@ interface DataContextType {
   blogs: BlogPost[];
   leads: LeadEntry[];
   faqs: FAQItem[];
+  workVisaPage: WorkVisaPageData;
+  touristVisaPage: TouristVisaPageData;
   isLoading: boolean;
   refreshData: () => Promise<void>;
   updateData: (action: string, entity?: string, payload?: unknown) => Promise<boolean>;
@@ -65,6 +70,8 @@ interface DataContextType {
   setTestimonials: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   setBlogs: React.Dispatch<React.SetStateAction<BlogPost[]>>;
   setFaqs: React.Dispatch<React.SetStateAction<FAQItem[]>>;
+  setWorkVisaPage: React.Dispatch<React.SetStateAction<WorkVisaPageData>>;
+  setTouristVisaPage: React.Dispatch<React.SetStateAction<TouristVisaPageData>>;
   resetToDefaultData: () => void;
 }
 
@@ -84,6 +91,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [blogs, setBlogs] = useState<BlogPost[]>(defaultBlogs);
   const [leads, setLeads] = useState<LeadEntry[]>(defaultLeads);
   const [faqs, setFaqs] = useState<FAQItem[]>(defaultFaqs);
+  const [workVisaPage, setWorkVisaPage] = useState<WorkVisaPageData>(defaultWorkVisaPage);
+  const [touristVisaPage, setTouristVisaPage] = useState<TouristVisaPageData>(defaultTouristVisaPage);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const refreshData = async () => {
@@ -106,6 +115,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
           if (d.blogs) setBlogs(d.blogs);
           if (d.leads) setLeads(d.leads);
           if (d.faqs) setFaqs(d.faqs);
+          if (d.workVisaPage) setWorkVisaPage(d.workVisaPage);
+          if (d.touristVisaPage) setTouristVisaPage(d.touristVisaPage);
         }
       }
     } catch (err) {
@@ -196,6 +207,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     setBlogs(defaultBlogs);
     setLeads(defaultLeads);
     setFaqs(defaultFaqs);
+    setWorkVisaPage(defaultWorkVisaPage);
+    setTouristVisaPage(defaultTouristVisaPage);
     updateData('UPDATE_ALL', undefined, {
       settings: defaultSettings,
       heroSlides: defaultHeroSlides,
@@ -209,6 +222,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       blogs: defaultBlogs,
       leads: defaultLeads,
       faqs: defaultFaqs,
+      workVisaPage: defaultWorkVisaPage,
+      touristVisaPage: defaultTouristVisaPage,
     });
   };
 
@@ -228,6 +243,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         blogs,
         leads,
         faqs,
+        workVisaPage,
+        touristVisaPage,
         isLoading,
         refreshData,
         updateData,
@@ -247,6 +264,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setTestimonials,
         setBlogs,
         setFaqs,
+        setWorkVisaPage,
+        setTouristVisaPage,
         resetToDefaultData,
       }}
     >

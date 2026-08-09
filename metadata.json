@@ -1,0 +1,6 @@
+{
+  "name": "Glontis Visa Consultancy",
+  "description": "Premium study abroad and visa consultancy website with full CMS admin panel, lead generation, study destination guides, university directory, and offer management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

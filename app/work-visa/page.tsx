@@ -20,6 +20,10 @@ import ConsultationForm from '@/components/home/ConsultationForm';
 
 export default function WorkVisaPage() {
   const { settings, workVisaPage } = useData();
+
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Work Visa';
+  }, []);
   const whatsappNumber = settings.whatsapp || '03334530456';
   const data = workVisaPage;
   const vis = data.section_visibility || {

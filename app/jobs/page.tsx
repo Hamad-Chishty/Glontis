@@ -71,6 +71,10 @@ const demoJobs: JobOpportunity[] = [
 
 export default function JobsPage() {
   const { settings } = useData();
+
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Jobs Abroad';
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const categories = ['All', 'Healthcare', 'Information Technology', 'Engineering', 'Hospitality'];

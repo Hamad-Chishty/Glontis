@@ -121,14 +121,8 @@ export default function Header() {
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
-          {/* Official Glontis Logo + Company Name */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/glontis-logo.svg"
-              alt="Glontis Visa Consultancy"
-              className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-transform group-hover:scale-105"
-            />
+          {/* Glontis Company Name Only - Clean Header Text */}
+          <Link href="/" className="flex items-center shrink-0 group py-1">
             <span className="text-base sm:text-lg lg:text-xl font-black tracking-tight text-[#0A1838] whitespace-nowrap leading-none group-hover:text-[#F07100] transition-colors">
               Glontis <span className="text-[#F07100]">Visa Consultancy</span>
             </span>

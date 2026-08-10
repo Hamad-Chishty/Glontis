@@ -22,6 +22,10 @@ import ConsultationForm from '@/components/home/ConsultationForm';
 export default function StudyVisaPage() {
   const { countries, settings, faqs, successStories } = useData();
 
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Study Visa';
+  }, []);
+
   const publishedCountries = countries.filter((c) => c.is_published);
   const studentFaqs = faqs.filter((f) => f.category === 'Study Visa' || f.category === 'General');
   const whatsappNumber = settings.whatsapp || '03334530456';

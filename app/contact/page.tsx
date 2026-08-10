@@ -6,6 +6,10 @@ import ConsultationForm from '@/components/home/ConsultationForm';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
 export default function ContactPage() {
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Contact Us';
+  }, []);
+
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="bg-slate-950 text-white py-16 text-center">

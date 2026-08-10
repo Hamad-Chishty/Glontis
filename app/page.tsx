@@ -18,6 +18,10 @@ import { defaultHomepageSections } from '@/lib/data-store';
 export default function HomePage() {
   const { homepageSections } = useData();
 
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy';
+  }, []);
+
   const activeSections = (homepageSections && homepageSections.length > 0 ? homepageSections : defaultHomepageSections)
     .filter((s) => s.is_enabled)
     .sort((a, b) => a.display_order - b.display_order);

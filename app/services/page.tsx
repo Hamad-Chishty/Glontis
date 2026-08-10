@@ -8,6 +8,9 @@ import ConsultationForm from '@/components/home/ConsultationForm';
 import { GraduationCap, Award, CheckCircle2 } from 'lucide-react';
 
 export default function ServicesPage() {
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Services';
+  }, []);
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="bg-slate-950 text-white py-16 relative overflow-hidden text-center">

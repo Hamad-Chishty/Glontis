@@ -28,6 +28,12 @@ export default function CountryDetailPage() {
 
   const country = countries.find((c) => c.slug === slug);
 
+  React.useEffect(() => {
+    if (country) {
+      document.title = `Glontis Visa Consultancy | ${country.name}`;
+    }
+  }, [country]);
+
   if (!country) {
     // Check if it's a non-country path or 404
     return (

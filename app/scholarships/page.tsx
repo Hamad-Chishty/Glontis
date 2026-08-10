@@ -7,6 +7,10 @@ import { Award, GraduationCap, ArrowRight, CheckCircle2, MessageCircle, DollarSi
 
 export default function ScholarshipsPage() {
   const { universities, settings } = useData();
+
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Scholarships';
+  }, []);
   const [selectedCountry, setSelectedCountry] = useState('All');
 
   // Filter universities offering scholarships

@@ -19,6 +19,10 @@ import ConsultationForm from '@/components/home/ConsultationForm';
 
 export default function TouristVisaPage() {
   const { settings, touristVisaPage } = useData();
+
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Tourist Visa';
+  }, []);
   const whatsappNumber = settings.whatsapp || '03334530456';
   const data = touristVisaPage;
   const vis = data.section_visibility || {

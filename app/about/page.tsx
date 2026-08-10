@@ -10,6 +10,10 @@ import { GraduationCap, ShieldCheck, Award, Users, MapPin, CheckCircle2 } from '
 export default function AboutPage() {
   const { settings } = useData();
 
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | About Us';
+  }, []);
+
   return (
     <main className="min-h-screen bg-slate-50">
       {/* Header Banner */}

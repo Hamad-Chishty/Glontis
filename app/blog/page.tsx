@@ -8,6 +8,10 @@ import { BookOpen, Calendar, User, ArrowRight, Tag, Search } from 'lucide-react'
 
 export default function BlogPage() {
   const { blogs } = useData();
+
+  React.useEffect(() => {
+    document.title = 'Glontis Visa Consultancy | Blog';
+  }, []);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 

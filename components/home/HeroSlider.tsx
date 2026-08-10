@@ -235,14 +235,16 @@ export default function HeroSlider() {
   ];
 
   return (
-    <section
-      className="relative w-full bg-[#0A1128] text-white overflow-hidden py-8 sm:py-12 lg:py-14 group/hero transition-colors duration-700"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
+    <>
+      {/* 1. COMPACT DARK NAVY HERO SECTION (550-680px Desktop) */}
+      <section
+        className="relative w-full bg-[#0A1128] text-white overflow-hidden py-6 sm:py-8 lg:py-10 group/hero transition-colors duration-700"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
       {/* 1. CINEMATIC BACKGROUND ATMOSPHERE WITH GLOW & WORLD MAP PATTERN */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Soft Radial Ambient Lighting */}
@@ -598,30 +600,41 @@ export default function HeroSlider() {
           </div>
         )}
 
-        {/* 5. DESTINATION ROUTES PILL BANNER */}
-        <div className="mt-6 pt-4 border-t border-slate-800/80 z-20">
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-bold text-slate-300">
-            <span className="text-[10px] uppercase font-black tracking-widest text-[#EA580C] mr-1">Global Routes:</span>
-            {routeDestinations.map((route, i) => (
-              <span
-                key={i}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-800 text-slate-300 text-[11px] font-semibold hover:border-[#EA580C]/50 hover:text-white transition-all"
-              >
-                <span>{route.from}</span>
-                <span className="text-[#EA580C]">➔</span>
-                <span>{route.to}</span>
-              </span>
-            ))}
+      </div>
+    </section>
+
+    {/* 2. LIGHT / OFF-WHITE SECTION: GLOBAL ROUTES & EXPLORE SERVICES */}
+    <section className="w-full bg-[#F8FAFC] py-6 sm:py-8 border-t border-b border-slate-200/80">
+      <div className="w-[92%] max-w-[1400px] mx-auto space-y-6">
+        {/* Global Migration Routes Bar */}
+        <div className="bg-white border border-slate-200/90 shadow-sm p-3.5 sm:p-4 rounded-2xl">
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-bold text-slate-800">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#EA580C] animate-pulse" />
+              <span className="text-[11px] uppercase font-black tracking-widest text-[#EA580C]">Global Migration Routes</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              {routeDestinations.map((route, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-xs font-bold hover:border-[#EA580C] hover:bg-orange-50 hover:text-[#EA580C] transition-all"
+                >
+                  <span>{route.from}</span>
+                  <span className="text-[#EA580C] font-black">➔</span>
+                  <span>{route.to}</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* 6. SERVICE QUICK LINKS BAR BELOW HERO */}
+        {/* Quick Services Bar */}
         {activeServices.length > 0 && (
-          <div className="mt-6 pt-5 border-t border-slate-800/80 z-20">
+          <div className="pt-1">
             <div className="mb-3.5 flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#EA580C]">Explore Services</span>
-                <h3 className="text-base sm:text-lg font-black text-white">Our Premier Visa & Overseas Services</h3>
+                <span className="text-[11px] font-black uppercase tracking-widest text-[#EA580C]">Explore Services</span>
+                <h3 className="text-base sm:text-lg lg:text-xl font-black text-slate-900">Our Premier Visa & Overseas Advisory</h3>
               </div>
               <Link
                 href="/services"
@@ -632,36 +645,36 @@ export default function HeroSlider() {
               </Link>
             </div>
 
-            <div className="flex gap-4 overflow-x-auto pb-2 pt-1 snap-x scrollbar-thin scrollbar-thumb-slate-800 lg:grid lg:grid-cols-4 xl:grid-cols-7 lg:overflow-visible">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
               {activeServices.map((service) => (
                 <Link
                   key={service.id}
                   href={service.url || '/services'}
-                  className="min-w-[210px] lg:min-w-0 snap-start bg-slate-900/80 hover:bg-[#EA580C] border border-slate-800 hover:border-[#EA580C] p-3.5 rounded-2xl transition-all duration-300 group shadow-lg flex flex-col justify-between shrink-0"
+                  className="bg-white hover:bg-slate-900 border border-slate-200/90 hover:border-slate-800 p-3.5 rounded-2xl transition-all duration-300 group shadow-sm hover:shadow-xl flex flex-col justify-between"
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-xl bg-slate-800 group-hover:bg-white/20 text-[#EA580C] group-hover:text-white flex items-center justify-center transition-colors">
-                        {renderIcon(service.icon_name, 'w-4.5 h-4.5')}
+                      <div className="w-8 h-8 rounded-xl bg-orange-50 group-hover:bg-white/10 text-[#EA580C] group-hover:text-orange-400 flex items-center justify-center transition-colors">
+                        {renderIcon(service.icon_name, 'w-4 h-4')}
                       </div>
                       {service.badge && (
-                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#EA580C]/20 group-hover:bg-white/20 text-[#EA580C] group-hover:text-white">
+                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-100 group-hover:bg-white/20 text-[#EA580C] group-hover:text-white">
                           {service.badge}
                         </span>
                       )}
                     </div>
 
                     <div>
-                      <h4 className="text-xs sm:text-sm font-extrabold text-white group-hover:text-white leading-tight">{service.title}</h4>
+                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-white leading-tight">{service.title}</h4>
                       {service.description && (
-                        <p className="text-[11px] text-slate-400 group-hover:text-white/90 line-clamp-2 mt-1 font-medium leading-relaxed">
+                        <p className="text-[11px] text-slate-500 group-hover:text-slate-300 line-clamp-2 mt-1 font-medium leading-relaxed">
                           {service.description}
                         </p>
                       )}
                     </div>
                   </div>
 
-                  <div className="pt-2.5 mt-2 border-t border-slate-800/60 group-hover:border-white/20 flex items-center justify-between text-[11px] font-extrabold text-[#EA580C] group-hover:text-white">
+                  <div className="pt-2 mt-2.5 border-t border-slate-100 group-hover:border-slate-800 flex items-center justify-between text-[11px] font-extrabold text-[#EA580C] group-hover:text-orange-400">
                     <span>Apply Now</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -672,5 +685,6 @@ export default function HeroSlider() {
         )}
       </div>
     </section>
+  </>
   );
 }

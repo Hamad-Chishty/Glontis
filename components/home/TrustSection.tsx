@@ -38,24 +38,24 @@ export default function TrustSection() {
   ];
 
   return (
-    <section className="py-16 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-16 bg-slate-50 relative border-b border-slate-200/80">
+      <div className="w-[92%] max-w-[1400px] mx-auto">
         {/* Editable Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-8 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden -mt-16 z-20">
-          <div className="absolute -right-10 -bottom-10 w-60 h-60 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-6 sm:p-8 rounded-3xl bg-[#0A1838] text-white shadow-xl relative overflow-hidden z-20 border border-slate-800">
+          <div className="absolute -right-10 -bottom-10 w-60 h-60 bg-[#EA580C]/15 rounded-full blur-3xl pointer-events-none" />
 
           {trustStats.map((stat) => (
-            <div key={stat.id} className="flex flex-col items-center text-center p-4 space-y-2 border-r border-slate-800 last:border-0">
-              <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700/80 mb-1">
-                {iconMap[stat.icon] || <GraduationCap className="w-8 h-8 text-blue-400" />}
+            <div key={stat.id} className="flex flex-col items-center text-center p-3 sm:p-4 space-y-2 border-r border-slate-800/80 last:border-0">
+              <div className="p-2.5 rounded-2xl bg-slate-900 border border-slate-800 mb-1">
+                {iconMap[stat.icon] || <GraduationCap className="w-7 h-7 text-[#EA580C]" />}
               </div>
-              <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
                 {stat.value}
               </span>
-              <span className="text-xs font-bold uppercase tracking-wider text-yellow-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#EA580C]">
                 {stat.label}
               </span>
-              <p className="text-[11px] text-slate-400 hidden sm:block max-w-[180px]">
+              <p className="text-[11px] text-slate-300 hidden sm:block max-w-[200px] font-medium leading-relaxed">
                 {stat.description}
               </p>
             </div>

@@ -17,7 +17,7 @@ import {
   ChevronRight,
   HelpCircle,
 } from 'lucide-react';
-import ConsultationForm from '@/components/home/ConsultationForm';
+import CompactHeroForm from '@/components/home/CompactHeroForm';
 
 export default function StudyVisaPage() {
   const { countries, settings, faqs, successStories } = useData();
@@ -89,10 +89,13 @@ export default function StudyVisaPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-white p-4 sm:p-5 lg:p-6 rounded-2xl shadow-xl text-slate-900 border border-slate-100">
-            <h3 className="text-lg font-black text-[#0A1838] mb-0.5">Apply for Study Visa</h3>
-            <p className="text-xs text-slate-500 mb-3 font-medium">Get a call back from our senior counselor in Multan.</p>
-            <ConsultationForm />
+          <div className="lg:col-span-5 w-full">
+            <CompactHeroForm
+              title="Apply for Study Visa"
+              subtitle="Get a call back from our senior counselor in Multan."
+              serviceType="Study Visa"
+              defaultCountry="United Kingdom"
+            />
           </div>
         </div>
       </div>

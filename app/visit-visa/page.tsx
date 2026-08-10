@@ -54,31 +54,31 @@ export default function VisitVisaPage() {
       case 'hero':
         if (!visibility.hero) return null;
         return (
-          <div key="hero" className="relative bg-[#0A1838] text-white py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <div key="hero" className="relative bg-[#0A1838] text-white py-6 sm:py-8 lg:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A1838] via-[#0A1838]/95 to-slate-900/90 z-10" />
-            <div className="absolute -right-20 -top-20 w-96 h-96 bg-[#F07100]/15 rounded-full blur-3xl z-0" />
+            <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#F07100]/15 rounded-full blur-3xl z-0" />
 
-            <div className="relative z-20 w-[92%] max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
+            <div className="relative z-20 w-[92%] max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+              <div className="lg:col-span-7 space-y-3.5 text-center lg:text-left">
                 {page.hero_subheading && (
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F07100]/20 text-[#F07100] border border-[#F07100]/30 text-xs font-black uppercase tracking-wider">
-                    <Users className="w-4 h-4 text-[#F07100]" />
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F07100]/20 text-[#F07100] border border-[#F07100]/30 text-xs font-black uppercase tracking-wider">
+                    <Users className="w-3.5 h-3.5 text-[#F07100]" />
                     <span>{page.hero_subheading}</span>
                   </div>
                 )}
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] xl:text-[56px] font-black text-white tracking-tight leading-[1.1]">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-black text-white tracking-tight leading-[1.15]">
                   {page.hero_heading}
                 </h1>
 
-                <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                <p className="text-slate-300 text-xs sm:text-sm lg:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
                   {page.hero_description}
                 </p>
 
-                <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-3">
                   <Link
                     href={page.primary_cta_url || '/free-consultation'}
-                    className="px-6 py-3.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm flex items-center gap-2 shadow-lg hover:shadow-orange-500/20 transition-all"
+                    className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg hover:shadow-orange-500/20 transition-all"
                   >
                     <span>{page.primary_cta_text || 'Book Free Assessment'}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -88,32 +88,32 @@ export default function VisitVisaPage() {
                     href={`https://wa.me/92${cleanWhatsapp}?text=Hello%20Glontis,%20I%20want%20information%20about%20a%20Visit%20Visa.`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm flex items-center gap-2 shadow-lg transition-all"
+                    className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg transition-all"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>{page.whatsapp_button_text || 'Chat on WhatsApp'}</span>
                   </a>
                 </div>
 
-                <div className="pt-4 grid grid-cols-3 gap-4 border-t border-slate-800/80 text-left">
+                <div className="pt-2.5 grid grid-cols-3 gap-3 border-t border-slate-800/80 text-left">
                   <div>
-                    <span className="block text-xl sm:text-2xl font-black text-[#F07100]">High Rate</span>
-                    <span className="text-[11px] text-slate-400 font-semibold uppercase">Approval Support</span>
+                    <span className="block text-lg sm:text-xl font-black text-[#F07100]">High Rate</span>
+                    <span className="text-[10px] text-slate-400 font-semibold uppercase">Approval Support</span>
                   </div>
                   <div>
-                    <span className="block text-xl sm:text-2xl font-black text-white">UK, EU, US</span>
-                    <span className="text-[11px] text-slate-400 font-semibold uppercase">Key Embassies</span>
+                    <span className="block text-lg sm:text-xl font-black text-white">UK, EU, US</span>
+                    <span className="text-[10px] text-slate-400 font-semibold uppercase">Key Embassies</span>
                   </div>
                   <div>
-                    <span className="block text-xl sm:text-2xl font-black text-white">Multan</span>
-                    <span className="text-[11px] text-slate-400 font-semibold uppercase">Official Office</span>
+                    <span className="block text-lg sm:text-xl font-black text-white">Multan</span>
+                    <span className="text-[10px] text-slate-400 font-semibold uppercase">Official Office</span>
                   </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl shadow-2xl text-slate-900 border border-slate-100">
-                <h3 className="text-xl font-black text-[#0A1838] mb-1">Apply for Visit Visa</h3>
-                <p className="text-xs text-slate-500 mb-6 font-medium">Get your financial ties & cover letter evaluated.</p>
+              <div className="lg:col-span-5 bg-white p-4 sm:p-5 lg:p-6 rounded-2xl shadow-xl text-slate-900 border border-slate-100">
+                <h3 className="text-lg font-black text-[#0A1838] mb-0.5">Apply for Visit Visa</h3>
+                <p className="text-xs text-slate-500 mb-3 font-medium">Get your financial ties & cover letter evaluated.</p>
                 <ConsultationForm />
               </div>
             </div>

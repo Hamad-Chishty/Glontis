@@ -44,7 +44,7 @@ export default function WorkVisaPage() {
     <div className="min-h-screen bg-slate-50 pb-20 space-y-16">
       {/* Hero Banner Section */}
       {vis.hero && (
-        <div className="relative bg-[#0A1838] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="relative bg-[#0A1838] text-white py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background image if provided */}
           {data.hero_image && (
             <div className="absolute inset-0 z-0 opacity-20">
@@ -64,18 +64,18 @@ export default function WorkVisaPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A1838] via-[#0A1838]/95 to-slate-900/90 z-10" />
           <div className="absolute -right-20 -top-20 w-96 h-96 bg-[#F07100]/15 rounded-full blur-3xl z-0" />
 
-          <div className="relative z-20 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div className="relative z-20 w-[92%] max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F07100]/20 text-[#F07100] border border-[#F07100]/30 text-xs font-black uppercase tracking-wider">
                 <Briefcase className="w-4 h-4 text-[#F07100]" />
                 <span>{data.page_title || 'Work Visa Consultancy'}</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] xl:text-[56px] font-black text-white tracking-tight leading-[1.1]">
                 {data.hero_heading}
               </h1>
 
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+              <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 {data.hero_description}
               </p>
 

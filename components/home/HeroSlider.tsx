@@ -236,7 +236,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative w-full bg-[#0A1128] text-white overflow-hidden min-h-[75vh] lg:min-h-[85vh] flex flex-col justify-between group/hero transition-colors duration-700"
+      className="relative w-full bg-[#0A1128] text-white overflow-hidden py-8 sm:py-12 lg:py-14 group/hero transition-colors duration-700"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
@@ -295,26 +295,26 @@ export default function HeroSlider() {
           <button
             onClick={handlePrev}
             aria-label="Previous Slide"
-            className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-900/80 hover:bg-[#EA580C] border border-slate-700/80 hover:border-[#EA580C] text-white flex items-center justify-center transition-all shadow-2xl hover:scale-110 active:scale-95 group/btn"
+            className="absolute left-3 lg:left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#EA580C] border border-slate-700/80 hover:border-[#EA580C] text-white flex items-center justify-center transition-all shadow-2xl hover:scale-110 active:scale-95 group/btn z-30"
           >
-            <ChevronLeft className="w-6 h-6 group-hover/btn:-translate-x-0.5 transition-transform" />
+            <ChevronLeft className="w-5 h-5 group-hover/btn:-translate-x-0.5 transition-transform" />
           </button>
           <button
             onClick={handleNext}
             aria-label="Next Slide"
-            className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-900/80 hover:bg-[#EA580C] border border-slate-700/80 hover:border-[#EA580C] text-white flex items-center justify-center transition-all shadow-2xl hover:scale-110 active:scale-95 group/btn"
+            className="absolute right-3 lg:right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#EA580C] border border-slate-700/80 hover:border-[#EA580C] text-white flex items-center justify-center transition-all shadow-2xl hover:scale-110 active:scale-95 group/btn z-30"
           >
-            <ChevronRight className="w-6 h-6 group-hover/btn:translate-x-0.5 transition-transform" />
+            <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-0.5 transition-transform" />
           </button>
         </div>
       )}
 
-      {/* 3. MAIN HERO CONTENT CONTAINER */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16 pb-8 flex-1 flex flex-col justify-center w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* 3. MAIN HERO CONTENT CONTAINER (Wider max-w-[1400px]) */}
+      <div className="relative z-20 w-[92%] max-w-[1400px] mx-auto flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
           
           {/* LEFT COLUMN: BRANDING & SLIDE TEXT CONTENT */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left z-20">
+          <div className="lg:col-span-7 space-y-5 text-center lg:text-left z-20">
             {/* Top Brand Eyebrow & Slide Category Badge */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-black text-white shadow-lg backdrop-blur-md">
@@ -331,7 +331,7 @@ export default function HeroSlider() {
             <div className="space-y-3">
               <h1
                 key={`heading-${currentSlideIndex}`}
-                className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08] drop-shadow-md animate-in fade-in slide-in-from-bottom-3 duration-500"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[60px] font-black text-white tracking-tight leading-[1.08] drop-shadow-md animate-in fade-in slide-in-from-bottom-3 duration-500"
               >
                 {slideTitle}
               </h1>
@@ -389,7 +389,7 @@ export default function HeroSlider() {
             {/* Hero CTA Action Buttons */}
             <div
               key={`cta-${currentSlideIndex}`}
-              className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3.5 animate-in fade-in slide-in-from-bottom-2 duration-700"
+              className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-3.5 animate-in fade-in slide-in-from-bottom-2 duration-700"
             >
               <Link
                 href={primaryCtaUrl}
@@ -418,7 +418,7 @@ export default function HeroSlider() {
             </div>
 
             {/* Minimal High-Trust Proof Row */}
-            <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-5 text-xs text-slate-300 font-bold border-t border-slate-800/80">
+            <div className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-300 font-bold border-t border-slate-800/80">
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Professional Guidance</span>
@@ -438,9 +438,9 @@ export default function HeroSlider() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: LARGE CINEMATIC VISUAL CONTAINER & FLOATING BADGES */}
-          <div className="lg:col-span-5 relative flex justify-center items-center mt-4 lg:mt-0">
-            <div className="relative w-full max-w-lg lg:max-w-none aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] rounded-3xl overflow-hidden border-2 border-slate-700/80 shadow-2xl bg-slate-900 group">
+          {/* RIGHT COLUMN: LARGE PROMINENT VISUAL CONTAINER & FLOATING BADGES */}
+          <div className="lg:col-span-5 relative flex justify-center items-center mt-2 lg:mt-0">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] min-h-[300px] sm:min-h-[380px] lg:min-h-[440px] xl:min-h-[480px] rounded-3xl overflow-hidden border-2 border-slate-700/80 shadow-2xl bg-slate-900 group">
               {/* Active Hero Background Image with Ken Burns Zoom Effect */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -461,7 +461,7 @@ export default function HeroSlider() {
               </div>
 
               {/* Bottom Glass Caption Bar */}
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-xl p-3.5 rounded-2xl border border-white/15 text-xs font-bold text-white flex items-center justify-between shadow-2xl">
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-xl p-3 sm:p-3.5 rounded-2xl border border-white/15 text-xs font-bold text-white flex items-center justify-between shadow-2xl">
                 <div className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-lg bg-[#EA580C]/20 border border-[#EA580C]/40 flex items-center justify-center text-[#EA580C]">
                     <ShieldCheck className="w-4 h-4" />
@@ -477,17 +477,17 @@ export default function HeroSlider() {
               </div>
             </div>
 
-            {/* 4 ELEGANT CONTINUOUS FLOATING VISA BADGES (Gently floating 4-8px) */}
+            {/* 4 ELEGANT FLOATING VISA BADGES (Positions tuned for large image) */}
             {activeBadges.length > 0 && (
               <>
                 {/* Badge 1: Study Visa */}
                 {activeBadges[0] && (
                   <Link
                     href={getBadgeHref(activeBadges[0].title)}
-                    className="absolute -top-4 -left-2 sm:-left-6 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-slow"
+                    className="absolute -top-3 -left-2 sm:-left-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-slow"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-[#EA580C]/20 text-[#EA580C] group-hover:bg-[#EA580C] group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[0].icon_name || 'GraduationCap', 'w-4.5 h-4.5')}
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#EA580C]/20 text-[#EA580C] group-hover:bg-[#EA580C] group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
+                      {renderIcon(activeBadges[0].icon_name || 'GraduationCap', 'w-4 h-4')}
                     </div>
                     <div>
                       <div className="text-xs font-extrabold text-white group-hover:text-orange-300 transition-colors flex items-center gap-1">
@@ -505,10 +505,10 @@ export default function HeroSlider() {
                 {activeBadges[1] && (
                   <Link
                     href={getBadgeHref(activeBadges[1].title)}
-                    className="absolute top-8 -right-2 sm:-right-6 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-reverse"
+                    className="absolute top-6 -right-2 sm:-right-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-reverse"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[1].icon_name || 'Briefcase', 'w-4.5 h-4.5')}
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
+                      {renderIcon(activeBadges[1].icon_name || 'Briefcase', 'w-4 h-4')}
                     </div>
                     <div>
                       <div className="text-xs font-extrabold text-white group-hover:text-blue-300 transition-colors flex items-center gap-1">
@@ -526,11 +526,11 @@ export default function HeroSlider() {
                 {activeBadges[2] && (
                   <Link
                     href={getBadgeHref(activeBadges[2].title)}
-                    className="absolute bottom-16 -left-3 sm:-left-8 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-slow"
+                    className="absolute bottom-12 -left-2 sm:-left-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-slow"
                     style={{ animationDelay: '1.5s' }}
                   >
-                    <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[2].icon_name || 'Users', 'w-4.5 h-4.5')}
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
+                      {renderIcon(activeBadges[2].icon_name || 'Users', 'w-4 h-4')}
                     </div>
                     <div>
                       <div className="text-xs font-extrabold text-white group-hover:text-emerald-300 transition-colors flex items-center gap-1">
@@ -548,11 +548,11 @@ export default function HeroSlider() {
                 {activeBadges[3] && (
                   <Link
                     href={getBadgeHref(activeBadges[3].title)}
-                    className="absolute -bottom-4 -right-2 sm:-right-6 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-reverse"
+                    className="absolute -bottom-3 -right-2 sm:-right-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-reverse"
                     style={{ animationDelay: '2s' }}
                   >
-                    <div className="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 group-hover:bg-purple-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[3].icon_name || 'Compass', 'w-4.5 h-4.5')}
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/20 text-purple-400 group-hover:bg-purple-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
+                      {renderIcon(activeBadges[3].icon_name || 'Compass', 'w-4 h-4')}
                     </div>
                     <div>
                       <div className="text-xs font-extrabold text-white group-hover:text-purple-300 transition-colors flex items-center gap-1">
@@ -572,7 +572,7 @@ export default function HeroSlider() {
 
         {/* 4. MODERN PAGINATION DOTS & PLAY/PAUSE CONTROLLER */}
         {totalSlides > 1 && sliderSettings.show_pagination_dots && (
-          <div className="mt-8 flex items-center justify-center gap-3 z-30">
+          <div className="mt-6 flex items-center justify-center gap-3 z-30">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
               className="p-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 hover:border-[#EA580C] text-slate-400 hover:text-white transition-colors"
@@ -599,7 +599,7 @@ export default function HeroSlider() {
         )}
 
         {/* 5. DESTINATION ROUTES PILL BANNER */}
-        <div className="mt-8 pt-6 border-t border-slate-800/80 z-20">
+        <div className="mt-6 pt-4 border-t border-slate-800/80 z-20">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-bold text-slate-300">
             <span className="text-[10px] uppercase font-black tracking-widest text-[#EA580C] mr-1">Global Routes:</span>
             {routeDestinations.map((route, i) => (
@@ -617,8 +617,8 @@ export default function HeroSlider() {
 
         {/* 6. SERVICE QUICK LINKS BAR BELOW HERO */}
         {activeServices.length > 0 && (
-          <div className="mt-8 pt-6 border-t border-slate-800/80 z-20">
-            <div className="mb-4 flex items-center justify-between">
+          <div className="mt-6 pt-5 border-t border-slate-800/80 z-20">
+            <div className="mb-3.5 flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#EA580C]">Explore Services</span>
                 <h3 className="text-base sm:text-lg font-black text-white">Our Premier Visa & Overseas Services</h3>

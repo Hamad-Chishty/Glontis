@@ -28,16 +28,16 @@ export default function ScholarshipsPage() {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 text-xs font-bold uppercase tracking-wider">
+      <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-8">
+        <div className="w-[92%] max-w-[1400px] mx-auto text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 text-xs font-bold uppercase tracking-wider">
             <Award className="w-4 h-4 text-yellow-400" />
             <span>International Education Aid</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black tracking-tight leading-tight">
             Study Abroad Scholarships & Fee Discounts
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto leading-relaxed">
             Discover partial and full tuition fee scholarships for Bachelor’s & Master’s programs across UK, Australia, Canada, USA, Germany, and Ireland.
           </p>
         </div>

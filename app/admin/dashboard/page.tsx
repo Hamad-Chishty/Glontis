@@ -121,11 +121,9 @@ export default function AdminDashboardPage() {
   const [notification, setNotification] = useState('');
   const [savingEntity, setSavingEntity] = useState<string | null>(null);
 
-  // CRM Filters & AI State
+  // CRM Filters
   const [leadSearch, setLeadSearch] = useState('');
   const [leadStatusFilter, setLeadStatusFilter] = useState('All');
-  const [selectedLeadForAi, setSelectedLeadForAi] = useState<LeadEntry | null>(null);
-  const [aiReport, setAiReport] = useState('');
 
   // Manual Lead Creation Modal State
   const [isAddLeadModalOpen, setIsAddLeadModalOpen] = useState(false);
@@ -190,41 +188,6 @@ export default function AdminDashboardPage() {
 
     return matchesSearch && matchesStatus;
   });
-
-  // AI Profile Evaluation Generator
-  const generateAiAssessment = (lead: LeadEntry) => {
-    setSelectedLeadForAi(lead);
-    const country = lead.preferred_country;
-    const qual = lead.qualification;
-
-    let text = `AI VISA & IMMIGRATION EVALUATION REPORT — GLONTIS CONSULTANCY\n`;
-    text += `============================================================\n`;
-    text += `Candidate: ${lead.name.toUpperCase()}\n`;
-    text += `Contact: ${lead.phone} | ${lead.email || 'N/A'}\n`;
-    text += `Target Country: ${country}\n`;
-    text += `Target Program: ${lead.preferred_course || 'General Visa / Studies'}\n`;
-    text += `Qualification: ${qual}\n`;
-    text += `City: ${lead.city || 'Multan'}\n\n`;
-    text += `1. VISA APPROVAL PROBABILITY: HIGH (88% Assessment Match)\n`;
-    text += `2. ACADEMIC MATCH: Candidate background aligns with criteria for ${country}.\n`;
-    text += `3. CRITICAL DOCUMENTATION REQUIREMENTS:\n`;
-    if (country === 'United Kingdom') {
-      text += `- CAS Deposit: £1,000 - £4,000 required\n- Bank Statement: ~£12,000 living expenses + remaining tuition held 28 days\n- Language: English Proficiency Certificate / IELTS 6.0`;
-    } else if (country === 'Australia') {
-      text += `- Tuition Deposit: 1 semester fees\n- Financial Capacity: AUD $29,710 + 1st year tuition\n- GST / GTE Statement of genuine intent`;
-    } else if (country === 'Canada') {
-      text += `- SDS Stream: GIC $20,635 CAD + 1st year tuition paid\n- PAL (Provincial Attestation Letter) required for undergrad`;
-    } else if (country === 'Germany') {
-      text += `- Blocked Account: €11,904 EUR held in Expatrio / Fintiba\n- APS Verification Certificate required`;
-    } else if (country === 'Italy') {
-      text += `- Regional Scholarship (DSU): Up to €7,000 stipend + 100% tuition waiver for eligible students\n- Universitaly pre-enrollment`;
-    } else {
-      text += `- Standard financial proof of tuition + living costs required for embassy submission`;
-    }
-    text += `\n\n4. NEXT COUNSELING ACTION:\n- Contact student via WhatsApp (${lead.whatsapp || lead.phone}).\n- Invite for physical consultation at Office #28, 2nd Floor, Chaze Up Plaza, Bosan Road, Multan.`;
-
-    setAiReport(text);
-  };
 
   // Add Manual Lead
   const handleCreateLead = async (e: React.FormEvent) => {
@@ -489,14 +452,6 @@ export default function AdminDashboardPage() {
 
                           <td className="p-4 text-right space-x-2 whitespace-nowrap">
                             <button
-                              onClick={() => generateAiAssessment(lead)}
-                              className="px-3 py-1.5 rounded-lg bg-[#F07100] hover:bg-[#d96600] text-white font-black text-[11px] shadow-sm inline-flex items-center gap-1 transition-colors"
-                            >
-                              <Sparkles className="w-3 h-3 text-white" />
-                              <span>AI Assessment</span>
-                            </button>
-
-                            <button
                               onClick={() => {
                                 if (confirm(`Delete lead entry for ${lead.name}?`)) {
                                   deleteLead(lead.id);
@@ -504,6 +459,7 @@ export default function AdminDashboardPage() {
                                 }
                               }}
                               className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                              title="Delete Lead"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -1942,48 +1898,6 @@ export default function AdminDashboardPage() {
 
         </main>
       </div>
-
-      {/* AI REPORT MODAL */}
-      {selectedLeadForAi && (
-        <div className="fixed inset-0 z-50 bg-[#0A1838]/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="w-full max-w-2xl bg-white rounded-3xl p-6 shadow-2xl border border-slate-200 space-y-4">
-            <div className="flex items-center justify-between border-b pb-3">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#F07100]" />
-                <h3 className="font-black text-base text-[#0A1838]">AI Profile Evaluation Report</h3>
-              </div>
-              <button onClick={() => setSelectedLeadForAi(null)} className="text-slate-400 hover:text-slate-800">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <textarea
-              readOnly
-              value={aiReport}
-              rows={13}
-              className="w-full font-mono text-xs bg-slate-900 p-4 rounded-2xl text-emerald-400 resize-none focus:outline-none"
-            />
-
-            <div className="flex justify-end gap-3 pt-2">
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(aiReport);
-                  showNotify('Report copied to clipboard!');
-                }}
-                className="px-4 py-2.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-xs shadow-md"
-              >
-                Copy Report Text
-              </button>
-              <button
-                onClick={() => setSelectedLeadForAi(null)}
-                className="px-4 py-2.5 rounded-xl bg-slate-200 text-slate-800 font-bold text-xs"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* MANUAL ADD LEAD MODAL */}
       {isAddLeadModalOpen && (

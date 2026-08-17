@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useData } from '@/lib/context/DataContext';
 import {
@@ -11,7 +11,6 @@ import {
   Building2,
   Globe,
   Award,
-  Sparkles,
   ArrowRight,
   MessageCircle,
   CheckCircle2,
@@ -20,9 +19,10 @@ import {
   ChevronRight,
   ChevronLeft,
   AlertCircle,
-  MapPin,
   Play,
   Pause,
+  MapPin,
+  Clock,
 } from 'lucide-react';
 
 export default function HeroSlider() {
@@ -46,19 +46,22 @@ export default function HeroSlider() {
     show_pagination_dots: true,
   };
 
-  // Default 4 Cinematic Slides fallback
+  // Default 4 Professional Service-Focused Slides
   const fallbackSlides = [
     {
       id: 'slide-1',
       badge: '🎓 Study Visa Services',
       title: 'Turn Your Education Goals Into Global Opportunities',
-      subheading: 'Gain admission into top-ranked universities in UK, Australia, Canada, USA & Europe with full guidance on scholarships and student visas.',
+      subheading:
+        'Gain admission into top-ranked universities in UK, Australia, Canada, USA & Europe with comprehensive guidance on scholarships, admissions, and student visas.',
       primary_cta_text: 'Book Free Consultation',
       primary_cta_link: '/free-consultation',
-      secondary_cta_text: 'Explore Study Visas',
+      secondary_cta_text: 'Explore Study Visa',
       secondary_cta_link: '/study-visa',
-      image_url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+      image_url:
+        'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
       image_alt_text: 'Study Abroad International Students',
+      image_title: 'Study Visa Counseling',
       is_active: true,
       display_order: 1,
     },
@@ -66,48 +69,59 @@ export default function HeroSlider() {
       id: 'slide-2',
       badge: '💼 Work Visa Guidance',
       title: 'Build Your Career Beyond Borders',
-      subheading: 'Explore job permit options, skilled work visas, and professional migration pathways in leading global economic centers.',
+      subheading:
+        'Explore skilled worker permits, job seeker visas, and professional immigration pathways in leading global economies with end-to-end file preparation.',
       primary_cta_text: 'Check Work Eligibility',
       primary_cta_link: '/work-visa',
-      secondary_cta_text: 'Explore Services',
-      secondary_cta_link: '/services',
-      image_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1600&q=80',
+      secondary_cta_text: 'Explore Work Visa',
+      secondary_cta_link: '/work-visa',
+      image_url:
+        'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1600&q=80',
       image_alt_text: 'Working Abroad International Career',
+      image_title: 'Work Visa Assessment',
       is_active: true,
       display_order: 2,
     },
     {
       id: 'slide-3',
-      badge: '✈️ Visit & Tourist Visa',
-      title: 'Explore The World With Confidence',
-      subheading: 'Seamless visit visa sponsorship files, tourist itineraries, family reunion visas, and hassle-free travel documentation.',
+      badge: '✈️ Visit Visa Advisory',
+      title: 'Visit Family & Travel With Complete Peace of Mind',
+      subheading:
+        'Thorough visit visa sponsorship file compilation, sponsor invitation verification, cover letters, and financial ties documentation for UK, USA, Canada & Schengen.',
       primary_cta_text: 'Apply For Visit Visa',
       primary_cta_link: '/visit-visa',
-      secondary_cta_text: 'Tourist Destinations',
-      secondary_cta_link: '/tourist-visa',
-      image_url: 'https://images.unsplash.com/photo-1500835556837-99ac94a94552?auto=format&fit=crop&w=1600&q=80',
-      image_alt_text: 'International Travel Destination Landmark',
+      secondary_cta_text: 'Explore Visit Visa',
+      secondary_cta_link: '/visit-visa',
+      image_url:
+        'https://images.unsplash.com/photo-1500835556837-99ac94a94552?auto=format&fit=crop&w=1600&q=80',
+      image_alt_text: 'International Travel and Family Visits',
+      image_title: 'Visit Visa Processing',
       is_active: true,
       display_order: 3,
     },
     {
       id: 'slide-4',
-      badge: '🌍 Scholarships & Opportunities',
-      title: 'Your Future Has No Borders',
-      subheading: 'Unlock fully funded scholarships, permanent residency guidance, and VIP counseling for your global mobility.',
-      primary_cta_text: 'Book VIP Assessment',
-      primary_cta_link: '/free-consultation',
-      secondary_cta_text: 'View Scholarships',
-      secondary_cta_link: '/scholarships',
-      image_url: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=80',
-      image_alt_text: 'Global Opportunities City Skyline',
+      badge: '🌍 Tourist & Holiday Visa',
+      title: 'Discover Iconic Destinations Worldwide',
+      subheading:
+        'Fast and transparent tourist visa processing for individuals and families. Get assistance with flight reservations, hotel bookings, and embassy appointments.',
+      primary_cta_text: 'Explore Tourist Visa',
+      primary_cta_link: '/tourist-visa',
+      secondary_cta_text: 'Holiday Destinations',
+      secondary_cta_link: '/tourist-visa',
+      image_url:
+        'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=80',
+      image_alt_text: 'Global Travel and Tourism Destinations',
+      image_title: 'Tourist Visa Guidance',
       is_active: true,
       display_order: 4,
     },
   ];
 
-  // Active slides list
-  const configuredActiveSlides = (heroSlides || []).filter((s) => s.is_active).sort((a, b) => a.display_order - b.display_order);
+  // Active slides list from CMS or fallback
+  const configuredActiveSlides = (heroSlides || [])
+    .filter((s) => s.is_active)
+    .sort((a, b) => a.display_order - b.display_order);
   const activeSlides = configuredActiveSlides.length > 0 ? configuredActiveSlides : fallbackSlides;
   const totalSlides = activeSlides.length;
 
@@ -116,23 +130,18 @@ export default function HeroSlider() {
   // Dynamic values
   const eyebrow = homepageHero?.eyebrow || 'GLONTIS VISA CONSULTANCY';
   const slideBadge = currentSlide?.badge || '🎓 Study Visa Services';
-  const slideTitle = currentSlide?.title || 'Your Journey Abroad Starts Here';
-  const slideSubheading = currentSlide?.subheading || 'Expert guidance for Study, Work, Visit & Tourist Visas, Immigration, Scholarships and overseas opportunities.';
+  const slideTitle = currentSlide?.title || 'Turn Your Education Goals Into Global Opportunities';
+  const slideSubheading =
+    currentSlide?.subheading ||
+    'Gain admission into top-ranked universities in UK, Australia, Canada, USA & Europe with full guidance on scholarships and student visas.';
   const primaryCtaText = currentSlide?.primary_cta_text || 'Book Free Consultation';
   const primaryCtaUrl = currentSlide?.primary_cta_link || '/free-consultation';
-  const secondaryCtaText = currentSlide?.secondary_cta_text || 'Explore Our Services';
-  const secondaryCtaUrl = currentSlide?.secondary_cta_link || '/services';
-  const heroImage = currentSlide?.image_url || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80';
-  const heroImageAlt = currentSlide?.image_alt_text || 'Glontis Overseas Counseling';
-
-  // Floating Badges
-  const floatingBadges = homepageHero?.floating_badges || [
-    { id: 'fb-1', title: 'Study Visa', subtitle: 'Top Universities', icon_name: 'GraduationCap', is_active: true },
-    { id: 'fb-2', title: 'Work Visa', subtitle: 'Job Permits', icon_name: 'Briefcase', is_active: true },
-    { id: 'fb-3', title: 'Visit Visa', subtitle: 'Sponsor File', icon_name: 'Users', is_active: true },
-    { id: 'fb-4', title: 'Tourist Visa', subtitle: 'Global Travel', icon_name: 'Compass', is_active: true },
-  ];
-  const activeBadges = floatingBadges.filter((b) => b.is_active);
+  const secondaryCtaText = currentSlide?.secondary_cta_text || 'Explore Study Visa';
+  const secondaryCtaUrl = currentSlide?.secondary_cta_link || '/study-visa';
+  const heroImage =
+    currentSlide?.image_url ||
+    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80';
+  const heroImageAlt = currentSlide?.image_alt_text || 'Glontis Visa Consultancy';
 
   // Quick Service Links
   const activeServices = (homepageHero?.service_quick_links || [])
@@ -144,13 +153,20 @@ export default function HeroSlider() {
     if (!sliderSettings.autoplay || !isPlaying || totalSlides <= 1) return;
     if (sliderSettings.pause_on_hover && isHovered) return;
 
-    const intervalTime = sliderSettings.autoplay_duration_ms || 5000;
+    const intervalTime = sliderSettings.autoplay_duration_ms || 5500;
     const timer = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev + 1) % totalSlides);
     }, intervalTime);
 
     return () => clearInterval(timer);
-  }, [sliderSettings.autoplay, sliderSettings.autoplay_duration_ms, sliderSettings.pause_on_hover, isHovered, isPlaying, totalSlides]);
+  }, [
+    sliderSettings.autoplay,
+    sliderSettings.autoplay_duration_ms,
+    sliderSettings.pause_on_hover,
+    isHovered,
+    isPlaying,
+    totalSlides,
+  ]);
 
   const handlePrev = () => {
     setCurrentSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
@@ -182,15 +198,6 @@ export default function HeroSlider() {
     setTouchEndX(null);
   };
 
-  const getBadgeHref = (badgeTitle: string) => {
-    const t = badgeTitle.toLowerCase();
-    if (t.includes('study')) return '/study-visa';
-    if (t.includes('work')) return '/work-visa';
-    if (t.includes('visit')) return '/visit-visa';
-    if (t.includes('tourist')) return '/tourist-visa';
-    return '/services';
-  };
-
   const renderIcon = (iconName?: string, className = 'w-5 h-5') => {
     switch (iconName) {
       case 'GraduationCap':
@@ -214,7 +221,7 @@ export default function HeroSlider() {
     }
   };
 
-  const whatsappNumber = settings.whatsapp || '03334530456';
+  const whatsappNumber = settings?.whatsapp || '03334530456';
   const cleanWhatsapp = whatsappNumber.replace(/^0/, '').replace(/\s+/g, '');
 
   const handleExploreCountryClick = (e: React.MouseEvent) => {
@@ -225,466 +232,366 @@ export default function HeroSlider() {
     }
   };
 
-  // International Route Highlights
+  // Global Migration Routes Bar
   const routeDestinations = [
-    { from: '🇵🇰 Pakistan', to: '🇬🇧 UK', flag: '🇬🇧' },
-    { from: '🇵🇰 Pakistan', to: '🇦🇺 Australia', flag: '🇦🇺' },
-    { from: '🇵🇰 Pakistan', to: '🇨🇦 Canada', flag: '🇨🇦' },
-    { from: '🇵🇰 Pakistan', to: '🇺🇸 USA', flag: '🇺🇸' },
-    { from: '🇵🇰 Pakistan', to: '🇪🇺 Europe', flag: '🇪🇺' },
+    { from: 'Pakistan', to: 'United Kingdom', flag: '🇬🇧' },
+    { from: 'Pakistan', to: 'Australia', flag: '🇦🇺' },
+    { from: 'Pakistan', to: 'Canada', flag: '🇨🇦' },
+    { from: 'Pakistan', to: 'USA', flag: '🇺🇸' },
+    { from: 'Pakistan', to: 'Europe / Schengen', flag: '🇪🇺' },
   ];
 
   return (
     <>
-      {/* 1. COMPACT DARK NAVY HERO SECTION (550-680px Desktop) */}
+      {/* ========================================================================= */}
+      {/* 1. MAIN HERO SECTION — WORDPRESS-STYLE PREMIUM IMMIGRATION THEME LAYOUT */}
+      {/* ========================================================================= */}
       <section
-        className="relative w-full bg-[#0A1128] text-white overflow-hidden py-6 sm:py-8 lg:py-10 group/hero transition-colors duration-700"
+        id="hero-slider"
+        className="relative w-full bg-[#0A1838] text-white overflow-hidden py-8 sm:py-10 lg:py-14 border-b border-slate-800"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-      {/* 1. CINEMATIC BACKGROUND ATMOSPHERE WITH GLOW & WORLD MAP PATTERN */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Soft Radial Ambient Lighting */}
-        <div className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-[#EA580C]/20 rounded-full blur-[140px] animate-pulse-glow" />
-        <div className="absolute top-1/3 right-0 w-[650px] h-[650px] bg-blue-600/15 rounded-full blur-[160px] animate-pulse-slow" />
-        <div className="absolute -bottom-32 left-1/3 w-[500px] h-[500px] bg-indigo-700/20 rounded-full blur-[130px]" />
-
-        {/* Subtle World Map Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"
-          style={{
-            maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
-            WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
-          }}
-        />
-
-        {/* Animated Flying Particles / Light Glow Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none z-0">
-          <defs>
-            <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#F97316" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M 50,200 C 300,50 600,350 1200,100"
-            fill="none"
-            stroke="url(#routeGrad)"
-            strokeWidth="2"
-            className="animate-dash"
+        {/* Subtle Background Pattern & Ambient Lighting */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute -top-36 -left-36 w-[500px] h-[500px] bg-[#F07100]/10 rounded-full blur-[140px]" />
+          <div className="absolute top-1/2 right-0 w-[550px] h-[550px] bg-blue-600/10 rounded-full blur-[160px]" />
+          <div
+            className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"
+            style={{
+              maskImage: 'radial-gradient(ellipse at center, black 50%, transparent 90%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at center, black 50%, transparent 90%)',
+            }}
           />
-          <path
-            d="M 100,500 C 400,200 800,600 1400,250"
-            fill="none"
-            stroke="url(#routeGrad)"
-            strokeWidth="1.5"
-            className="animate-dash"
-            style={{ animationDuration: '2.5s' }}
-          />
-        </svg>
-
-        {/* Dark Navy Gradient Overlay for Uncompromised Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1128]/95 via-[#0A1128]/85 to-transparent z-10" />
-      </div>
-
-      {/* 2. HERO NAVIGATION CONTROLS (Floating Arrows) */}
-      {totalSlides > 1 && sliderSettings.show_navigation_arrows && (
-        <div className="hidden sm:block z-30">
-          <button
-            onClick={handlePrev}
-            aria-label="Previous Slide"
-            className="absolute left-3 lg:left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#EA580C] border border-slate-700/80 hover:border-[#EA580C] text-white flex items-center justify-center transition-all shadow-2xl hover:scale-110 active:scale-95 group/btn z-30"
-          >
-            <ChevronLeft className="w-5 h-5 group-hover/btn:-translate-x-0.5 transition-transform" />
-          </button>
-          <button
-            onClick={handleNext}
-            aria-label="Next Slide"
-            className="absolute right-3 lg:right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#EA580C] border border-slate-700/80 hover:border-[#EA580C] text-white flex items-center justify-center transition-all shadow-2xl hover:scale-110 active:scale-95 group/btn z-30"
-          >
-            <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-0.5 transition-transform" />
-          </button>
         </div>
-      )}
 
-      {/* 3. MAIN HERO CONTENT CONTAINER (Wider max-w-[1400px]) */}
-      <div className="relative z-20 w-[92%] max-w-[1400px] mx-auto flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
-          
-          {/* LEFT COLUMN: BRANDING & SLIDE TEXT CONTENT */}
-          <div className="lg:col-span-7 space-y-5 text-center lg:text-left z-20">
-            {/* Top Brand Eyebrow & Slide Category Badge */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-black text-white shadow-lg backdrop-blur-md">
-                <Sparkles className="w-3.5 h-3.5 text-[#EA580C] animate-spin-slow" />
-                <span className="tracking-wider uppercase text-[11px] sm:text-xs">{eyebrow}</span>
+        {/* Navigation Arrow Controls (Desktop Sleek Hover Arrows) */}
+        {totalSlides > 1 && sliderSettings.show_navigation_arrows && (
+          <div className="hidden xl:block">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous Slide"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-[#F07100] border border-slate-700/80 hover:border-[#F07100] text-white flex items-center justify-center transition-all shadow-xl hover:scale-105 active:scale-95 z-30 cursor-pointer"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next Slide"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-[#F07100] border border-slate-700/80 hover:border-[#F07100] text-white flex items-center justify-center transition-all shadow-xl hover:scale-105 active:scale-95 z-30 cursor-pointer"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
+
+        {/* Main Hero Grid Container */}
+        <div className="relative z-20 w-[92%] max-w-[1360px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
+            
+            {/* ======================================================= */}
+            {/* LEFT COLUMN: HERO CONTENT & IMMIGRATION CALLS-TO-ACTION */}
+            {/* ======================================================= */}
+            <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
+              
+              {/* Brand Eyebrow & Service Slide Category Pill */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F07100]/15 border border-[#F07100]/40 text-[#F07100] text-[11px] font-black uppercase tracking-wider">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  {eyebrow}
+                </span>
+
+                <span
+                  key={`badge-${currentSlideIndex}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/90 border border-slate-700 text-slate-200 text-xs font-bold transition-all duration-300"
+                >
+                  {slideBadge}
+                </span>
               </div>
 
-              <div key={`badge-${currentSlideIndex}`} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EA580C]/20 border border-[#EA580C]/40 text-xs font-extrabold text-orange-300 shadow-md animate-in fade-in slide-in-from-left-2 duration-500">
-                <span>{slideBadge}</span>
-              </div>
-            </div>
-
-            {/* Dynamic Animated Heading */}
-            <div className="space-y-3">
+              {/* Headline Title */}
               <h1
-                key={`heading-${currentSlideIndex}`}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[60px] font-black text-white tracking-tight leading-[1.08] drop-shadow-md animate-in fade-in slide-in-from-bottom-3 duration-500"
+                key={`title-${currentSlideIndex}`}
+                className="text-3xl sm:text-4xl md:text-[44px] lg:text-[46px] xl:text-[52px] font-black text-white tracking-tight leading-[1.12] drop-shadow-sm transition-all duration-500"
               >
                 {slideTitle}
               </h1>
 
-              {/* Dynamic Subheading / Description */}
+              {/* Subheading / Description */}
               <p
                 key={`desc-${currentSlideIndex}`}
-                className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-2xl mx-auto lg:mx-0 animate-in fade-in slide-in-from-bottom-2 duration-700"
+                className="text-slate-300 text-sm sm:text-base lg:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal transition-all duration-500"
               >
                 {slideSubheading}
               </p>
-            </div>
 
-            {/* Country Target Destination Dropdown */}
-            {countries?.length > 0 && (
-              <div className="pt-1 max-w-xl mx-auto lg:mx-0 space-y-2">
-                <div className="p-2 rounded-2xl bg-slate-900/95 backdrop-blur-xl border border-slate-700/80 shadow-2xl flex flex-col sm:flex-row items-center gap-2">
-                  <select
-                    value={selectedCountry}
-                    onChange={(e) => {
-                      setSelectedCountry(e.target.value);
-                      if (e.target.value) setCountryError(false);
-                    }}
-                    className="w-full sm:flex-1 bg-slate-950 text-white text-xs sm:text-sm py-2.5 px-3.5 rounded-xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-[#EA580C] font-bold"
-                  >
-                    <option value="">Select Target Country Destination...</option>
-                    {countries
-                      .filter((c) => c.is_published)
-                      .map((c) => (
-                        <option key={c.id} value={c.slug} className="bg-slate-900 text-white">
-                          {c.flag_emoji} Study / Visit in {c.name}
-                        </option>
-                      ))}
-                  </select>
+              {/* Country Destination Selector Box */}
+              {countries?.length > 0 && (
+                <div className="pt-1 max-w-xl mx-auto lg:mx-0 space-y-1.5">
+                  <div className="p-1.5 sm:p-2 rounded-2xl bg-slate-900/90 border border-slate-700/80 shadow-lg flex flex-col sm:flex-row items-center gap-2">
+                    <div className="w-full sm:flex-1 relative">
+                      <select
+                        value={selectedCountry}
+                        onChange={(e) => {
+                          setSelectedCountry(e.target.value);
+                          if (e.target.value) setCountryError(false);
+                        }}
+                        className="w-full bg-[#0A1838] text-white text-xs sm:text-sm py-2.5 px-3.5 rounded-xl border border-slate-700/90 focus:outline-none focus:ring-2 focus:ring-[#F07100] font-semibold cursor-pointer"
+                      >
+                        <option value="">Select Target Country Destination...</option>
+                        {countries
+                          .filter((c) => c.is_published)
+                          .map((c) => (
+                            <option key={c.id} value={c.slug} className="bg-slate-900 text-white">
+                              {c.flag_emoji} {c.name} (Admissions & Visa)
+                            </option>
+                          ))}
+                      </select>
+                    </div>
 
-                  <Link
-                    href={selectedCountry ? `/${selectedCountry}` : '#'}
-                    onClick={handleExploreCountryClick}
-                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#EA580C] hover:bg-orange-600 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shrink-0 shadow-lg active:scale-95"
-                  >
-                    <span>Explore Info</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-
-                {countryError && (
-                  <p className="text-xs font-bold text-amber-400 flex items-center justify-center lg:justify-start gap-1.5 animate-in fade-in">
-                    <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-                    <span>Please select a target country destination from the dropdown list.</span>
-                  </p>
-                )}
-              </div>
-            )}
-
-            {/* Hero CTA Action Buttons */}
-            <div
-              key={`cta-${currentSlideIndex}`}
-              className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-3.5 animate-in fade-in slide-in-from-bottom-2 duration-700"
-            >
-              <Link
-                href={primaryCtaUrl}
-                className="px-7 py-3.5 rounded-xl bg-[#EA580C] hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base flex items-center gap-2 shadow-xl shadow-orange-900/30 hover:shadow-orange-500/30 transition-all hover:scale-[1.02] active:scale-95"
-              >
-                <span>{primaryCtaText}</span>
-                <ArrowRight className="w-4.5 h-4.5" />
-              </Link>
-
-              <Link
-                href={secondaryCtaUrl}
-                className="px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border border-slate-700/80 font-bold text-sm sm:text-base flex items-center gap-2 transition-all hover:border-[#EA580C]"
-              >
-                <span>{secondaryCtaText}</span>
-              </Link>
-
-              <a
-                href={`https://wa.me/92${cleanWhatsapp}?text=Hello%20Glontis%20Visa%20Consultancy,%20I%20want%20information%20about%20Overseas%20Visa%20Guidance.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center gap-2 transition-all shadow-md hover:scale-[1.02] active:scale-95"
-              >
-                <MessageCircle className="w-4.5 h-4.5" />
-                <span className="hidden sm:inline">WhatsApp Us</span>
-              </a>
-            </div>
-
-            {/* Minimal High-Trust Proof Row */}
-            <div className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-slate-300 font-bold border-t border-slate-800/80">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Professional Guidance</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Personalized Counseling</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Multan Office</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Zero Assessment Fee</span>
-              </span>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN: LARGE PROMINENT VISUAL CONTAINER & FLOATING BADGES */}
-          <div className="lg:col-span-5 relative flex justify-center items-center mt-2 lg:mt-0">
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] min-h-[300px] sm:min-h-[380px] lg:min-h-[440px] xl:min-h-[480px] rounded-3xl overflow-hidden border-2 border-slate-700/80 shadow-2xl bg-slate-900 group">
-              {/* Active Hero Background Image with Ken Burns Zoom Effect */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                key={heroImage}
-                src={heroImage}
-                alt={heroImageAlt}
-                className="w-full h-full object-cover transition-all duration-1000 ease-out transform scale-100 group-hover:scale-105 animate-in fade-in zoom-in-95 duration-700"
-              />
-
-              {/* Cinematic Vignette Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
-
-              {/* Top Right Live Slide Counter */}
-              <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[11px] font-black text-white flex items-center gap-2">
-                <span className="text-[#EA580C]">0{currentSlideIndex + 1}</span>
-                <span className="text-slate-500">/</span>
-                <span className="text-slate-400">0{totalSlides}</span>
-              </div>
-
-              {/* Bottom Glass Caption Bar */}
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-xl p-3 sm:p-3.5 rounded-2xl border border-white/15 text-xs font-bold text-white flex items-center justify-between shadow-2xl">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-[#EA580C]/20 border border-[#EA580C]/40 flex items-center justify-center text-[#EA580C]">
-                    <ShieldCheck className="w-4 h-4" />
+                    <Link
+                      href={selectedCountry ? `/${selectedCountry}` : '#'}
+                      onClick={handleExploreCountryClick}
+                      className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shrink-0 shadow-md active:scale-95"
+                    >
+                      <span>Explore Info</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
-                  <div>
-                    <div className="text-xs font-extrabold text-white">Glontis Official File Support</div>
-                    <div className="text-[10px] text-slate-400 font-semibold">Authorized Advisory in Multan</div>
-                  </div>
+
+                  {countryError && (
+                    <p className="text-xs font-bold text-amber-400 flex items-center justify-center lg:justify-start gap-1.5 animate-in fade-in">
+                      <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+                      <span>Please select a target country from the dropdown above.</span>
+                    </p>
+                  )}
                 </div>
-                <span className="text-[10px] bg-[#EA580C] px-2.5 py-1 rounded-full uppercase font-black tracking-wider text-white shrink-0">
-                  VIP Counseling
-                </span>
-              </div>
-            </div>
+              )}
 
-            {/* 4 ELEGANT FLOATING VISA BADGES (Positions tuned for large image) */}
-            {activeBadges.length > 0 && (
-              <>
-                {/* Badge 1: Study Visa */}
-                {activeBadges[0] && (
-                  <Link
-                    href={getBadgeHref(activeBadges[0].title)}
-                    className="absolute -top-3 -left-2 sm:-left-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-slow"
-                  >
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#EA580C]/20 text-[#EA580C] group-hover:bg-[#EA580C] group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[0].icon_name || 'GraduationCap', 'w-4 h-4')}
-                    </div>
-                    <div>
-                      <div className="text-xs font-extrabold text-white group-hover:text-orange-300 transition-colors flex items-center gap-1">
-                        <span>{activeBadges[0].title}</span>
-                        <span>🎓</span>
-                      </div>
-                      {activeBadges[0].subtitle && (
-                        <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[0].subtitle}</div>
-                      )}
-                    </div>
-                  </Link>
-                )}
-
-                {/* Badge 2: Work Visa */}
-                {activeBadges[1] && (
-                  <Link
-                    href={getBadgeHref(activeBadges[1].title)}
-                    className="absolute top-6 -right-2 sm:-right-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-reverse"
-                  >
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[1].icon_name || 'Briefcase', 'w-4 h-4')}
-                    </div>
-                    <div>
-                      <div className="text-xs font-extrabold text-white group-hover:text-blue-300 transition-colors flex items-center gap-1">
-                        <span>{activeBadges[1].title}</span>
-                        <span>💼</span>
-                      </div>
-                      {activeBadges[1].subtitle && (
-                        <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[1].subtitle}</div>
-                      )}
-                    </div>
-                  </Link>
-                )}
-
-                {/* Badge 3: Visit Visa */}
-                {activeBadges[2] && (
-                  <Link
-                    href={getBadgeHref(activeBadges[2].title)}
-                    className="absolute bottom-12 -left-2 sm:-left-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-slow"
-                    style={{ animationDelay: '1.5s' }}
-                  >
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[2].icon_name || 'Users', 'w-4 h-4')}
-                    </div>
-                    <div>
-                      <div className="text-xs font-extrabold text-white group-hover:text-emerald-300 transition-colors flex items-center gap-1">
-                        <span>{activeBadges[2].title}</span>
-                        <span>✈️</span>
-                      </div>
-                      {activeBadges[2].subtitle && (
-                        <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[2].subtitle}</div>
-                      )}
-                    </div>
-                  </Link>
-                )}
-
-                {/* Badge 4: Tourist Visa */}
-                {activeBadges[3] && (
-                  <Link
-                    href={getBadgeHref(activeBadges[3].title)}
-                    className="absolute -bottom-3 -right-2 sm:-right-4 bg-slate-900/95 hover:bg-[#0A1128] backdrop-blur-xl border border-slate-700/90 hover:border-[#EA580C] p-2.5 sm:p-3 rounded-2xl shadow-2xl flex items-center gap-2.5 z-30 transition-all hover:scale-105 group animate-float-reverse"
-                    style={{ animationDelay: '2s' }}
-                  >
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/20 text-purple-400 group-hover:bg-purple-500 group-hover:text-white flex items-center justify-center font-black transition-colors shrink-0">
-                      {renderIcon(activeBadges[3].icon_name || 'Compass', 'w-4 h-4')}
-                    </div>
-                    <div>
-                      <div className="text-xs font-extrabold text-white group-hover:text-purple-300 transition-colors flex items-center gap-1">
-                        <span>{activeBadges[3].title}</span>
-                        <span>🌍</span>
-                      </div>
-                      {activeBadges[3].subtitle && (
-                        <div className="text-[10px] text-slate-400 font-semibold">{activeBadges[3].subtitle}</div>
-                      )}
-                    </div>
-                  </Link>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* 4. MODERN PAGINATION DOTS & PLAY/PAUSE CONTROLLER */}
-        {totalSlides > 1 && sliderSettings.show_pagination_dots && (
-          <div className="mt-6 flex items-center justify-center gap-3 z-30">
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="p-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 hover:border-[#EA580C] text-slate-400 hover:text-white transition-colors"
-              title={isPlaying ? 'Pause Autoplay' : 'Play Autoplay'}
-            >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-            </button>
-
-            <div className="flex items-center gap-2">
-              {activeSlides.map((slide, idx) => (
-                <button
-                  key={slide.id || idx}
-                  onClick={() => setCurrentSlideIndex(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${
-                    idx === currentSlideIndex % totalSlides
-                      ? 'w-9 bg-[#EA580C] shadow-md shadow-orange-500/50'
-                      : 'w-2.5 bg-slate-700/80 hover:bg-slate-500'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-      </div>
-    </section>
-
-    {/* 2. LIGHT / OFF-WHITE SECTION: GLOBAL ROUTES & EXPLORE SERVICES */}
-    <section className="w-full bg-[#F8FAFC] py-6 sm:py-8 border-t border-b border-slate-200/80">
-      <div className="w-[92%] max-w-[1400px] mx-auto space-y-6">
-        {/* Global Migration Routes Bar */}
-        <div className="bg-white border border-slate-200/90 shadow-sm p-3.5 sm:p-4 rounded-2xl">
-          <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-bold text-slate-800">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#EA580C] animate-pulse" />
-              <span className="text-[11px] uppercase font-black tracking-widest text-[#EA580C]">Global Migration Routes</span>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              {routeDestinations.map((route, i) => (
-                <span
-                  key={i}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-xs font-bold hover:border-[#EA580C] hover:bg-orange-50 hover:text-[#EA580C] transition-all"
-                >
-                  <span>{route.from}</span>
-                  <span className="text-[#EA580C] font-black">➔</span>
-                  <span>{route.to}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Services Bar */}
-        {activeServices.length > 0 && (
-          <div className="pt-1">
-            <div className="mb-3.5 flex items-center justify-between">
-              <div>
-                <span className="text-[11px] font-black uppercase tracking-widest text-[#EA580C]">Explore Services</span>
-                <h3 className="text-base sm:text-lg lg:text-xl font-black text-slate-900">Our Premier Visa & Overseas Advisory</h3>
-              </div>
-              <Link
-                href="/services"
-                className="text-xs font-bold text-[#EA580C] hover:underline flex items-center gap-1"
+              {/* Action Buttons Row */}
+              <div
+                key={`cta-${currentSlideIndex}`}
+                className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-3"
               >
-                <span>View All Services</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
-              {activeServices.map((service) => (
                 <Link
-                  key={service.id}
-                  href={service.url || '/services'}
-                  className="bg-white hover:bg-slate-900 border border-slate-200/90 hover:border-slate-800 p-3.5 rounded-2xl transition-all duration-300 group shadow-sm hover:shadow-xl flex flex-col justify-between"
+                  href={primaryCtaUrl}
+                  className="px-6 py-3.5 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm flex items-center gap-2 shadow-lg shadow-orange-950/40 hover:shadow-orange-500/20 transition-all hover:scale-[1.01] active:scale-95"
                 >
-                  <div className="space-y-2.5">
-                    <div className="flex items-center justify-between">
-                      <div className="w-8 h-8 rounded-xl bg-orange-50 group-hover:bg-white/10 text-[#EA580C] group-hover:text-orange-400 flex items-center justify-center transition-colors">
-                        {renderIcon(service.icon_name, 'w-4 h-4')}
-                      </div>
-                      {service.badge && (
-                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-100 group-hover:bg-white/20 text-[#EA580C] group-hover:text-white">
-                          {service.badge}
-                        </span>
-                      )}
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-white leading-tight">{service.title}</h4>
-                      {service.description && (
-                        <p className="text-[11px] text-slate-500 group-hover:text-slate-300 line-clamp-2 mt-1 font-medium leading-relaxed">
-                          {service.description}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="pt-2 mt-2.5 border-t border-slate-100 group-hover:border-slate-800 flex items-center justify-between text-[11px] font-extrabold text-[#EA580C] group-hover:text-orange-400">
-                    <span>Apply Now</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                  <span>{primaryCtaText}</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
-              ))}
+
+                <Link
+                  href={secondaryCtaUrl}
+                  className="px-5 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700/80 font-bold text-sm flex items-center gap-2 transition-all hover:border-slate-500"
+                >
+                  <span>{secondaryCtaText}</span>
+                </Link>
+
+                <a
+                  href={`https://wa.me/92${cleanWhatsapp}?text=Hello%20Glontis%20Visa%20Consultancy,%20I%20want%20information%20about%20Visa%20Guidance.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center gap-2 transition-all shadow-md hover:scale-[1.01] active:scale-95"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp Us</span>
+                </a>
+              </div>
+
+              {/* Trust Indicators Bar */}
+              <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs text-slate-300 font-semibold border-t border-slate-800/80">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>98% Visa Success Rate</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Zero Assessment Fee</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Multan Office Advisory</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Transparent Process</span>
+                </span>
+              </div>
+            </div>
+
+            {/* ================================================================= */}
+            {/* RIGHT COLUMN: SINGLE CLEAN, CRISP PROFESSIONAL HERO IMAGE */}
+            {/* (NO excessive floating cards covering or cluttering the image) */}
+            {/* ================================================================= */}
+            <div className="lg:col-span-5 relative flex flex-col justify-center items-center">
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] rounded-3xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-900 group">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  key={heroImage}
+                  src={heroImage}
+                  alt={heroImageAlt}
+                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                />
+
+                {/* Subtle, Natural Vignette Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20 pointer-events-none" />
+
+                {/* Top-Right Slide Number Indicator */}
+                <div className="absolute top-4 right-4 bg-[#0A1838]/85 backdrop-blur-md px-3 py-1 rounded-full border border-slate-700 text-xs font-black text-white flex items-center gap-1.5 shadow-md">
+                  <span className="text-[#F07100]">0{currentSlideIndex + 1}</span>
+                  <span className="text-slate-500">/</span>
+                  <span className="text-slate-400">0{totalSlides}</span>
+                </div>
+
+                {/* Single Bottom Status Banner (Clean, Professional Theme Style) */}
+                <div className="absolute bottom-4 left-4 right-4 bg-[#0A1838]/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-slate-700/90 text-white flex items-center justify-between shadow-xl">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-[#F07100]/20 border border-[#F07100]/40 flex items-center justify-center text-[#F07100] shrink-0">
+                      <MapPin className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-extrabold text-white">Glontis Multan Office</div>
+                      <div className="text-[10px] text-slate-400 font-medium">Chaze Up Plaza, Bosan Road</div>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800/80 px-2.5 py-1 rounded-full shrink-0">
+                    Open Mon - Sat
+                  </span>
+                </div>
+              </div>
+
+              {/* Slider Dots & Autoplay Toggle Controls */}
+              {totalSlides > 1 && sliderSettings.show_pagination_dots && (
+                <div className="mt-5 flex items-center justify-center gap-3">
+                  <button
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="p-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 hover:border-[#F07100] text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    title={isPlaying ? 'Pause Autoplay' : 'Play Autoplay'}
+                    aria-label={isPlaying ? 'Pause Slider' : 'Play Slider'}
+                  >
+                    {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {activeSlides.map((slide, idx) => (
+                      <button
+                        key={slide.id || idx}
+                        onClick={() => setCurrentSlideIndex(idx)}
+                        aria-label={`Go to slide ${idx + 1}`}
+                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                          idx === currentSlideIndex % totalSlides
+                            ? 'w-8 bg-[#F07100] shadow-sm'
+                            : 'w-2 bg-slate-700 hover:bg-slate-500'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-        )}
-      </div>
-    </section>
-  </>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 2. GLOBAL ROUTES & QUICK SERVICE SHORTCUTS (Professional Theme Section) */}
+      {/* ========================================================================= */}
+      <section className="w-full bg-[#F8FAFC] py-6 sm:py-8 border-b border-slate-200/80">
+        <div className="w-[92%] max-w-[1360px] mx-auto space-y-6">
+          
+          {/* Global Migration Routes Bar */}
+          <div className="bg-white border border-slate-200/90 shadow-sm p-3.5 sm:p-4 rounded-2xl">
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-bold text-slate-800">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#F07100] animate-pulse" />
+                <span className="text-[11px] uppercase font-black tracking-widest text-[#F07100]">
+                  Global Visa Destinations
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                {routeDestinations.map((route, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-xs font-bold hover:border-[#F07100] hover:bg-orange-50 hover:text-[#F07100] transition-all"
+                  >
+                    <span>{route.flag}</span>
+                    <span>{route.from}</span>
+                    <span className="text-[#F07100] font-black">➔</span>
+                    <span>{route.to}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Services Directory */}
+          {activeServices.length > 0 && (
+            <div className="pt-1">
+              <div className="mb-3.5 flex items-center justify-between">
+                <div>
+                  <span className="text-[11px] font-black uppercase tracking-widest text-[#F07100]">
+                    Core Categories
+                  </span>
+                  <h3 className="text-base sm:text-lg lg:text-xl font-black text-slate-900">
+                    Our Premier Visa & Overseas Advisory
+                  </h3>
+                </div>
+                <Link
+                  href="/services"
+                  className="text-xs font-bold text-[#F07100] hover:underline flex items-center gap-1"
+                >
+                  <span>View All Services</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+                {activeServices.map((service) => (
+                  <Link
+                    key={service.id}
+                    href={service.url || '/services'}
+                    className="bg-white hover:bg-slate-900 border border-slate-200/90 hover:border-slate-800 p-3.5 rounded-2xl transition-all duration-300 group shadow-sm hover:shadow-xl flex flex-col justify-between"
+                  >
+                    <div className="space-y-2.5">
+                      <div className="flex items-center justify-between">
+                        <div className="w-8 h-8 rounded-xl bg-orange-50 group-hover:bg-white/10 text-[#F07100] group-hover:text-orange-400 flex items-center justify-center transition-colors">
+                          {renderIcon(service.icon_name, 'w-4 h-4')}
+                        </div>
+                        {service.badge && (
+                          <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-100 group-hover:bg-white/20 text-[#F07100] group-hover:text-white">
+                            {service.badge}
+                          </span>
+                        )}
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-white leading-tight">
+                          {service.title}
+                        </h4>
+                        {service.description && (
+                          <p className="text-[11px] text-slate-500 group-hover:text-slate-300 line-clamp-2 mt-1 font-medium leading-relaxed">
+                            {service.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="pt-2 mt-2.5 border-t border-slate-100 group-hover:border-slate-800 flex items-center justify-between text-[11px] font-extrabold text-[#F07100] group-hover:text-orange-400">
+                      <span>Apply Now</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
+

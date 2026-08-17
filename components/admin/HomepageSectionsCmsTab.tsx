@@ -398,7 +398,7 @@ export default function HomepageSectionsCmsTab() {
             <div className="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl">
               <Sparkles className="w-8 h-8 text-slate-400 mx-auto mb-2" />
               <p className="text-sm font-extrabold text-slate-700">No Hero Slides Added Yet</p>
-              <p className="text-xs text-slate-500 mt-1">Click "Add New Hero Slide" to create multi-banner slides.</p>
+              <p className="text-xs text-slate-500 mt-1">Click &quot;Add New Hero Slide&quot; to create multi-banner slides.</p>
             </div>
           ) : (
             <div className="space-y-4">

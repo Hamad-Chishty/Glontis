@@ -2,15 +2,22 @@ import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/data-store';
 
 export async function GET() {
-  const domain = 'https://glontisvisaconsultancy.com';
   const db = getDb();
+  const domain = `https://${db.settings.domain || 'glontisconsultancy.com'}`;
 
   const staticPages = [
     '',
     '/about',
+    '/study-visa',
+    '/work-visa',
+    '/visit-visa',
+    '/tourist-visa',
+    '/scholarships',
     '/study-destinations',
     '/services',
+    '/jobs',
     '/universities',
+    '/offers',
     '/success-stories',
     '/testimonials',
     '/blog',

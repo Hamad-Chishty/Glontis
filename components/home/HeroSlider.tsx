@@ -53,8 +53,8 @@ export default function HeroSlider() {
       badge: '🎓 Study Visa Services',
       title: 'Turn Your Education Goals Into Global Opportunities',
       subheading:
-        'Gain admission into top-ranked universities in UK, Australia, Canada, USA & Europe with comprehensive guidance on scholarships, admissions, and student visas.',
-      primary_cta_text: 'Book Free Consultation',
+        'Gain admission into top-ranked universities in New Zealand, Italy, Malaysia, Turkey, UK, Australia & Canada with comprehensive guidance on scholarships, admissions, and student visas.',
+      primary_cta_text: 'Book Free Initial Counseling',
       primary_cta_link: '/free-consultation',
       secondary_cta_text: 'Explore Study Visa',
       secondary_cta_link: '/study-visa',
@@ -70,7 +70,7 @@ export default function HeroSlider() {
       badge: '💼 Work Visa Guidance',
       title: 'Build Your Career Beyond Borders',
       subheading:
-        'Explore skilled worker permits, job seeker visas, and professional immigration pathways in leading global economies with end-to-end file preparation.',
+        'Professional work visa processing & job category assistance for Italy, Turkey, and Saudi Arabia. Verified legal procedures and complete documentation support.',
       primary_cta_text: 'Check Work Eligibility',
       primary_cta_link: '/work-visa',
       secondary_cta_text: 'Explore Work Visa',
@@ -87,7 +87,7 @@ export default function HeroSlider() {
       badge: '✈️ Visit Visa Advisory',
       title: 'Visit Family & Travel With Complete Peace of Mind',
       subheading:
-        'Thorough visit visa sponsorship file compilation, sponsor invitation verification, cover letters, and financial ties documentation for UK, USA, Canada & Schengen.',
+        'Thorough visit visa sponsorship file compilation, sponsor invitation verification, cover letters, and financial ties documentation for UK, USA, Canada, Schengen & Gulf.',
       primary_cta_text: 'Apply For Visit Visa',
       primary_cta_link: '/visit-visa',
       secondary_cta_text: 'Explore Visit Visa',
@@ -133,8 +133,8 @@ export default function HeroSlider() {
   const slideTitle = currentSlide?.title || 'Turn Your Education Goals Into Global Opportunities';
   const slideSubheading =
     currentSlide?.subheading ||
-    'Gain admission into top-ranked universities in UK, Australia, Canada, USA & Europe with full guidance on scholarships and student visas.';
-  const primaryCtaText = currentSlide?.primary_cta_text || 'Book Free Consultation';
+    'Gain admission into top-ranked universities in New Zealand, Italy, Malaysia, Turkey, UK, Australia & Canada with full guidance on scholarships and student visas.';
+  const primaryCtaText = currentSlide?.primary_cta_text || 'Book Free Initial Counseling';
   const primaryCtaUrl = currentSlide?.primary_cta_link || '/free-consultation';
   const secondaryCtaText = currentSlide?.secondary_cta_text || 'Explore Study Visa';
   const secondaryCtaUrl = currentSlide?.secondary_cta_link || '/study-visa';

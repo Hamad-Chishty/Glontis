@@ -59,7 +59,7 @@ export default function Header() {
     { name: 'Contact', href: '/contact' },
   ];
 
-  const primaryPhone = settings.phones[0] || '03334301456';
+  const primaryPhone = settings.phones[0] || '03334530456';
   const whatsappNumber = settings.whatsapp || '03334530456';
 
   return (
@@ -86,22 +86,38 @@ export default function Header() {
           <span className="flex items-center gap-1.5 text-slate-300">
             <MapPin className="w-3.5 h-3.5 text-[#F07100]" />
             <span className="hidden md:inline">{settings.address}</span>
-            <span className="md:hidden">Bosan Road, Multan</span>
+            <span className="md:hidden">Chaze Up Plaza, Bosan Road, Multan</span>
           </span>
           <span className="hidden sm:inline-block text-slate-700">|</span>
           <span className="hidden sm:inline font-medium text-slate-400">Mon - Sat: 9:00 AM - 6:30 PM</span>
         </div>
 
         <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-3">
+            <a
+              href="tel:03334530456"
+              className="flex items-center gap-1.5 hover:text-[#F07100] transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5 text-[#F07100]" />
+              <span className="font-extrabold">0333-4530456</span>
+            </a>
+            <span className="text-slate-700">/</span>
+            <a
+              href="tel:03334301456"
+              className="hover:text-[#F07100] transition-colors font-extrabold"
+            >
+              0333-4301456
+            </a>
+          </div>
           <a
-            href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
-            className="flex items-center gap-1.5 hover:text-[#F07100] transition-colors"
+            href="tel:03334530456"
+            className="sm:hidden flex items-center gap-1.5 hover:text-[#F07100] transition-colors font-extrabold"
           >
             <Phone className="w-3.5 h-3.5 text-[#F07100]" />
-            <span className="font-extrabold">{primaryPhone}</span>
+            <span>0333-4530456</span>
           </a>
           <a
-            href={`https://wa.me/92${whatsappNumber.replace(/^0/, '').replace(/\s+/g, '')}?text=Hello%20Glontis%20Visa%20Consultancy,%20I%20would%20like%20to%20get%20a%20free%20consultation.`}
+            href="https://wa.me/923334530456?text=Hello%20Glontis%20Visa%20Consultancy,%20I%20would%20like%20to%20get%20free%20initial%20counseling."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-bold transition-colors"
@@ -117,12 +133,18 @@ export default function Header() {
         className={`w-full transition-all duration-300 ${
           isScrolled
             ? 'glass-header shadow-md border-b border-slate-200/80 py-2'
-            : 'bg-white border-b border-slate-100 py-2.5'
+            : 'bg-white border-b border-slate-100 py-2'
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
-          {/* Glontis Company Name Only - Clean Header Text */}
+          {/* Official Logo & Brand Name */}
           <Link href="/" className="flex items-center shrink-0 group py-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/glontis-logo.svg"
+              alt="Glontis Logo"
+              className="h-8 sm:h-9 w-auto object-contain mr-2.5 shrink-0 transition-transform group-hover:scale-105"
+            />
             <span className="text-base sm:text-lg lg:text-xl font-black tracking-tight text-[#0A1838] whitespace-nowrap leading-none group-hover:text-[#F07100] transition-colors">
               Glontis <span className="text-[#F07100]">Visa Consultancy</span>
             </span>
@@ -182,7 +204,7 @@ export default function Header() {
               className="px-3.5 xl:px-4 py-2 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white text-xs font-extrabold shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 whitespace-nowrap"
             >
               <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>Free Consultation</span>
+              <span>Free Initial Counseling</span>
             </Link>
           </div>
 
@@ -241,7 +263,7 @@ export default function Header() {
                 className="w-full py-3.5 rounded-xl bg-[#F07100] text-white text-center font-extrabold text-sm shadow-md flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>Book Free Consultation</span>
+                <span>Book Free Initial Counseling</span>
               </Link>
 
               <div className="grid grid-cols-2 gap-2">

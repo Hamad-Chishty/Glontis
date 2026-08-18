@@ -7,7 +7,7 @@ import { MapPin, Phone, Mail, Clock, Navigation, ExternalLink } from 'lucide-rea
 export default function OfficeLocationMap() {
   const { settings } = useData();
 
-  const primaryPhone = settings.phones[0] || '03334301456';
+  const primaryPhone = settings.phones[0] || '03334530456';
 
   return (
     <section className="py-20 bg-white">

@@ -65,9 +65,9 @@ export default function ConsultationForm() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Text Column */}
           <div className="lg:col-span-5 space-y-6">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-900/60 border border-blue-400/30 text-xs font-bold text-yellow-300">
-              <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-              <span>100% Free Consultation</span>
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-950/60 border border-[#F07100]/40 text-xs font-bold text-[#F07100]">
+              <Sparkles className="w-3.5 h-3.5 text-[#F07100]" />
+              <span>100% Free Initial Counseling</span>
             </span>
 
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
@@ -295,7 +295,7 @@ export default function ConsultationForm() {
                     <span>Submitting...</span>
                   ) : (
                     <>
-                      <span>Submit Free Consultation Request</span>
+                      <span>Submit Free Initial Counseling Request</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}

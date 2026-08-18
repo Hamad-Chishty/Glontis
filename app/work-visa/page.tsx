@@ -197,6 +197,17 @@ export default function WorkVisaPage() {
               </div>
             ))}
           </div>
+
+          {/* Transparent Advisory & Legal Disclaimer Box */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs leading-relaxed space-y-1">
+            <p className="font-extrabold flex items-center gap-1.5 text-amber-950">
+              <ShieldCheck className="w-4 h-4 text-[#F07100]" />
+              <span>Important Work Visa & Job Category Advisory</span>
+            </p>
+            <p className="text-amber-800 font-medium">
+              Glontis Visa Consultancy provides legal documentation, attestation, and embassy visa application filing assistance. We do not sell jobs or guarantee visa grants, as final authority belongs exclusively to the respective embassy, consulate, or immigration authority. Current vacancies, quotas, and trade criteria may vary based on employer requirements and government labor policies.
+            </p>
+          </div>
         </div>
       )}
 
@@ -265,6 +276,17 @@ export default function WorkVisaPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Transparent Advisory & Legal Disclaimer Box */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs leading-relaxed space-y-1">
+            <p className="font-extrabold flex items-center gap-1.5 text-amber-950">
+              <ShieldCheck className="w-4 h-4 text-[#F07100]" />
+              <span>Important Work Visa & Job Category Advisory</span>
+            </p>
+            <p className="text-amber-800 font-medium">
+              Glontis Visa Consultancy provides legal documentation, attestation, and embassy visa application filing assistance. We do not sell jobs or guarantee visa grants, as final authority belongs exclusively to the respective embassy, consulate, or immigration authority. Current vacancies, quotas, and trade criteria may vary based on employer requirements and government labor policies.
+            </p>
           </div>
         </div>
       )}

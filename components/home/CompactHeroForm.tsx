@@ -157,11 +157,13 @@ export default function CompactHeroForm({
                     ))
                   ) : (
                     <>
+                      <option value="New Zealand">🇳🇿 New Zealand</option>
+                      <option value="Italy">🇮🇹 Italy</option>
+                      <option value="Malaysia">🇲🇾 Malaysia</option>
+                      <option value="Turkey">🇹🇷 Turkey</option>
                       <option value="United Kingdom">🇬🇧 United Kingdom</option>
                       <option value="Australia">🇦🇺 Australia</option>
                       <option value="Canada">🇨🇦 Canada</option>
-                      <option value="USA">🇺🇸 USA</option>
-                      <option value="Europe / Schengen">🇪🇺 Europe / Schengen</option>
                     </>
                   )}
                 </select>
@@ -194,7 +196,7 @@ export default function CompactHeroForm({
               <span>Submitting...</span>
             ) : (
               <>
-                <span>Get Free Consultation Call</span>
+                <span>Get Free Initial Counseling</span>
                 <Send className="w-3.5 h-3.5" />
               </>
             )}

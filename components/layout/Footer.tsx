@@ -24,14 +24,14 @@ export default function Footer() {
               Ready to Start Your International Visa Journey?
             </h3>
             <p className="text-slate-300 text-sm max-w-xl">
-              Book a free 1-on-1 profile assessment with senior visa counselors at our Chaze Up Plaza office in Multan.
+              Book 100% Free Initial Counseling with senior visa counselors at our Chaze Up Plaza office in Multan.
             </p>
           </div>
           <Link
             href="/free-consultation"
             className="px-8 py-4 rounded-xl bg-[#F07100] hover:bg-[#d96600] text-white font-extrabold text-sm shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 shrink-0"
           >
-            <span>Book Free Assessment</span>
+            <span>Book Free Initial Counseling</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -53,7 +53,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              Glontis Visa Consultancy is Multan’s premier international study abroad and work visa advisory firm. We offer transparent admissions counseling, work permit guidance, and visa file preparation for UK, Australia, Canada, USA, Germany, and Europe.
+              Glontis Visa Consultancy is Multan’s premier international study abroad and work visa advisory firm. We offer transparent counseling for study visas in New Zealand, Italy, Malaysia, Turkey, UK, Australia, and Canada, as well as work permit services for Italy, Turkey, and Saudi Arabia.
             </p>
 
             <div className="space-y-3 text-xs text-slate-300">

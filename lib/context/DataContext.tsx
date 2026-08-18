@@ -10,6 +10,7 @@ import {
   CountryDestination,
   ServiceItem,
   UniversityItem,
+  ScholarshipItem,
   SuccessStory,
   Testimonial,
   BlogPost,
@@ -27,6 +28,7 @@ import {
   defaultCountries,
   defaultServices,
   defaultUniversities,
+  defaultScholarships,
   defaultSuccessStories,
   defaultTestimonials,
   defaultBlogs,
@@ -49,6 +51,7 @@ interface DataContextType {
   countries: CountryDestination[];
   services: ServiceItem[];
   universities: UniversityItem[];
+  scholarships: ScholarshipItem[];
   successStories: SuccessStory[];
   testimonials: Testimonial[];
   blogs: BlogPost[];
@@ -74,6 +77,7 @@ interface DataContextType {
   setCountries: React.Dispatch<React.SetStateAction<CountryDestination[]>>;
   setServices: React.Dispatch<React.SetStateAction<ServiceItem[]>>;
   setUniversities: React.Dispatch<React.SetStateAction<UniversityItem[]>>;
+  setScholarships: React.Dispatch<React.SetStateAction<ScholarshipItem[]>>;
   setSuccessStories: React.Dispatch<React.SetStateAction<SuccessStory[]>>;
   setTestimonials: React.Dispatch<React.SetStateAction<Testimonial[]>>;
   setBlogs: React.Dispatch<React.SetStateAction<BlogPost[]>>;
@@ -98,6 +102,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [countries, setCountries] = useState<CountryDestination[]>(defaultCountries);
   const [services, setServices] = useState<ServiceItem[]>(defaultServices);
   const [universities, setUniversities] = useState<UniversityItem[]>(defaultUniversities);
+  const [scholarships, setScholarships] = useState<ScholarshipItem[]>(defaultScholarships);
   const [successStories, setSuccessStories] = useState<SuccessStory[]>(defaultSuccessStories);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(defaultTestimonials);
   const [blogs, setBlogs] = useState<BlogPost[]>(defaultBlogs);
@@ -125,6 +130,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
           if (d.countries) setCountries(d.countries);
           if (d.services) setServices(d.services);
           if (d.universities) setUniversities(d.universities);
+          if (d.scholarships) setScholarships(d.scholarships);
           if (d.successStories) setSuccessStories(d.successStories);
           if (d.testimonials) setTestimonials(d.testimonials);
           if (d.blogs) setBlogs(d.blogs);
@@ -221,6 +227,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     setCountries(defaultCountries);
     setServices(defaultServices);
     setUniversities(defaultUniversities);
+    setScholarships(defaultScholarships);
     setSuccessStories(defaultSuccessStories);
     setTestimonials(defaultTestimonials);
     setBlogs(defaultBlogs);
@@ -239,6 +246,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       countries: defaultCountries,
       services: defaultServices,
       universities: defaultUniversities,
+      scholarships: defaultScholarships,
       successStories: defaultSuccessStories,
       testimonials: defaultTestimonials,
       blogs: defaultBlogs,
@@ -263,6 +271,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         countries,
         services,
         universities,
+        scholarships,
         successStories,
         testimonials,
         blogs,
@@ -288,6 +297,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         setCountries,
         setServices,
         setUniversities,
+        setScholarships,
         setSuccessStories,
         setTestimonials,
         setBlogs,

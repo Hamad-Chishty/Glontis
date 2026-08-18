@@ -6,6 +6,8 @@ import HeroSlider from '@/components/home/HeroSlider';
 import TrustSection from '@/components/home/TrustSection';
 import OfferBanner from '@/components/home/OfferBanner';
 import DestinationsGrid from '@/components/home/DestinationsGrid';
+import ScholarshipsSection from '@/components/home/ScholarshipsSection';
+import WorkVisaSection from '@/components/home/WorkVisaSection';
 import ServicesSection from '@/components/home/ServicesSection';
 import UniversitiesSection from '@/components/home/UniversitiesSection';
 import SuccessStoriesSection from '@/components/home/SuccessStoriesSection';
@@ -35,7 +37,12 @@ export default function HomePage() {
       case 'offer_banner':
         return <OfferBanner key="offer_banner" />;
       case 'destinations':
+      case 'study_visa':
         return <DestinationsGrid key="destinations" />;
+      case 'scholarships':
+        return <ScholarshipsSection key="scholarships" />;
+      case 'work_visa':
+        return <WorkVisaSection key="work_visa" />;
       case 'services':
         return <ServicesSection key="services" />;
       case 'universities':

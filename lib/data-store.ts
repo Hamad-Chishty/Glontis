@@ -12,6 +12,7 @@ import {
   LeadEntry,
   FAQItem,
   TrustStat,
+  ScholarshipItem,
   WorkVisaPageData,
   VisitVisaPageData,
   TouristVisaPageData,
@@ -31,6 +32,7 @@ export interface AppDatabase {
   countries: CountryDestination[];
   services: ServiceItem[];
   universities: UniversityItem[];
+  scholarships: ScholarshipItem[];
   successStories: SuccessStory[];
   testimonials: Testimonial[];
   blogs: BlogPost[];
@@ -806,6 +808,117 @@ export const defaultSuccessStories: SuccessStory[] = [
     story_text: 'Glontis Visa Consultancy prepared my Universitaly pre-enrollment and family income documentation for Italy DSU scholarship. I got a full tuition waiver plus €7,000 yearly stipend!',
     is_featured: false,
     is_published: true,
+  },
+];
+
+export const defaultScholarships: ScholarshipItem[] = [
+  {
+    id: 'sch-nz-postgrad',
+    title: 'New Zealand Master\'s & PhD Research Scholarships',
+    country: 'New Zealand',
+    flag_emoji: '🇳🇿',
+    award_type: 'Fully Funded / High Value',
+    amount_or_coverage: '100% Tuition Waiver + NZD 25,000 - 35,000 / Year Stipend',
+    degree_levels: ['Master\'s Research', 'PhD / Doctoral'],
+    description: 'Comprehensive research bursaries and university scholarships across top New Zealand institutions (Auckland, Lincoln, Otago, Massey). Includes spouse work rights and up to 3 years post-study work visa.',
+    benefits: [
+      '100% Full university tuition coverage',
+      'Annual living stipend + medical insurance',
+      'Full-time work rights for spouse during study',
+      'Up to 3-Year Post-Study Work Visa (PSWV)',
+    ],
+    eligibility: [
+      'Strong academic profile (CGPA 3.2+ or equivalent)',
+      'Relevant Bachelor\'s / Master\'s background with research interest',
+      'IELTS 6.5 or institutional English requirement',
+    ],
+    deadline: 'Intake Specific / Rolling Deadlines',
+    image_url: 'https://images.unsplash.com/photo-1507699622108-4be3aac6900f?auto=format&fit=crop&w=800&q=80',
+    image_alt_text: 'New Zealand Scholarships',
+    is_featured: true,
+    is_active: true,
+    display_order: 1,
+  },
+  {
+    id: 'sch-ita-dsu',
+    title: 'Italy Regional DSU Need-Based & Merit Grants',
+    country: 'Italy',
+    flag_emoji: '🇮🇹',
+    award_type: 'Government Regional Grant',
+    amount_or_coverage: '100% Free Tuition + up to €7,000 / Year Cash Allowance',
+    degree_levels: ['Bachelor\'s', 'Master\'s', 'PhD'],
+    description: 'Italian regional government scholarship programs (DSU Toscana, LazioDisco, EDISU) providing complete tuition exemption, free campus meals, student dormitory accommodation, and cash stipends for qualifying Pakistani students.',
+    benefits: [
+      '100% Tuition fee waiver at public Italian universities',
+      'Up to €7,000 annual living allowance',
+      'Free daily campus dining canteen access',
+      'Schengen area travel rights across 29 European nations',
+    ],
+    eligibility: [
+      'Admission to accredited Italian public university',
+      'Family income document verification (ISEE Parificato)',
+      'English proficiency letter or IELTS 6.0',
+    ],
+    deadline: 'July - September (Annual Intake)',
+    image_url: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',
+    image_alt_text: 'Italy DSU Scholarship',
+    is_featured: true,
+    is_active: true,
+    display_order: 2,
+  },
+  {
+    id: 'sch-tur-burslari',
+    title: 'Türkiye Bursları & University Merit Bursaries',
+    country: 'Turkey',
+    flag_emoji: '🇹🇷',
+    award_type: 'Government / Merit Award',
+    amount_or_coverage: '100% Tuition + Monthly Stipend + Accommodation',
+    degree_levels: ['Bachelor\'s', 'Master\'s', 'PhD'],
+    description: 'Prestigious Turkish Government scholarship covering full tuition, monthly stipend, university dormitory accommodation, one-year Turkish language preparatory year, and comprehensive health insurance.',
+    benefits: [
+      'Zero tuition fee throughout full degree duration',
+      'Free university accommodation & health insurance',
+      'Monthly financial allowance',
+      'Direct gateway to European and Middle Eastern academic networks',
+    ],
+    eligibility: [
+      'Minimum 70% for Undergraduate, 75% for Master\'s/PhD',
+      'Online application with academic transcripts and motivation letter',
+      'Age limit criteria per degree tier',
+    ],
+    deadline: 'January - February (Annual Cycle)',
+    image_url: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80',
+    image_alt_text: 'Turkiye Burslari Scholarships',
+    is_featured: true,
+    is_active: true,
+    display_order: 3,
+  },
+  {
+    id: 'sch-mys-mis',
+    title: 'Malaysia International Scholarship (MIS) & Research Grants',
+    country: 'Malaysia',
+    flag_emoji: '🇲🇾',
+    award_type: 'Government / Research Grant',
+    amount_or_coverage: 'Full Tuition + Monthly Allowance / 50% Fee Waivers',
+    degree_levels: ['Master\'s', 'PhD'],
+    description: 'Malaysian government and top QS-ranked public and private research universities providing tuition waivers and research bursaries in technology, artificial intelligence, business, and engineering fields.',
+    benefits: [
+      'Full or partial university tuition exemption',
+      'Low cost of living in Southeast Asia\'s leading education hub',
+      'Fast EMGS student visa approval turnaround',
+      'Globally recognized UK and Australian dual-degree options',
+    ],
+    eligibility: [
+      'CGPA 3.5 or equivalent in previous qualification',
+      'Research proposal for Master\'s/PhD candidates',
+      'IELTS 6.0 or recognized English medium proof',
+    ],
+    deadline: 'May - July (Annual Cycle)',
+    image_url: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
+    image_alt_text: 'Malaysia International Scholarships',
+    is_featured: false,
+    is_active: true,
+    display_order: 4,
   },
 ];
 
@@ -1823,14 +1936,16 @@ export const defaultHomepageSections: HomepageSectionConfig[] = [
   { id: 'hero', title: 'Hero Section & Banner Slider', description: 'Main banner with headline, call-to-action buttons, country selector, and floating badges.', is_enabled: true, display_order: 1 },
   { id: 'trust_stats', title: 'Trust & Statistics Bar', description: 'Key highlights such as assessment fee, university count, and office location.', is_enabled: true, display_order: 2 },
   { id: 'offer_banner', title: 'Special Offers Banner', description: 'Featured promotional offers and discounts banner.', is_enabled: true, display_order: 3 },
-  { id: 'destinations', title: 'Study Visa Destinations', description: 'Interactive country cards for top study destinations.', is_enabled: true, display_order: 4 },
-  { id: 'services', title: 'Our Visa Services', description: 'Comprehensive list of Study, Work, Visit, Tourist & Immigration services.', is_enabled: true, display_order: 5 },
-  { id: 'universities', title: 'Partner Universities & Colleges', description: 'Showcase of 200+ partner international institutions.', is_enabled: true, display_order: 6 },
-  { id: 'success_stories', title: 'Visa Success Stories', description: 'Real student visa grant letters and success cases.', is_enabled: true, display_order: 7 },
-  { id: 'testimonials', title: 'Client Reviews & Testimonials', description: 'Verified student and client reviews.', is_enabled: true, display_order: 8 },
-  { id: 'consultation_form', title: 'Free Consultation Form', description: 'Lead generation assessment form.', is_enabled: true, display_order: 9 },
-  { id: 'faqs', title: 'Frequently Asked Questions (FAQs)', description: 'Accordion list of common visa and admission queries.', is_enabled: true, display_order: 10 },
-  { id: 'office_map', title: 'Office Location & Map', description: 'Multan Bosan Road office address, directions, and Google Maps embed.', is_enabled: true, display_order: 11 },
+  { id: 'destinations', title: 'Study Visa Destinations (CMS Dynamic)', description: 'Interactive country cards for active study destinations.', is_enabled: true, display_order: 4 },
+  { id: 'scholarships', title: 'Scholarships & Financial Aid (CMS Dynamic)', description: 'Funded scholarship opportunities read directly from the Scholarships CMS.', is_enabled: true, display_order: 5 },
+  { id: 'work_visa', title: 'Work Visa Opportunities (CMS Dynamic)', description: 'Verified employment categories for Italy, Turkey & Saudi Arabia from Work Visa CMS.', is_enabled: true, display_order: 6 },
+  { id: 'services', title: 'Our Visa Services', description: 'Comprehensive list of Study, Work, Visit, Tourist & Immigration services.', is_enabled: true, display_order: 7 },
+  { id: 'universities', title: 'Partner Universities & Colleges', description: 'Showcase of 200+ partner international institutions.', is_enabled: true, display_order: 8 },
+  { id: 'success_stories', title: 'Visa Success Stories', description: 'Real student visa grant letters and success cases.', is_enabled: true, display_order: 9 },
+  { id: 'testimonials', title: 'Client Reviews & Testimonials', description: 'Verified student and client reviews.', is_enabled: true, display_order: 10 },
+  { id: 'consultation_form', title: 'Free Initial Counseling Form', description: 'Lead generation assessment form.', is_enabled: true, display_order: 11 },
+  { id: 'faqs', title: 'Frequently Asked Questions (FAQs)', description: 'Accordion list of common visa and admission queries.', is_enabled: true, display_order: 12 },
+  { id: 'office_map', title: 'Office Location & Map', description: 'Multan Bosan Road office address, directions, and Google Maps embed.', is_enabled: true, display_order: 13 },
 ];
 
 // Persistent File System DB Store Helper
@@ -1866,6 +1981,7 @@ export function getDb(): AppDatabase {
           if (!inMemoryDb.countries) inMemoryDb.countries = defaultCountries;
           if (!inMemoryDb.services) inMemoryDb.services = defaultServices;
           if (!inMemoryDb.universities) inMemoryDb.universities = defaultUniversities;
+          if (!inMemoryDb.scholarships) inMemoryDb.scholarships = defaultScholarships;
           if (!inMemoryDb.successStories) inMemoryDb.successStories = defaultSuccessStories;
           if (!inMemoryDb.testimonials) inMemoryDb.testimonials = defaultTestimonials;
           if (!inMemoryDb.blogs) inMemoryDb.blogs = defaultBlogs;
@@ -1893,6 +2009,7 @@ export function getDb(): AppDatabase {
     countries: defaultCountries,
     services: defaultServices,
     universities: defaultUniversities,
+    scholarships: defaultScholarships,
     successStories: defaultSuccessStories,
     testimonials: defaultTestimonials,
     blogs: defaultBlogs,
@@ -1902,7 +2019,6 @@ export function getDb(): AppDatabase {
     visitVisaPage: defaultVisitVisaPage,
     touristVisaPage: defaultTouristVisaPage,
   };
-
 
   saveDb(inMemoryDb);
   return inMemoryDb;

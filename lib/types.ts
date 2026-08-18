@@ -146,6 +146,25 @@ export interface UniversityItem {
   is_published: boolean;
 }
 
+export interface ScholarshipItem {
+  id: string;
+  title: string;
+  country: string;
+  flag_emoji?: string;
+  award_type: string;
+  amount_or_coverage: string;
+  degree_levels: string[];
+  description: string;
+  benefits: string[];
+  eligibility: string[];
+  deadline?: string;
+  image_url?: string;
+  image_alt_text?: string;
+  is_featured: boolean;
+  is_active: boolean;
+  display_order: number;
+}
+
 export interface SuccessStory {
   id: string;
   student_name: string;

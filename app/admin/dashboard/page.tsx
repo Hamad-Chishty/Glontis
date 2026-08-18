@@ -10,6 +10,7 @@ import VisitVisaCmsTab from '@/components/admin/VisitVisaCmsTab';
 import TouristVisaCmsTab from '@/components/admin/TouristVisaCmsTab';
 import HomepageHeroCmsTab from '@/components/admin/HomepageHeroCmsTab';
 import HomepageSectionsCmsTab from '@/components/admin/HomepageSectionsCmsTab';
+import ScholarshipsCmsTab from '@/components/admin/ScholarshipsCmsTab';
 import {
   Users,
   ImageIcon,
@@ -76,6 +77,8 @@ export default function AdminDashboardPage() {
     setServices,
     universities,
     setUniversities,
+    scholarships,
+    setScholarships,
     successStories,
     setSuccessStories,
     testimonials,
@@ -105,15 +108,16 @@ export default function AdminDashboardPage() {
     | 'hero'
     | 'offers'
     | 'countries'
-    | 'services'
+    | 'scholarships'
+    | 'workVisa'
+    | 'visitVisa'
+    | 'touristVisa'
     | 'universities'
+    | 'services'
     | 'stories'
     | 'testimonials'
     | 'blogs'
     | 'faqs'
-    | 'workVisa'
-    | 'visitVisa'
-    | 'touristVisa'
     | 'settings'
   >('leads');
 
@@ -304,10 +308,11 @@ export default function AdminDashboardPage() {
             { id: 'hero', name: 'Hero Slider Banners', icon: ImageIcon, badge: heroSlides.length },
             { id: 'offers', name: 'Special Offers & Popups', icon: Tag, badge: offers.length },
             { id: 'countries', name: 'Study Visa / Destinations', icon: Globe, badge: countries.length },
+            { id: 'scholarships', name: 'Scholarships CMS', icon: Award, badge: scholarships?.length || 0 },
             { id: 'workVisa', name: 'Work Visa CMS', icon: Briefcase },
             { id: 'visitVisa', name: 'Visit Visa CMS', icon: Users },
             { id: 'touristVisa', name: 'Tourist Visa CMS', icon: Compass },
-            { id: 'universities', name: 'Scholarships & Universities', icon: Building2, badge: universities.length },
+            { id: 'universities', name: 'Partner Universities', icon: Building2, badge: universities.length },
             { id: 'services', name: 'Visa & Admission Services', icon: GraduationCap, badge: services.length },
             { id: 'stories', name: 'Visa Success Grants', icon: Award, badge: successStories.length },
             { id: 'testimonials', name: 'Client Testimonials', icon: Star, badge: testimonials.length },
@@ -1221,6 +1226,9 @@ export default function AdminDashboardPage() {
               </div>
             </div>
           )}
+
+          {/* SCHOLARSHIPS CMS */}
+          {activeTab === 'scholarships' && <ScholarshipsCmsTab />}
 
           {/* VISA SUCCESS STORIES CMS */}
           {activeTab === 'stories' && (

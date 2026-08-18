@@ -12,6 +12,10 @@ export default function UniversitiesSection() {
 
   const publishedUnis = universities.filter((u) => u.is_published);
 
+  if (publishedUnis.length === 0) {
+    return null;
+  }
+
   const countriesList = ['All', ...Array.from(new Set(publishedUnis.map((u) => u.country)))];
 
   const filteredUnis = publishedUnis.filter((u) => {
@@ -34,10 +38,10 @@ export default function UniversitiesSection() {
               Global University Network
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              200+ Recognized Partner Institutions
+              Recognized Partner Institutions
             </h2>
             <p className="text-slate-400 text-sm max-w-xl">
-              Explore leading universities in the UK, Australia, Canada, USA, and Europe with direct application support through Glontis Visa Consultancy.
+              Explore leading universities and colleges with direct application and admission support through Glontis Visa Consultancy.
             </p>
           </div>
 
